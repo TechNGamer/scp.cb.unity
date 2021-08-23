@@ -6,14 +6,38 @@ using UnityEngine;
 
 
 namespace SCPCB.Remaster {
+	/// <summary>
+	/// The player controller.
+	/// </summary>
 	public class Controller : MonoBehaviour {
+		private static Controller pController;
+
+		/// <summary>
+		/// If the player is touching the ground.
+		/// </summary>
+		/// <remarks>
+		/// This value cannot be set outside the class. It is determined every update.
+		/// </remarks>
 		public bool IsGrounded { get; private set; }
 
+		/// <summary>
+		/// If the player is crouching or not.
+		/// </summary>
+		/// <remarks>
+		/// This value can be changed externally, but might be closed off.
+		/// </remarks>
 		public bool IsCrouched { get; set; }
 
+		/// <summary>
+		/// If the player is running or not.
+		/// </summary>
+		/// <remarks>
+		/// This value is set by the Input System, and should generally not be modified.
+		/// </remarks>
 		public bool IsRunning { get; private set; }
 
 		[SerializeField]
+		[Range( 1f, 100f )]
 		[Tooltip( "The speed at which the camera moves." )]
 		private float camSpeed = 1f;
 
@@ -23,6 +47,7 @@ namespace SCPCB.Remaster {
 		private float walkSpeed = 1f;
 
 		[SerializeField]
+		[Range( 0.5f, 1f )]
 		[Tooltip( "The speed at which the player crouch walks." )]
 		private float crouchSpeed = 1f;
 
@@ -54,6 +79,14 @@ namespace SCPCB.Remaster {
 		private Transform groundCheck;
 
 		private void Awake() {
+			// Want to make sure that there is only one player controller.
+			if ( pController ) {
+				Destroy( this );
+				return;
+			}
+
+			pController = this;
+
 			// This section is mainly used to initialize the events of the new Input System.
 			input = new MainInput();
 
@@ -78,24 +111,39 @@ namespace SCPCB.Remaster {
 					IsRunning = false;
 				}
 
+				Debug.Log( "Player is crouching." );
+
 				IsCrouched = true;
 			};
-			input.Game.Crouch.canceled += _ => { IsCrouched = false; };
+			input.Game.Crouch.canceled += _ => {
+				Debug.Log( "Player is no longer crouching." );
+
+				IsCrouched = false;
+			};
 
 			input.Game.Sprint.started += _ => {
 				if ( IsCrouched ) {
 					return;
 				}
 
+				Debug.Log( "Player is running." );
+
 				IsRunning = true;
 			};
-			input.Game.Sprint.canceled += _ => { IsRunning = false; };
+			input.Game.Sprint.canceled += _ => {
+				Debug.Log( "Player is no longer running." );
+
+				IsRunning = false;
+			};
 
 			input.Game.Enable();
 		}
 
 		// Start is called before the first frame update
 		private void Start() {
+			// Instead of having it be associated within the editor, it will grab it during runtime.
+			// This is better in my opinion because if anything changes with the Character Controller
+			// or the Camera, then it will be picked up during runtime instead of erroring out and forgetting.
 			cam = GetComponentInChildren<Camera>();
 			cc  = GetComponent<CharacterController>();
 
@@ -105,8 +153,6 @@ namespace SCPCB.Remaster {
 
 		// Update is called once per frame
 		private void Update() {
-			Debug.Log( $"Camera Rotate Direction:\t{moveCamRot}\nPlayer Move Direction:\t{moveDirection}" );
-
 			MoveCharacter();
 			MoveCamera();
 		}
@@ -157,7 +203,7 @@ namespace SCPCB.Remaster {
 
 		private void MoveCamera() {
 			var camTransform = cam.transform;
-			var rotateDiff   = Quaternion.Euler( new Vector3( moveCamRot.x, 0f ) * camSpeed * Time.deltaTime );
+			var rotateDiff   = Quaternion.Euler( new Vector3( moveCamRot.x, 0f ) * ( camSpeed * Time.deltaTime ) );
 			var angle        = Quaternion.Angle( cam.transform.localRotation * rotateDiff, quaternion.Euler( 0f, camTransform.localRotation.eulerAngles.y, 0f ) );
 
 			if ( angle <= 45f ) {
