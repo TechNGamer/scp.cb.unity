@@ -194,6 +194,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94152b126f6f36f41b4508c9c7bbddc8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  useLocation0: 1
+  useLocation1: 1
   button: {fileID: 0}
   button0Location: {fileID: 6647664447175843257}
   button1Location: {fileID: 1318015942869817953}
