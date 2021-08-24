@@ -45,4 +45,4 @@ Check [here](https://docs.unity3d.com/Manual/BuildSettings.html) on how to build
 # Contributing
 If you want to contribute, you can. The only requirements is that you follow the style of code that I write.
 There is also to be no harassing, doxxing, racism, or extremism (eg. Nazism) within the issues, code, or anywhere someone can type.
-Doing so will result in a ban on contributing code to the project. See the `Code of Conduct` for more rules.
+See the [Code of Conduct](CODE_OF_CONDUCT.md) for more rules.
