@@ -1,64 +1,79 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 namespace SCPCB.Remaster.Door {
 	[RequireComponent( typeof( Animator ) )]
 	public class Door : MonoBehaviour {
+		private static readonly int OPEN  = Animator.StringToHash( "Open" );
+		private static readonly int CLOSE = Animator.StringToHash( "Close" );
+
 		[SerializeField]
-		[Tooltip("Whether to use the location or not.")]
-		private bool useLocation0;
+		[Tooltip( "Determines if the door is open or not." )]
+		private bool doorOpen;
+
 		[SerializeField]
-		[Tooltip("Whether to use the location or not.")]
-		private bool useLocation1;
-		
-		[SerializeField]
-		[Tooltip("The button type to use for this kind of door.")]
+		[Tooltip( "The button type to use for this kind of door." )]
 		private GameObject button;
 
 		[SerializeField]
-		[Tooltip("The location of one of the buttons.")]
-		private Transform button0Location;
-
-		[SerializeField]
-		[Tooltip("The location of one of the buttons.")]
-		private Transform button1Location;
+		[Tooltip( "The location of the buttons." )]
+		private Transform[] buttonLocations;
 
 		private Animator animator;
 
 		private void Start() {
 			animator = GetComponent<Animator>();
 
+			InitializeButtons();
+
+			if ( doorOpen ) {
+				animator.SetTrigger( OPEN );
+			}
+		}
+
+		private void InitializeButtons() {
 			if ( !button ) {
-				// Doing this to free up memory, even though it is a small amount of memory.
-				Destroy( button0Location );
-				Destroy( button1Location );
+				/* Doing this to free up memory.
+				 * My reasoning is that if there are a ton of buttons,
+				 * then a good amount of memory can be freed up.
+				 * I do not want to have this game using memory when it shouldn't. */
+				foreach ( var loc in buttonLocations ) {
+					if ( !loc.GetComponent<Button>() ) {
+						Destroy( loc.gameObject );
+					}
+				}
+
+				buttonLocations = null;
 
 				return;
 			}
 
 			// Checking if there is a location to place button.
-			if ( button0Location ) {
-				if ( useLocation0 ) {
-					Instantiate( button, button0Location );
-				} else {
-					Destroy( button0Location );
+			// It is also checking to see if a button is already at that transform, and if so,
+			// to not delete the transform is not going to use it, otherwise to just go ahead and use it.
+			foreach ( var location in buttonLocations ) {
+				if ( !location.TryGetComponent( out Button locButton ) ) {
+					locButton = Instantiate( button, location ).GetComponent<Button>();
 				}
-			}
-
-			// Disabling in case more is to be added here.
-			// ReSharper disable once InvertIf
-			if ( button1Location && useLocation1 ) {
-				if ( useLocation1 ) {
-					Instantiate( button, button1Location );
-				} else {
-					Destroy( button1Location );
-				}
+				
+				locButton.ButtonPressed += ToggleDoor;
 			}
 		}
 
-		// Update is called once per frame
-		private void Update() {
+		#if UNITY_EDITOR
+		private void OnDrawGizmos() {
+			foreach ( var location in buttonLocations ) {
+				if ( location ) {
+					Gizmos.DrawSphere( location.position, 0.125f );
+				}
+			}
+		}
+		#endif
+
+		private void ToggleDoor() {
+			doorOpen = !doorOpen;
+
+			animator.SetTrigger( doorOpen ? OPEN : CLOSE );
 		}
 	}
 }
