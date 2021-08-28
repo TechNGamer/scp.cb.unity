@@ -204,7 +204,7 @@ namespace SCPCB.Remaster {
 		private void MoveCamera() {
 			var camTransform = cam.transform;
 			var rotateDiff   = Quaternion.Euler( new Vector3( moveCamRot.x, 0f ) * ( camSpeed * Time.deltaTime ) );
-			var angle        = Quaternion.Angle( cam.transform.localRotation * rotateDiff, quaternion.Euler( 0f, camTransform.localRotation.eulerAngles.y, 0f ) );
+			var angle        = Quaternion.Angle( cam.transform.localRotation * rotateDiff, Quaternion.Euler( 0f, camTransform.localRotation.eulerAngles.y, 0f ) );
 
 			if ( angle <= 45f ) {
 				camTransform.Rotate( new Vector3( moveCamRot.x * camSpeed * Time.deltaTime, 0f ) );

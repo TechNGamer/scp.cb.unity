@@ -62,6 +62,10 @@ namespace SCPCB.Remaster.Door {
 
 		#if UNITY_EDITOR
 		private void OnDrawGizmos() {
+			if ( buttonLocations == null ) {
+				return;
+			}
+			
 			foreach ( var location in buttonLocations ) {
 				if ( location ) {
 					Gizmos.DrawSphere( location.position, 0.125f );

@@ -44,7 +44,7 @@ Light:
   m_Type: 0
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 50
+  m_Intensity: 10
   m_Range: 6.776973
   m_SpotAngle: 160
   m_InnerSpotAngle: 80
@@ -151,7 +151,7 @@ Light:
   m_Type: 0
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 50
+  m_Intensity: 10
   m_Range: 6.776973
   m_SpotAngle: 160
   m_InnerSpotAngle: 80
@@ -670,7 +670,7 @@ Transform:
   m_GameObject: {fileID: 8351898165871740816}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.95, y: 0.95, z: 0.95}
   m_Children:
   - {fileID: 7789043579604887385}
   - {fileID: 3738841823181043991}
