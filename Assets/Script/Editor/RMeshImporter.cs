@@ -9,6 +9,7 @@ namespace SCPCB.Remaster {
 	 * that is placed inside square brackets is going to be a type. Anything inside curly brackets means that
 	 * it repeats. Inside the type block will usually be a base type and name, or just a type that is explained
 	 * later on. Anything beside the curly brackets on the same line at the start means how many times to loop.
+	 * Another thing is that everything here is Little Endian, so it goes least significant to most.
 	 *
 	 * The file starts by a number to indicate how long the string is. The string is NOT a C String at all.
 	 * It will not end in a NULL terminator.
