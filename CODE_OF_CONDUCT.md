@@ -12,8 +12,6 @@ In order to contribute to this project, if it is by issues, contributing code, o
       5) Sexual Orientation
       6) Gender Identity
       7) Religious Belief, or lack there of.
-      8) Doxxing someone.
-         * This means no releasing someones private information without their consent.
   3) No political talk.
       * We are not republicans/democrats/etc, we are sapient being working on a common goal. If you cannot put your political identity aside for one minute, you are not welcome.
 
