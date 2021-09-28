@@ -119,10 +119,19 @@ namespace SCPCB.Remaster {
 			var uvs       = new Vector2[vertCount];
 
 			for ( var i = 0; i < vertCount; ++i ) {
-				// Loads the 5 values needed to construct the mesh and position the textures.
-				var x = binReader.ReadSingle() / 100f;
-				var y = binReader.ReadSingle() / 100f;
-				var z = binReader.ReadSingle() / 100f;
+				/* The reason this is getting divided by 157.45 is for the following reasons:
+				 * 1.) The values are really big and do not match the scale that is being used in Unity.
+				 * 2.) Dividing by 100 shrinks it down to a more reasonable scale.
+				 * 3.) The 57.45 is to make sure that the doorways match that of the average 2.036 meters
+				 *
+				 * Do not ask me why 57.45 is the value to get it to match that of the average doorway, but
+				 * it does. So I am not questioning it and neither should you. Also, unless you know a way
+				 * to better fix this code, do not touch it. */
+				var x = binReader.ReadSingle() / 157.45f;
+				var y = binReader.ReadSingle() / 157.45f;
+				var z = binReader.ReadSingle() / 157.45f;
+				// For some reason, Unity needs the V flipped in order to map the UV properly.
+				// I don't know why Unity needs it that why, but it does.
 				var u = binReader.ReadSingle();
 				var v = -binReader.ReadSingle();
 
@@ -236,7 +245,9 @@ namespace SCPCB.Remaster {
 						continue;
 					}
 
-					mat = new Material( usedShader );
+					mat = new Material( usedShader ) {
+						name = $"Basic {texName}"
+					};
 
 					var tex = GetTexture( texName );
 
@@ -298,6 +309,8 @@ namespace SCPCB.Remaster {
 
 			myTex.LoadImage( File.ReadAllBytes( fullTexPath ) );
 			myTex.Apply();
+
+			myTex.name = textureName;
 
 			return myTex;
 		}
