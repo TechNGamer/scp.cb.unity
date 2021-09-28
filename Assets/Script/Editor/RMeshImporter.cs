@@ -101,14 +101,25 @@ namespace SCPCB.Remaster {
 	 * } */
 	[ScriptedImporter( 1, "rmesh" )]
 	public class RMesshImporter : ScriptedImporter {
-		private static readonly int    BASE_MAP = Shader.PropertyToID( "_BaseMap" );
+		// This is the property for the shader.
+		private static readonly int BASE_MAP = Shader.PropertyToID( "_BaseMap" );
 
+		/// <summary>
+		/// Interprets the mesh data inside the RMesh file.
+		/// </summary>
+		/// <remarks>
+		/// This file reads the RMesh mesh data in, and converts it to a mesh that Unity understands.
+		/// </remarks>
+		/// <param name="binReader">A <see cref="BinaryReader"/> for reading data directly in.</param>
+		/// <param name="mesh">A <see cref="Mesh"/> object to load the data into.</param>
+		/// <returns>The loaded <see cref="Mesh"/> object with all the data.</returns>
 		private static Mesh ReadMeshData( BinaryReader binReader, Mesh mesh ) {
 			var vertCount = binReader.ReadInt32();
 			var verts     = new Vector3[vertCount];
 			var uvs       = new Vector2[vertCount];
 
 			for ( var i = 0; i < vertCount; ++i ) {
+				// Loads the 5 values needed to construct the mesh and position the textures.
 				var x = binReader.ReadSingle() / 100f;
 				var y = binReader.ReadSingle() / 100f;
 				var z = binReader.ReadSingle() / 100f;
@@ -117,11 +128,14 @@ namespace SCPCB.Remaster {
 
 				verts[i] = new Vector3( x, y, z );
 				uvs[i]   = new Vector2( u, v );
-				
+
 				// I don't know what the next 8 bytes do, but I am also skipping the colors.
 				binReader.BaseStream.Position += 11;
 			}
 
+			/* Multiplying the triangle count by 3 since all triangles have 3 points.
+			 * This also makes it easier to just loop through all the points since they're
+			 * laid out right next to each other with no other value next to them. */
 			var triCount = binReader.ReadInt32() * 3;
 			var tris     = new int[triCount];
 
@@ -129,6 +143,7 @@ namespace SCPCB.Remaster {
 				tris[i] = binReader.ReadInt32();
 			}
 
+			// Clearing the mesh so that there is no "random" data.
 			mesh.Clear();
 
 			mesh.vertices  = verts;
@@ -144,6 +159,11 @@ namespace SCPCB.Remaster {
 
 		private Shader usedShader;
 
+		/// <summary>
+		/// Get's the string that the RMesh file contains.
+		/// </summary>
+		/// <param name="stream">The stream that represents the RMesh.</param>
+		/// <returns>The string inside the RMesh file.</returns>
 		private static string GetString( Stream stream ) {
 			var len    = stream.ReadByte() | stream.ReadByte() << 8 | stream.ReadByte() << 16 | stream.ReadByte() << 24;
 			var buffer = new byte[len];
@@ -153,8 +173,13 @@ namespace SCPCB.Remaster {
 			return Encoding.UTF8.GetString( buffer );
 		}
 
-		private static bool IsRMesh( BinaryReader binReader ) {
-			var header = GetString( binReader.BaseStream );
+		/// <summary>
+		/// Used to check for the RMesh header.
+		/// </summary>
+		/// <param name="stream">The stream that represents the RMesh.</param>
+		/// <returns>Rather or not the header matches the RMesh header.</returns>
+		private static bool IsRMesh( Stream stream ) {
+			var header = GetString( stream );
 
 			return header == "RoomMesh";
 		}
@@ -164,11 +189,12 @@ namespace SCPCB.Remaster {
 			usedShader = Shader.Find( "Universal Render Pipeline/Lit" );
 
 			ctx.AddObjectToAsset( "commonShader", usedShader );
-			
+
+			// Opens the file for importing into Unity.
 			using var fStream   = new FileStream( ctx.assetPath, FileMode.Open, FileAccess.Read );
 			using var binReader = new BinaryReader( fStream, Encoding.UTF8 );
 
-			if ( !IsRMesh( binReader ) ) {
+			if ( !IsRMesh( fStream ) ) {
 				ctx.LogImportError( "The file is not an RMesh file." );
 				return;
 			}
@@ -192,12 +218,13 @@ namespace SCPCB.Remaster {
 					parent = ( ( GameObject )ctx.mainObject ).transform
 				}
 			};
-			
+
 			ctx.AddObjectToAsset( modelObj.name, modelObj );
 
 			for ( var i = 0; i < matCount; i++ ) {
 				Material mat = default;
-				
+
+				// I only care about the non-lightmap texture.
 				for ( var j = 0; j < MAT_NUM; ++j ) {
 					if ( binReader.ReadByte() == 0x0 ) {
 						continue;
@@ -210,42 +237,56 @@ namespace SCPCB.Remaster {
 					}
 
 					mat = new Material( usedShader );
-					
+
 					var tex = GetTexture( texName );
 
 					if ( tex == null ) {
 						ctx.LogImportWarning( $"Could not find texture `{texName}`. Make sure it is in the `{texPath}` directory." );
 					} else {
 						mat.SetTexture( BASE_MAP, tex );
-						
+
 						ctx.AddObjectToAsset( $"{texName}.{i}", tex );
 					}
 
 					ctx.AddObjectToAsset( $"mat.{texName}.{i}", mat );
 				}
 
-				// Each "material" will be it's own game object.
+				// Each mesh will be it's own game object.
 				var model = new GameObject( i.ToString() ) {
 					transform = {
 						parent = modelObj.transform
 					}
 				};
 
-				var meshFilter     = model.AddComponent<MeshFilter>();
-				var renderer = model.AddComponent<MeshRenderer>();
-				
+				// Adds the mesh filter and renderer to the model object for later use.
+				var meshFilter = model.AddComponent<MeshFilter>();
+				var renderer   = model.AddComponent<MeshRenderer>();
+
+				// Adds all this to the asset so Unity will import it.
 				ctx.AddObjectToAsset( $"model.{i}.meshFilter", meshFilter );
 				ctx.AddObjectToAsset( $"model.{i}.renderer", renderer );
 				ctx.AddObjectToAsset( $"model.{i}", model );
 
-				meshFilter.sharedMesh = ReadMeshData( binReader, new Mesh() );
+				// Loads the mesh data and saves it to the shared mesh, because referencing doesn't work.
+				var sharedMesh = ReadMeshData( binReader, new Mesh() );
 				
-				ctx.AddObjectToAsset( $"model.{i}.mesh", meshFilter.sharedMesh );
+				meshFilter.sharedMesh = sharedMesh;
+
+				// Adds a name to the mesh to better aid in finding it in Unity.
+				sharedMesh.name = $"mesh{i}";
+
+				// Adds the mesh to the asset.
+				ctx.AddObjectToAsset( $"model.{i}.mesh", sharedMesh );
 
 				renderer.material = mat;
 			}
 		}
 
+		/// <summary>
+		/// Looks for the texture in the Texture folder of Unity.
+		/// </summary>
+		/// <param name="textureName">The name of the texture.</param>
+		/// <returns>A texture object if there is a texture there, otherwise null.</returns>
 		private Texture GetTexture( string textureName ) {
 			var texPath = Path.Combine( this.texPath, textureName );
 
