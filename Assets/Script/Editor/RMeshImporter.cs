@@ -123,7 +123,7 @@ namespace SCPCB.Remaster {
 				var x = binReader.ReadSingle() / 100f;
 				var y = binReader.ReadSingle() / 100f;
 				var z = binReader.ReadSingle() / 100f;
-				var u = -binReader.ReadSingle() + 0.17f;
+				var u = binReader.ReadSingle();
 				var v = -binReader.ReadSingle();
 
 				verts[i] = new Vector3( x, y, z );
