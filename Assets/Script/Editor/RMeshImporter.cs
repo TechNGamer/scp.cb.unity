@@ -288,15 +288,15 @@ namespace SCPCB.Remaster {
 		/// <param name="textureName">The name of the texture.</param>
 		/// <returns>A texture object if there is a texture there, otherwise null.</returns>
 		private Texture GetTexture( string textureName ) {
-			var texPath = Path.Combine( this.texPath, textureName );
+			var fullTexPath = Path.Combine( texPath, textureName );
 
-			if ( !File.Exists( texPath ) ) {
+			if ( !File.Exists( fullTexPath ) ) {
 				return null;
 			}
 
 			var myTex = new Texture2D( 1, 1 );
 
-			myTex.LoadImage( File.ReadAllBytes( texPath ) );
+			myTex.LoadImage( File.ReadAllBytes( fullTexPath ) );
 			myTex.Apply();
 
 			return myTex;
