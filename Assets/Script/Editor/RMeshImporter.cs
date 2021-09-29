@@ -1,4 +1,3 @@
-using System;
 using System.IO;
 using System.Text;
 using UnityEditor.AssetImporters;
@@ -32,18 +31,19 @@ namespace SCPCB.Remaster {
 	 *
 	 * The Vertex section can differ if this is a collision mesh or not. If it is not a collision mesh, then
 	 * there are 31 bytes. The first 20 are actually floats that map to X,Y,Z. The Z position, however, does
-	 * need to be flipped. After the first 3 floats are the UV floats. The next 8 bytes, I have no clue as to
-	 * what they do, but they do not seem needed. Then the remaining 3 bytes are RGB values. If, however, this
-	 * mesh is a collision mesh, then there are only 12 bytes that represent floats for X,Y,Z. UV and RGB values
+	 * need to be flipped. After the first 3 floats are the UV floats. The next 8 bytes are another set of UVs
+	 * with my best guess being for the lightmap PNGs. Then the remaining 3 bytes are RGB values. If, however, this
+	 * mesh is a collision mesh, then there are only 12 bytes that represent floats for X,Y,Z. UV0, UV1, and RGB values
 	 * are not encoded.
 	 *
 	 * [int vertCount]{
 	 *		[float x]
 	 *		[float y]
 	 *		[float z]
-	 *		[float u|no collision]
-	 *		[float v|no collision]
-	 *		[8 unknown bytes|no collision]
+	 *		[float u0|no collision]
+	 *		[float v0|no collision]
+	 *		[float u1|no collision]
+	 *		[float v1|no collision]
 	 *		[byte r|no collision]
 	 *		[byte g|no collision]
 	 *		[byte b|no collision]
@@ -75,9 +75,10 @@ namespace SCPCB.Remaster {
 	 *			[float x]
 	 *			[float y]
 	 *			[float z]
-	 *			[float u]
-	 *			[float v]
-	 *			[8 unknown bytes]
+	 *			[float u0]
+	 *			[float v0]
+	 *			[float u1]
+	 *			[float v1]
 	 *			[byte r]
 	 *			[byte g]
 	 *			[byte b]
