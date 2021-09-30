@@ -118,7 +118,8 @@ namespace SCPCB.Remaster {
 		private static Mesh ReadMeshData( BinaryReader binReader, Mesh mesh ) {
 			var vertCount = binReader.ReadInt32();
 			var verts     = new Vector3[vertCount];
-			var uvs       = new Vector2[vertCount];
+			var uv0       = new Vector2[vertCount];
+			var uv1       = new Vector2[vertCount];
 
 			for ( var i = 0; i < vertCount; ++i ) {
 				/* The reason this is getting divided by 157.45 is for the following reasons:
@@ -134,14 +135,17 @@ namespace SCPCB.Remaster {
 				var z = binReader.ReadSingle() / 157.45f;
 				// For some reason, Unity needs the V flipped in order to map the UV properly.
 				// I don't know why Unity needs it that why, but it does.
-				var u = binReader.ReadSingle();
-				var v = -binReader.ReadSingle();
+				var u0 = binReader.ReadSingle();
+				var v0 = -binReader.ReadSingle();
+				var u1 = binReader.ReadSingle();
+				var v1 = -binReader.ReadSingle();
 
 				verts[i] = new Vector3( x, y, z );
-				uvs[i]   = new Vector2( u, v );
-
-				// I don't know what the next 8 bytes do, but I am also skipping the colors.
-				binReader.BaseStream.Position += 11;
+				uv0[i]   = new Vector2( u0, v0 );
+				uv1[i]   = new Vector2( u1, v1 );
+				
+				// Skipping the color parts.
+				binReader.BaseStream.Position += 3;
 			}
 
 			/* Multiplying the triangle count by 3 since all triangles have 3 points.
@@ -159,7 +163,8 @@ namespace SCPCB.Remaster {
 
 			mesh.vertices  = verts;
 			mesh.triangles = tris;
-			mesh.uv        = uvs;
+			mesh.uv        = uv0;
+			mesh.uv2       = uv1;
 
 			mesh.RecalculateNormals();
 
@@ -243,6 +248,7 @@ namespace SCPCB.Remaster {
 
 					var texName = GetString( binReader.BaseStream );
 
+					// Do not care about loading lightmaps for the model.
 					if ( texName.Contains( "lm" ) ) {
 						continue;
 					}
