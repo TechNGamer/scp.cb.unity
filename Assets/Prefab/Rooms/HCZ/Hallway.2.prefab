@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6272011510568820477}
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 7.671875, y: 4.5, z: 0}
+  m_LocalPosition: {x: 7.6918654, y: 4.377298, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6272011512639192369}
@@ -43,10 +43,10 @@ Light:
   m_Type: 0
   m_Shape: 0
   m_Color: {r: 1, g: 0.495283, b: 0.495283, a: 1}
-  m_Intensity: 100
+  m_Intensity: 5
   m_Range: 5.25
-  m_SpotAngle: 55
-  m_InnerSpotAngle: 45
+  m_SpotAngle: 125
+  m_InnerSpotAngle: 50
   m_CookieSize: 10
   m_Shadows:
     m_Type: 2
@@ -206,7 +206,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6272011511028169511}
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -7.6914062, y: 4.5, z: 0}
+  m_LocalPosition: {x: -7.663143, y: 4.377298, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6272011512639192369}
@@ -224,10 +224,10 @@ Light:
   m_Type: 0
   m_Shape: 0
   m_Color: {r: 1, g: 0.495283, b: 0.495283, a: 1}
-  m_Intensity: 100
+  m_Intensity: 5
   m_Range: 5.25
-  m_SpotAngle: 55
-  m_InnerSpotAngle: 45
+  m_SpotAngle: 125
+  m_InnerSpotAngle: 50
   m_CookieSize: 10
   m_Shadows:
     m_Type: 2
@@ -236,7 +236,7 @@ Light:
     m_Strength: 1
     m_Bias: 0.05
     m_NormalBias: 0.4
-    m_NearPlane: 1
+    m_NearPlane: 0.1
     m_CullingMatrixOverride:
       e00: 1
       e01: 0
@@ -299,7 +299,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6272011511376735867}
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 2.5195312, y: 4.5, z: 0}
+  m_LocalPosition: {x: 2.579274, y: 4.377298, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6272011512639192369}
@@ -317,10 +317,10 @@ Light:
   m_Type: 0
   m_Shape: 0
   m_Color: {r: 1, g: 0.495283, b: 0.495283, a: 1}
-  m_Intensity: 100
+  m_Intensity: 5
   m_Range: 5.25
-  m_SpotAngle: 55
-  m_InnerSpotAngle: 45
+  m_SpotAngle: 125
+  m_InnerSpotAngle: 50
   m_CookieSize: 10
   m_Shadows:
     m_Type: 2
@@ -392,7 +392,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6272011511497359173}
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -2.5703125, y: 4.5, z: 0}
+  m_LocalPosition: {x: -2.544807, y: 4.377298, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6272011512639192369}
@@ -410,10 +410,10 @@ Light:
   m_Type: 0
   m_Shape: 0
   m_Color: {r: 1, g: 0.495283, b: 0.495283, a: 1}
-  m_Intensity: 100
+  m_Intensity: 5
   m_Range: 5.25
-  m_SpotAngle: 55
-  m_InnerSpotAngle: 45
+  m_SpotAngle: 125
+  m_InnerSpotAngle: 50
   m_CookieSize: 10
   m_Shadows:
     m_Type: 2
@@ -667,7 +667,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6130934270066154710}
   m_Layer: 0
-  m_Name: Hallway
+  m_Name: Hallway.2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
