@@ -32,7 +32,6 @@ namespace SCPCB.Remaster.Audio {
 		private int channels;
 		private int sampleRate;
 
-		private Stream       stream;
 		private BinaryReader binReader;
 
 		/// <summary>

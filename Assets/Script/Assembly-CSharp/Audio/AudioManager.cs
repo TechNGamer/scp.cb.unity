@@ -64,7 +64,9 @@ namespace SCPCB.Remaster.Audio {
 			using var reader     = new StreamReader( fStream, Encoding.UTF8 );
 			using var jsonReader = new JsonTextReader( reader );
 
-			jsonReader.Read();
+			while ( jsonReader.Read() && jsonReader.TokenType == JsonToken.Comment ) {
+				Debug.Log( "Came across another JSON comment." );
+			}
 
 			if ( jsonReader.TokenType != JsonToken.StartArray ) {
 				throw new ArgumentException( $"Expected an array, but got `{Enum.GetName( typeof( JsonToken ), jsonReader.TokenType )}" );
@@ -118,7 +120,7 @@ namespace SCPCB.Remaster.Audio {
 					continue;
 				}
 
-				if ( reader.TokenType == JsonToken.StartObject ) {
+				if ( reader.TokenType == JsonToken.StartObject || reader.TokenType == JsonToken.Comment ) {
 					continue;
 				}
 
@@ -162,7 +164,7 @@ namespace SCPCB.Remaster.Audio {
 					} else {
 						throw new Exception( $"Unknown property: {reader.Value}" );
 					}
-				} else if ( reader.TokenType == JsonToken.StartObject || reader.TokenType == JsonToken.StartArray ) {
+				} else if ( reader.TokenType == JsonToken.StartObject || reader.TokenType == JsonToken.StartArray || reader.TokenType == JsonToken.Comment ) {
 					// This is not redundant Rider, it is here to avoid the throw statement.
 					// ReSharper disable once RedundantJumpStatement
 					continue;
