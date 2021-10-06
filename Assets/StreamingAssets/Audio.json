@@ -606,5 +606,107 @@
         "path": "SFX/SCP/173/StoneDrag.mp3"
       }
     ]
+  },
+  // SCP-205 - Demons
+  {
+    "name": "SCP205",
+    "audio": [
+      {
+        "name": "Enter",
+        "stream": true,
+        "path": "SFX/SCP/205/Enter.mp3"
+      },
+      {
+        "name": "Horror",
+        "stream": true,
+        "path": "SFX/SCP/205/Horror.mp3"
+      }
+    ]
+  },
+  // SCP-294 - Vending Machine
+  {
+    "name": "SCP294",
+    "audio": [
+      {
+        "name": "ahh",
+        "stream": true,
+        "path": "SFX/SCP/294/ahh.mp3"
+      },
+      {
+        "name": "burn",
+        "stream": true,
+        "path": "SFX/SCP/294/burn.mp3"
+      },
+      {
+        "name": "coin_drop",
+        "stream": true,
+        "path": "SFX/SCP/294/coin_drop.mp3"
+      },
+      {
+        "name": "cough",
+        "stream": true,
+        "path": "SFX/SCP/294/cough.mp3"
+      },
+      {
+        "name": "dispense0",
+        "stream": true,
+        "path": "SFX/SCP/294/dispense0.mp3"
+      },
+      {
+        "name": "dispense1",
+        "stream": true,
+        "path": "SFX/SCP/294/dispense1.mp3"
+      },
+      {
+        "name": "dispense2",
+        "stream": true,
+        "path": "SFX/SCP/294/dispense2.mp3"
+      },
+      {
+        "name": "dispense3",
+        "stream": true,
+        "path": "SFX/SCP/294/dispense3.mp3"
+      },
+      {
+        "name": "ew1",
+        "stream": true,
+        "path": "SFX/SCP/294/ew1.mp3"
+      },
+      {
+        "name": "ew2",
+        "stream": true,
+        "path": "SFX/SCP/294/ew2.mp3"
+      },
+      {
+        "name": "outofrange",
+        "stream": true,
+        "path": "SFX/SCP/294/outofrange.mp3"
+      },
+      {
+        "name": "retch1",
+        "stream": true,
+        "path": "SFX/SCP/294/retch1.mp3"
+      },
+      {
+        "name": "retch2",
+        "stream": true,
+        "path": "SFX/SCP/294/retch2.mp3"
+      },
+      {
+        "name": "slurp",
+        "stream": true,
+        "path": "SFX/SCP/294/slurp.mp3"
+      },
+      {
+        "name": "spit",
+        "stream": true,
+        "path": "SFX/SCP/294/spit.mp3"
+      },
+      {
+        "name": "vomit",
+        "stream": true,
+        "path": "SFX/SCP/294/Vomit.mp3"
+      }
+    ]
   }
 ]
