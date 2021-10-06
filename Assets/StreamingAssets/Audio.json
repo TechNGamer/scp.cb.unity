@@ -1,26 +1,19 @@
+/* This file contains the audio banks and audio files
+ * that the game needs to play. Every audio file needs
+ * to be part of a bank. This bank holds all audio files
+ * that relate to each other. For example, every sound that
+ * SCP-173 makes goes into the SCP173 audio bank. Every sound
+ * that the lights make goes into the LightsFX bank. */
 [
+  // Lights sound effect.
   {
-    "name": "SCP173",
+    "name": "LightFX", // This is the name of the audio bank.
     "audio": [
+      // This is an example of an audio file.
       {
-        "name": "snap1",
-        "stream": true,
-        "path": "SFX/SCP/173/NeckSnap1.mp3"
-      },
-      {
-        "name": "snap2",
-        "stream": true,
-        "path": "SFX/SCP/173/NeckSnap2.mp3"
-      }
-    ]
-  },
-  {
-    "name": "LightFX",
-    "audio": [
-      {
-        "name": "light1",
-        "stream": true,
-        "path": "SFX/Room/Intro/Light1.mp3"
+        "name": "light1", // What name should be associated, does not have to be name of file.
+        "stream": true, // Tells the game rather to stream the audio file or not.
+        "path": "SFX/Room/Intro/Light1.mp3" // The path, relative to the StreamingAssets folder.
       },
       {
         "name": "light2",
@@ -31,6 +24,377 @@
         "name": "light3",
         "stream": true,
         "path": "SFX/Room/Intro/Light3.mp3"
+      }
+    ]
+  },
+  // SCP-008 - Prion
+  {
+    "name": "SCP008",
+    "audio": [
+      {
+        "name": "KillScientist1",
+        "stream": true,
+        "path": "SFX/SCP/008/KillScientist1.mp3"
+      },
+      {
+        "name": "KillScientist2",
+        "stream": true,
+        "path": "SFX/SCP/008/KillScientist2.mp3"
+      },
+      {
+        "name": "Voice0",
+        "stream": true,
+        "path": "SFX/SCP/008/Voice0.mp3"
+      },
+      {
+        "name": "Voice1",
+        "stream": true,
+        "path": "SFX/SCP/008/Voice1.mp3"
+      },
+      {
+        "name": "Voice2",
+        "stream": true,
+        "path": "SFX/SCP/008/Voice2.mp3"
+      },
+      {
+        "name": "Voice3",
+        "stream": true,
+        "path": "SFX/SCP/008/Voice3.mp3"
+      },
+      {
+        "name": "Voice4",
+        "stream": true,
+        "path": "SFX/SCP/008/Voice4.mp3"
+      },
+      {
+        "name": "Voice5",
+        "stream": true,
+        "path": "SFX/SCP/008/Voice5.mp3"
+      },
+      {
+        "name": "Voice6",
+        "stream": true,
+        "path": "SFX/SCP/008/Voice6.mp3"
+      }
+    ]
+  },
+  // SCP-012 - Music Sheet
+  {
+    "name": "SCP012",
+    "audio": [
+      {
+        "name": "Speech1",
+        "stream": true,
+        "path": "SFX/SCP/012/Speech1.mp3"
+      },
+      {
+        "name": "Speech2",
+        "stream": true,
+        "path": "SFX/SCP/012/Speech2.mp3"
+      },
+      {
+        "name": "Speech3",
+        "stream": true,
+        "path": "SFX/SCP/012/Speech3.mp3"
+      },
+      {
+        "name": "Speech4",
+        "stream": true,
+        "path": "SFX/SCP/012/Speech4.mp3"
+      },
+      {
+        "name": "Speech5",
+        "stream": true,
+        "path": "SFX/SCP/012/Speech5.mp3"
+      },
+      {
+        "name": "Speech6",
+        "stream": true,
+        "path": "SFX/SCP/012/Speech6.mp3"
+      },
+      {
+        "name": "Speech7",
+        "stream": true,
+        "path": "SFX/SCP/012/Speech7.mp3"
+      }
+    ]
+  },
+  // SCP-035 - Mask
+  {
+    "name": "SCP035",
+    "audio": [
+      {
+        "name": "Closet1",
+        "stream": true,
+        "path": "SFX/SCP/035/Closet1.mp3"
+      },
+      {
+        "name": "Closet2",
+        "stream": true,
+        "path": "SFX/SCP/035/Closet2.mp3"
+      },
+      {
+        "name": "Escape",
+        "stream": true,
+        "path": "SFX/SCP/035/Escape.mp3"
+      },
+      {
+        "name": "Gased1",
+        "stream": true,
+        "path": "SFX/SCP/035/Gased1.mp3"
+      },
+      {
+        "name": "Gased2",
+        "stream": true,
+        "path": "SFX/SCP/035/Gased2.mp3"
+      },
+      {
+        "name": "GasedCloset",
+        "stream": true,
+        "path": "SFX/SCP/035/GasedCloset.mp3"
+      },
+      {
+        "name": "GasedEscape",
+        "stream": true,
+        "path": "SFX/SCP/035/GasedEscape.mp3"
+      },
+      {
+        "name": "GasedKilled1",
+        "stream": true,
+        "path": "SFX/SCP/035/GasedKilled1.mp3"
+      },
+      {
+        "name": "GasedKilled2",
+        "stream": true,
+        "path": "SFX/SCP/035/GasedKilled2.mp3"
+      },
+      {
+        "name": "GasedStop1",
+        "stream": true,
+        "path": "SFX/SCP/035/GasedStop1.mp3"
+      },
+      {
+        "name": "GasedStop2",
+        "stream": true,
+        "path": "SFX/SCP/035/GasedStop2.mp3"
+      },
+      {
+        "name": "GetUp",
+        "stream": true,
+        "path": "SFX/SCP/035/GetUp.mp3"
+      },
+      {
+        "name": "Help1",
+        "stream": true,
+        "path": "SFX/SCP/035/Help1.mp3"
+      },
+      {
+        "name": "Help2",
+        "stream": true,
+        "path": "SFX/SCP/035/Help2.mp3"
+      },
+      {
+        "name": "Idle1",
+        "stream": true,
+        "path": "SFX/SCP/035/Idle1.mp3"
+      },
+      {
+        "name": "Idle2",
+        "stream": true,
+        "path": "SFX/SCP/035/Idle2.mp3"
+      },
+      {
+        "name": "Idle3",
+        "stream": true,
+        "path": "SFX/SCP/035/Idle3.mp3"
+      },
+      {
+        "name": "Idle4",
+        "stream": true,
+        "path": "SFX/SCP/035/Idle4.mp3"
+      },
+      {
+        "name": "Idle5",
+        "stream": true,
+        "path": "SFX/SCP/035/Idle5.mp3"
+      },
+      {
+        "name": "Idle6",
+        "stream": true,
+        "path": "SFX/SCP/035/Idle6.mp3"
+      },
+      {
+        "name": "Idle7",
+        "stream": true,
+        "path": "SFX/SCP/035/Idle7.mp3"
+      },
+      {
+        "name": "KilledEscape",
+        "stream": true,
+        "path": "SFX/SCP/035/KilledEscape.mp3"
+      },
+      {
+        "name": "KilledGetUp",
+        "stream": true,
+        "path": "SFX/SCP/035/KilledGetUp.mp3"
+      },
+      {
+        "name": "RadioHelp1",
+        "stream": true,
+        "path": "SFX/SCP/035/RadioHelp1.mp3"
+      },
+      {
+        "name": "RadioHelp2",
+        "stream": true,
+        "path": "SFX/SCP/035/RadioHelp2.mp3"
+      }
+    ]
+  },
+  // SCP-049 - Plague Doctor
+  {
+    "name": "PlagueDoctor",
+    "audio": [
+      {
+        "name": "714Equipped",
+        "stream": true,
+        "path": "SFX/SCP/049/714Equipped.mp3"
+      },{
+        "name": "Breath",
+        "stream": true,
+        "path": "SFX/SCP/049/Breath.mp3"
+      },{
+        "name": "DetectedInChamber",
+        "stream": true,
+        "path": "SFX/SCP/049/DetectedInChamber.mp3"
+      },{
+        "name": "Kidnap1",
+        "stream": true,
+        "path": "SFX/SCP/049/Kidnap1.mp3"
+      },{
+        "name": "Kidnap2",
+        "stream": true,
+        "path": "SFX/SCP/049/Kidnap2.mp3"
+      },{
+        "name": "Room2SL1",
+        "stream": true,
+        "path": "SFX/SCP/049/Room2SL1.mp3"
+      },{
+        "name": "Room2SL2",
+        "stream": true,
+        "path": "SFX/SCP/049/Room2SL2.mp3"
+      },{
+        "name": "Searching1",
+        "stream": true,
+        "path": "SFX/SCP/049/Searching1.mp3"
+      },{
+        "name": "Searching2",
+        "stream": true,
+        "path": "SFX/SCP/049/Searching2.mp3"
+      },{
+        "name": "Searching3",
+        "stream": true,
+        "path": "SFX/SCP/049/Searching3.mp3"
+      },{
+        "name": "Searching4",
+        "stream": true,
+        "path": "SFX/SCP/049/Searching4.mp3"
+      },{
+        "name": "Searching5",
+        "stream": true,
+        "path": "SFX/SCP/049/Searching5.mp3"
+      },{
+        "name": "Searching6",
+        "stream": true,
+        "path": "SFX/SCP/049/Searching6.mp3"
+      },{
+        "name": "Searching7",
+        "stream": true,
+        "path": "SFX/SCP/049/Searching7.mp3"
+      },{
+        "name": "Spotted1",
+        "stream": true,
+        "path": "SFX/SCP/049/Spotted1.mp3"
+      },{
+        "name": "Spotted2",
+        "stream": true,
+        "path": "SFX/SCP/049/Spotted2.mp3"
+      },{
+        "name": "Spotted3",
+        "stream": true,
+        "path": "SFX/SCP/049/Spotted3.mp3"
+      },{
+        "name": "Spotted4",
+        "stream": true,
+        "path": "SFX/SCP/049/Spotted4.mp3"
+      },{
+        "name": "Spotted5",
+        "stream": true,
+        "path": "SFX/SCP/049/Spotted5.mp3"
+      },{
+        "name": "Spotted6",
+        "stream": true,
+        "path": "SFX/SCP/049/Spotted6.mp3"
+      },{
+        "name": "Spotted7",
+        "stream": true,
+        "path": "SFX/SCP/049/Spotted7.mp3"
+      },{
+        "name": "Step1",
+        "stream": true,
+        "path": "SFX/SCP/049/Step1.mp3"
+      },{
+        "name": "Step2",
+        "stream": true,
+        "path": "SFX/SCP/049/Step2.mp3"
+      },{
+        "name": "Step3",
+        "stream": true,
+        "path": "SFX/SCP/049/Step3.mp3"
+      },{
+        "name": "TakeOffHazmat",
+        "stream": true,
+        "path": "SFX/SCP/049/TakeOffHazmat.mp3"
+      }
+    ]
+  },
+  // SCP-173
+  {
+    "name": "Billy", 
+    "audio": [
+      {
+        "name": "snap1", 
+        "stream": true,
+        "path": "SFX/SCP/173/NeckSnap1.mp3"
+      },
+      {
+        "name": "snap2",
+        "stream": true,
+        "path": "SFX/SCP/173/NeckSnap2.mp3"
+      },
+      {
+        "name": "snap3",
+        "stream": true,
+        "path": "SFX/SCP/173/NeckSnap3.mp3"
+      },
+      {
+        "name": "Rattle1",
+        "stream": true,
+        "path": "SFX/SCP/173/Rattle1.mp3"
+      },
+      {
+        "name": "Rattle2",
+        "stream": true,
+        "path": "SFX/SCP/173/Rattle2.mp3"
+      },
+      {
+        "name": "Rattle3",
+        "stream": true,
+        "path": "SFX/SCP/173/Rattle3.mp3"
+      },
+      {
+        "name": "StoneDrag",
+        "stream": true,
+        "path": "SFX/SCP/173/StoneDrag.mp3"
       }
     ]
   }
