@@ -708,5 +708,42 @@
         "path": "SFX/SCP/294/Vomit.mp3"
       }
     ]
+  },
+  // SCP-372 - Peripheral Jumper
+  {
+    "name": "SCP372",
+    "audio": [
+      {
+        "name": "Rustle0",
+        "stream": true,
+        "path": "SFX/SCP/372/Rustle0.mp3"
+      },
+      {
+        "name": "Rustle1",
+        "stream": true,
+        "path": "SFX/SCP/372/Rustle1.mp3"
+      },
+      {
+        "name": "Rustle2",
+        "stream": true,
+        "path": "SFX/SCP/372/Rustle2.mp3"
+      }
+    ]
+  },
+  // SCP-427 - Lovecraftian Locket
+  {
+    "name": "SCP427",
+    "audio": [
+      {
+        "name": "Effect",
+        "stream": true,
+        "path": "SFX/SCP/427/Effect.mp3"
+      },
+      {
+        "name": "Transform",
+        "stream": true,
+        "path": "SFX/SCP/427/Transform.mp3"
+      }
+    ]
   }
 ]
