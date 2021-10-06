@@ -418,6 +418,67 @@
       }
     ]
   },
+  // SCP-079 - The AI
+  {
+    "name": "TheAI",
+    "audio": [
+      {
+        "name": "Broadcast1",
+        "stream": true,
+        "path": "SFX/SCP/079/Broadcast1.mp3"
+      },
+      {
+        "name": "Broadcast2",
+        "stream": true,
+        "path": "SFX/SCP/079/Broadcast2.mp3"
+      },
+      {
+        "name": "Broadcast3",
+        "stream": true,
+        "path": "SFX/SCP/079/Broadcast3.mp3"
+      },
+      {
+        "name": "Broadcast4",
+        "stream": true,
+        "path": "SFX/SCP/079/Broadcast4.mp3"
+      },
+      {
+        "name": "Broadcast5",
+        "stream": true,
+        "path": "SFX/SCP/079/Broadcast5.mp3"
+      },
+      {
+        "name": "Broadcast6",
+        "stream": true,
+        "path": "SFX/SCP/079/Broadcast6.mp3"
+      },
+      {
+        "name": "Broadcast7",
+        "stream": true,
+        "path": "SFX/SCP/079/Broadcast7.mp3"
+      },
+      {
+        "name": "GateB",
+        "stream": true,
+        "path": "SFX/SCP/079/GateB.mp3"
+      },
+      {
+        "name": "Refuse",
+        "stream": true,
+        "path": "SFX/SCP/079/Refuse.mp3"
+      },
+      {
+        "name": "Speech",
+        "stream": true,
+        "path": "SFX/SCP/079/Speech.mp3"
+      },
+      {
+        "name": "TestroomWarning",
+        "stream": true,
+        "path": "SFX/SCP/079/TestroomWarning.mp3"
+      }
+    ]
+  },
   // SCP-173
   {
     "name": "Billy", 
