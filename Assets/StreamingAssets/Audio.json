@@ -479,6 +479,27 @@
       }
     ]
   },
+  // SCP-096 - Shy Guy
+  {
+    "name": "ShyGuy",
+    "audio": [
+      {
+        "name": "ElevatorSlam",
+        "stream": true,
+        "path": "SFX/SCP/096/ElevatorSlam.mp3"
+      },
+      {
+        "name": "Scream",
+        "stream": true,
+        "path": "SFX/SCP/096/Scream.mp3"
+      },
+      {
+        "name": "Triggered",
+        "stream": true,
+        "path": "SFX/SCP/096/Triggered.mp3"
+      }
+    ]
+  },
   // SCP-173
   {
     "name": "Billy", 
