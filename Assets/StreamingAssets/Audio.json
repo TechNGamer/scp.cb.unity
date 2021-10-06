@@ -745,5 +745,90 @@
         "path": "SFX/SCP/427/Transform.mp3"
       }
     ]
+  },
+  // SCP-513 - The Bell
+  {
+    "name": "SCP513",
+    "audio": [
+      {
+        "name": "914Refine",
+        "stream": true,
+        "path": "SFX/SCP/513/914Refine.mp3"
+      },
+      {
+        "name": "Bell1",
+        "stream": true,
+        "path": "SFX/SCP/513/Bell1.mp3"
+      },
+      {
+        "name": "Bell2",
+        "stream": true,
+        "path": "SFX/SCP/513/Bell2.mp3"
+      },
+      {
+        "name": "Bell3",
+        "stream": true,
+        "path": "SFX/SCP/513/Bell3.mp3"
+      }
+    ]
+  },
+  // SCP-682 - Indestructible Lizard
+  {
+    "name": "SCP682",
+    "audio": [
+      {
+        "name": "Roar",
+        "stream": true,
+        "path": "SFX/SCP/682/Roar.mp3"
+      }
+    ]
+  },
+  // SCP-860 - Blue Key
+  {
+    "name": "SCP860",
+    "audio": [
+      // Have no idea why these files are called cancer,
+      // in my opinion, SCP-860-2 is cute in most depictions.
+      {
+        "name": "Cancer0",
+        "stream": true,
+        "path": "SFX/SCP/860/Cancer0.mp3"
+      },
+      {
+        "name": "Cancer1",
+        "stream": true,
+        "path": "SFX/SCP/860/Cancer1.mp3"
+      },
+      {
+        "name": "Cancer2",
+        "stream": true,
+        "path": "SFX/SCP/860/Cancer2.mp3"
+      },
+      {
+        "name": "Cancer3",
+        "stream": true,
+        "path": "SFX/SCP/860/Cancer3.mp3"
+      },
+      {
+        "name": "Cancer4",
+        "stream": true,
+        "path": "SFX/SCP/860/Cancer4.mp3"
+      },
+      {
+        "name": "Cancer5",
+        "stream": true,
+        "path": "SFX/SCP/860/Cancer5.mp3"
+      },
+      {
+        "name": "Chase1",
+        "stream": true,
+        "path": "SFX/SCP/860/Chase1.mp3"
+      },
+      {
+        "name": "Chase2",
+        "stream": true,
+        "path": "SFX/SCP/860/Chase2.mp3"
+      }
+    ]
   }
 ]
