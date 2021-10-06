@@ -861,5 +861,297 @@
         "path": "SFX/SCP/914/Refining.mp3"
       }
     ]
+  },
+  // SCP-939
+  {
+    "name": "SCP939",
+    "audio": [
+      {
+        "name": "0Alert1",
+        "stream": true,
+        "path": "SFX/SCP/939/0Alert1.mp3"
+      },
+      {
+        "name": "0Alert2",
+        "stream": true,
+        "path": "SFX/SCP/939/0Alert2.mp3"
+      },
+      {
+        "name": "0Alert3",
+        "stream": true,
+        "path": "SFX/SCP/939/0Alert3.mp3"
+      },
+      {
+        "name": "0Attack1",
+        "stream": true,
+        "path": "SFX/SCP/939/0Attack1.mp3"
+      },
+      {
+        "name": "0Attack2",
+        "stream": true,
+        "path": "SFX/SCP/939/0Attack2.mp3"
+      },
+      {
+        "name": "0Attack3",
+        "stream": true,
+        "path": "SFX/SCP/939/0Attack3.mp3"
+      },
+      {
+        "name": "0Lure1",
+        "stream": true,
+        "path": "SFX/SCP/939/0Lure1.mp3"
+      },
+      {
+        "name": "0Lure2",
+        "stream": true,
+        "path": "SFX/SCP/939/0Lure2.mp3"
+      },
+      {
+        "name": "0Lure3",
+        "stream": true,
+        "path": "SFX/SCP/939/0Lure3.mp3"
+      },
+      {
+        "name": "0Lure4",
+        "stream": true,
+        "path": "SFX/SCP/939/0Lure4.mp3"
+      },
+      {
+        "name": "0Lure5",
+        "stream": true,
+        "path": "SFX/SCP/939/0Lure5.mp3"
+      },
+      {
+        "name": "0Lure6",
+        "stream": true,
+        "path": "SFX/SCP/939/0Lure6.mp3"
+      },
+      {
+        "name": "0Lure7",
+        "stream": true,
+        "path": "SFX/SCP/939/0Lure7.mp3"
+      },
+      {
+        "name": "0Lure8",
+        "stream": true,
+        "path": "SFX/SCP/939/0Lure8.mp3"
+      },
+      {
+        "name": "0Lure9",
+        "stream": true,
+        "path": "SFX/SCP/939/0Lure9.mp3"
+      },
+      {
+        "name": "0Lure10",
+        "stream": true,
+        "path": "SFX/SCP/939/0Lure10.mp3"
+      },
+      {
+        "name": "1Alert1",
+        "stream": true,
+        "path": "SFX/SCP/939/1Alert1.mp3"
+      },
+      {
+        "name": "1Alert2",
+        "stream": true,
+        "path": "SFX/SCP/939/1Alert2.mp3"
+      },
+      {
+        "name": "1Alert3",
+        "stream": true,
+        "path": "SFX/SCP/939/1Alert3.mp3"
+      },
+      {
+        "name": "1Attack1",
+        "stream": true,
+        "path": "SFX/SCP/939/1Attack1.mp3"
+      },
+      {
+        "name": "1Attack2",
+        "stream": true,
+        "path": "SFX/SCP/939/1Attack2.mp3"
+      },
+      {
+        "name": "1Attack3",
+        "stream": true,
+        "path": "SFX/SCP/939/1Attack3.mp3"
+      },
+      {
+        "name": "1Lure1",
+        "stream": true,
+        "path": "SFX/SCP/939/1Lure1.mp3"
+      },
+      {
+        "name": "1Lure2",
+        "stream": true,
+        "path": "SFX/SCP/939/1Lure2.mp3"
+      },
+      {
+        "name": "1Lure3",
+        "stream": true,
+        "path": "SFX/SCP/939/1Lure3.mp3"
+      },
+      {
+        "name": "1Lure4",
+        "stream": true,
+        "path": "SFX/SCP/939/1Lure4.mp3"
+      },
+      {
+        "name": "1Lure5",
+        "stream": true,
+        "path": "SFX/SCP/939/1Lure5.mp3"
+      },
+      {
+        "name": "1Lure6",
+        "stream": true,
+        "path": "SFX/SCP/939/1Lure6.mp3"
+      },
+      {
+        "name": "1Lure7",
+        "stream": true,
+        "path": "SFX/SCP/939/1Lure7.mp3"
+      },
+      {
+        "name": "1Lure8",
+        "stream": true,
+        "path": "SFX/SCP/939/1Lure8.mp3"
+      },
+      {
+        "name": "1Lure9",
+        "stream": true,
+        "path": "SFX/SCP/939/1Lure9.mp3"
+      },
+      {
+        "name": "1Lure10",
+        "stream": true,
+        "path": "SFX/SCP/939/1Lure10.mp3"
+      },
+      {
+        "name": "2Alert1",
+        "stream": true,
+        "path": "SFX/SCP/939/2Alert1.mp3"
+      },
+      {
+        "name": "2Alert2",
+        "stream": true,
+        "path": "SFX/SCP/939/2Alert2.mp3"
+      },
+      {
+        "name": "2Alert3",
+        "stream": true,
+        "path": "SFX/SCP/939/2Alert3.mp3"
+      },
+      {
+        "name": "2Attack1",
+        "stream": true,
+        "path": "SFX/SCP/939/2Attack1.mp3"
+      },
+      {
+        "name": "2Attack2",
+        "stream": true,
+        "path": "SFX/SCP/939/2Attack2.mp3"
+      },
+      {
+        "name": "2Attack3",
+        "stream": true,
+        "path": "SFX/SCP/939/2Attack3.mp3"
+      },
+      {
+        "name": "2Lure1",
+        "stream": true,
+        "path": "SFX/SCP/939/2Lure1.mp3"
+      },
+      {
+        "name": "2Lure2",
+        "stream": true,
+        "path": "SFX/SCP/939/2Lure2.mp3"
+      },
+      {
+        "name": "2Lure3",
+        "stream": true,
+        "path": "SFX/SCP/939/2Lure3.mp3"
+      },
+      {
+        "name": "2Lure4",
+        "stream": true,
+        "path": "SFX/SCP/939/2Lure4.mp3"
+      },
+      {
+        "name": "2Lure5",
+        "stream": true,
+        "path": "SFX/SCP/939/2Lure5.mp3"
+      },
+      {
+        "name": "2Lure6",
+        "stream": true,
+        "path": "SFX/SCP/939/2Lure6.mp3"
+      },
+      {
+        "name": "2Lure7",
+        "stream": true,
+        "path": "SFX/SCP/939/2Lure7.mp3"
+      },
+      {
+        "name": "2Lure8",
+        "stream": true,
+        "path": "SFX/SCP/939/2Lure8.mp3"
+      },
+      {
+        "name": "2Lure9",
+        "stream": true,
+        "path": "SFX/SCP/939/2Lure9.mp3"
+      },
+      {
+        "name": "2Lure10",
+        "stream": true,
+        "path": "SFX/SCP/939/2Lure10.mp3"
+      },
+      {
+        "name": "2Lure11",
+        "stream": true,
+        "path": "SFX/SCP/939/2Lure11.mp3"
+      },
+      {
+        "name": "attack",
+        "stream": true,
+        "path": "SFX/SCP/939/attack.mp3"
+      }
+    ]
+  },
+  // SCP-966
+  {
+    "name": "SCP966",
+    "audio": [
+      {
+        "name": "Echo1",
+        "stream": true,
+        "path": "SFX/SCP/966/Echo1.mp3"
+      },
+      {
+        "name": "Echo2",
+        "stream": true,
+        "path": "SFX/SCP/966/Echo2.mp3"
+      },
+      {
+        "name": "Echo3",
+        "stream": true,
+        "path": "SFX/SCP/966/Echo3.mp3"
+      },
+      {
+        "name": "Idle1",
+        "stream": true,
+        "path": "SFX/SCP/966/Idle1.mp3"
+      },
+      {
+        "name": "Idle2",
+        "stream": true,
+        "path": "SFX/SCP/966/Idle2.mp3"
+      },
+      {
+        "name": "Idle3",
+        "stream": true,
+        "path": "SFX/SCP/966/Idle3.mp3"
+      }
+    ]
   }
 ]
