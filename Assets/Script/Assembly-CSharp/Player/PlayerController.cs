@@ -4,13 +4,12 @@ using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
 
-
 namespace SCPCB.Remaster.Player {
 	/// <summary>
 	/// The player controller.
 	/// </summary>
-	public class Controller : MonoBehaviour {
-		private static Controller pController;
+	public class PlayerController : MonoBehaviour {
+		private static PlayerController pPlayerController;
 
 		/// <summary>
 		/// If the player is touching the ground.
@@ -61,7 +60,12 @@ namespace SCPCB.Remaster.Player {
 		[Tooltip( "The distance before snapping to the ground." )]
 		private float groundDistance = 0.25f;
 
-		private float fallSpeed = 0f;
+		[SerializeField]
+		[Range( 30f, 90f )]
+		[Tooltip("The maximum vertical look angle that is allowed.")]
+		private float maxLookAngle = 45f;
+
+		private float fallSpeed;
 
 		private Vector3 moveCamRot;
 		private Vector3 moveDirection;
@@ -80,12 +84,12 @@ namespace SCPCB.Remaster.Player {
 
 		private void Awake() {
 			// Want to make sure that there is only one player controller.
-			if ( pController ) {
+			if ( pPlayerController ) {
 				Destroy( this );
 				return;
 			}
 
-			pController = this;
+			pPlayerController = this;
 
 			// This section is mainly used to initialize the events of the new Input System.
 			input = new MainInput();
@@ -142,7 +146,7 @@ namespace SCPCB.Remaster.Player {
 		// Start is called before the first frame update
 		private void Start() {
 			// Instead of having it be associated within the editor, it will grab it during runtime.
-			// This is better in my opinion because if anything changes with the Character Controller
+			// This is better in my opinion because if anything changes with the Character PlayerController
 			// or the Camera, then it will be picked up during runtime instead of erroring out and forgetting.
 			cam = GetComponentInChildren<Camera>();
 			cc  = GetComponent<CharacterController>();
@@ -183,7 +187,12 @@ namespace SCPCB.Remaster.Player {
 				fallSpeed = 0f;
 			}
 
+			myDir.y = fallSpeed;
+
 			cc.Move( myDir );
+
+			Debug.Log( $"Movement: {myDir}\nMove Direction: {moveDirection}" );
+			Debug.DrawLine( camTransform.position, camTransform.position + myDir, Color.green, Time.deltaTime );
 		}
 
 		private float GetSpeed() {
@@ -206,7 +215,7 @@ namespace SCPCB.Remaster.Player {
 			var rotateDiff   = Quaternion.Euler( new Vector3( moveCamRot.x, 0f ) * ( camSpeed * Time.deltaTime ) );
 			var angle        = Quaternion.Angle( cam.transform.localRotation * rotateDiff, Quaternion.Euler( 0f, camTransform.localRotation.eulerAngles.y, 0f ) );
 
-			if ( angle <= 45f ) {
+			if ( angle <= maxLookAngle ) {
 				camTransform.Rotate( new Vector3( moveCamRot.x * camSpeed * Time.deltaTime, 0f ) );
 			}
 
