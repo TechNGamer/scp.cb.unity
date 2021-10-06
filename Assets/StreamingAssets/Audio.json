@@ -1153,5 +1153,185 @@
         "path": "SFX/SCP/966/Idle3.mp3"
       }
     ]
+  },
+  // SCP-970 - Spatial Phenomenon
+  {
+    "name": "SCP970",
+    "audio": [
+      {
+        "name": "Corpse",
+        "stream": true,
+        "path": "SFX/SCP/970/Corpse.mp3"
+      }
+    ]
+  },
+  // SCP-990 - Dream Man
+  {
+    "name": "CWM",
+    "audio": [
+      {
+        "name": "CWM1",
+        "stream": true,
+        "path": "SFX/SCP/990/CWM1.mp3"
+      },
+      {
+        "name": "CWM2",
+        "stream": true,
+        "path": "SFX/SCP/990/CWM2.mp3"
+      }
+    ]
+  },
+  // SCP-1048A - No
+  {
+    "name": "LOUDEAR",
+    "audio": [
+      {
+        "name": "Growth",
+        "stream": true,
+        "path": "SFX/SCP/1048A/Growth.mp3"
+      },
+      {
+        "name": "Shriek",
+        "stream": true,
+        "path": "SFX/SCP/1048A/Shriek.mp3"
+      }
+    ]
+  },
+  // SCP-1123 - WWII Skull
+  {
+    "name": "WWII",
+    "audio": [
+      {
+        "name": "Gunshot",
+        "stream": true,
+        "path": "SFX/SCP/1123/Gunshot.mp3"
+      },
+      {
+        "name": "Horror",
+        "stream": true,
+        "path": "SFX/SCP/1123/Horror.mp3"
+      },
+      {
+        "name": "Officer1",
+        "stream": true,
+        "path": "SFX/SCP/1123/Officer1.mp3"
+      },
+      {
+        "name": "Officer2",
+        "stream": true,
+        "path": "SFX/SCP/1123/Officer2.mp3"
+      },
+      {
+        "name": "Officer3",
+        "stream": true,
+        "path": "SFX/SCP/1123/Officer3.mp3"
+      },
+      {
+        "name": "Touch",
+        "stream": true,
+        "path": "SFX/SCP/1123/Touch.mp3"
+      }
+    ]
+  },
+  // SCP-1162 - Hole in the Wall
+  {
+    "name": "SCPHole",
+    "audio": [
+      {
+        "name": "BodyHorrorExchange1",
+        "stream": true,
+        "path": "SFX/SCP/1162/BodyHorrorExchange1.mp3"
+      },
+      {
+        "name": "BodyHorrorExchange2",
+        "stream": true,
+        "path": "SFX/SCP/1162/BodyHorrorExchange2.mp3"
+      },
+      {
+        "name": "BodyHorrorExchange3",
+        "stream": true,
+        "path": "SFX/SCP/1162/BodyHorrorExchange3.mp3"
+      },
+      {
+        "name": "BodyHorrorExchange4",
+        "stream": true,
+        "path": "SFX/SCP/1162/BodyHorrorExchange4.mp3"
+      },
+      {
+        "name": "Exchange0",
+        "stream": true,
+        "path": "SFX/SCP/1162/Exchange0.mp3"
+      },
+      {
+        "name": "Exchange1",
+        "stream": true,
+        "path": "SFX/SCP/1162/Exchange1.mp3"
+      },
+      {
+        "name": "Exchange2",
+        "stream": true,
+        "path": "SFX/SCP/1162/Exchange2.mp3"
+      },
+      {
+        "name": "Exchange3",
+        "stream": true,
+        "path": "SFX/SCP/1162/Exchange3.mp3"
+      },
+      {
+        "name": "Exchange4",
+        "stream": true,
+        "path": "SFX/SCP/1162/Exchange4.mp3"
+      },
+      {
+        "name": "NostalgiaCancer1",
+        "stream": true,
+        "path": "SFX/SCP/1162/NostalgiaCancer1.mp3"
+      },
+      {
+        "name": "NostalgiaCancer2",
+        "stream": true,
+        "path": "SFX/SCP/1162/NostalgiaCancer2.mp3"
+      },
+      {
+        "name": "NostalgiaCancer3",
+        "stream": true,
+        "path": "SFX/SCP/1162/NostalgiaCancer3.mp3"
+      },
+      {
+        "name": "NostalgiaCancer4",
+        "stream": true,
+        "path": "SFX/SCP/1162/NostalgiaCancer4.mp3"
+      },
+      {
+        "name": "NostalgiaCancer5",
+        "stream": true,
+        "path": "SFX/SCP/1162/NostalgiaCancer5.mp3"
+      },
+      {
+        "name": "NostalgiaCancer6",
+        "stream": true,
+        "path": "SFX/SCP/1162/NostalgiaCancer6.mp3"
+      },
+      {
+        "name": "NostalgiaCancer7",
+        "stream": true,
+        "path": "SFX/SCP/1162/NostalgiaCancer7.mp3"
+      },
+      {
+        "name": "NostalgiaCancer8",
+        "stream": true,
+        "path": "SFX/SCP/1162/NostalgiaCancer8.mp3"
+      },
+      {
+        "name": "NostalgiaCancer9",
+        "stream": true,
+        "path": "SFX/SCP/1162/NostalgiaCancer9.mp3"
+      },
+      {
+        "name": "NostalgiaCancer10",
+        "stream": true,
+        "path": "SFX/SCP/1162/NostalgiaCancer10.mp3"
+      }
+    ]
   }
 ]
