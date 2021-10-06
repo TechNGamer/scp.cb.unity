@@ -357,6 +357,67 @@
       }
     ]
   },
+  // SCP-066 - Rolly Polly
+  {
+    "name": "SCP066",
+    "audio": [
+      {
+        "name": "Beethoven",
+        "stream": true,
+        "path": "SFX/SCP/066/Beethoven.mp3"
+      },
+      {
+        "name": "Eric1",
+        "stream": true,
+        "path": "SFX/SCP/066/Eric1.mp3"
+      },
+      {
+        "name": "Eric2",
+        "stream": true,
+        "path": "SFX/SCP/066/Eric2.mp3"
+      },
+      {
+        "name": "Eric3",
+        "stream": true,
+        "path": "SFX/SCP/066/Eric3.mp3"
+      },
+      {
+        "name": "Notes1",
+        "stream": true,
+        "path": "SFX/SCP/066/Notes1.mp3"
+      },
+      {
+        "name": "Notes2",
+        "stream": true,
+        "path": "SFX/SCP/066/Notes2.mp3"
+      },
+      {
+        "name": "Notes3",
+        "stream": true,
+        "path": "SFX/SCP/066/Notes3.mp3"
+      },
+      {
+        "name": "Notes4",
+        "stream": true,
+        "path": "SFX/SCP/066/Notes4.mp3"
+      },
+      {
+        "name": "Notes5",
+        "stream": true,
+        "path": "SFX/SCP/066/Notes5.mp3"
+      },
+      {
+        "name": "Notes6",
+        "stream": true,
+        "path": "SFX/SCP/066/Notes6.mp3"
+      },
+      {
+        "name": "Rolling",
+        "stream": true,
+        "path": "SFX/SCP/066/Rolling.mp3"
+      }
+    ]
+  },
   // SCP-173
   {
     "name": "Billy", 
