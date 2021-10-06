@@ -1,0 +1,29 @@
+{
+    "name": "SCPCB.Remaster.Audio.Nix",
+    "rootNamespace": "SCPCB.Remaster.Audio.Nix",
+    "references": [
+        "GUID:be3a2a102a400a141a3afe70ad086b3c",
+        "GUID:e498378621b177190b28147067177a8a"
+    ],
+    "includePlatforms": [
+        "Android",
+        "Editor",
+        "iOS",
+        "LinuxStandalone64",
+        "macOSStandalone",
+        "PS4",
+        "PS5",
+        "tvOS"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": true,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [
+        "!UNITY_EDITOR_WIN",
+        "!UNITY_STANDALONE_WIN"
+    ],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

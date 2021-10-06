@@ -1,0 +1,24 @@
+{
+    "name": "SCPCB.Remaster.Audio.Windows",
+    "rootNamespace": "SCPCB.Remaster.Audio.Windows",
+    "references": [
+        "GUID:e498378621b177190b28147067177a8a"
+    ],
+    "includePlatforms": [
+        "WSA",
+        "WindowsStandalone32",
+        "WindowsStandalone64",
+        "XboxOne"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [
+        "UNITY_EDITOR_WIN",
+        "UNITY_STANDALONE_WIN"
+    ],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

@@ -1,0 +1,22 @@
+{
+    "name": "SCPCB.Remaster.Audio.Core",
+    "rootNamespace": "SCPCB.Remaster.Audio.Core",
+    "references": [],
+    "includePlatforms": [],
+    "excludePlatforms": [
+        "CloudRendering",
+        "GameCoreScarlett",
+        "GameCoreXboxOne",
+        "Lumin",
+        "Stadia",
+        "Switch",
+        "WSA"
+    ],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

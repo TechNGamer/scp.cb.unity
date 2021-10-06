@@ -10,14 +10,17 @@
         "macOSStandalone",
         "PS4",
         "PS5",
-        "WebGL"
+        "tvOS"
     ],
     "excludePlatforms": [],
     "allowUnsafeCode": true,
     "overrideReferences": false,
     "precompiledReferences": [],
     "autoReferenced": true,
-    "defineConstraints": [],
+    "defineConstraints": [
+        "!UNITY_EDITOR_WIN",
+        "!UNITY_STANDALONE_WIN"
+    ],
     "versionDefines": [],
     "noEngineReferences": true
 }
