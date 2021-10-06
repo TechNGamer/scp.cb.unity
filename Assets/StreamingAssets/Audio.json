@@ -500,6 +500,72 @@
       }
     ]
   },
+  // SCP-106 - Radical Larry
+  {
+    "name": "RadLarry",
+    "audio": [
+      {
+        "name": "Breathing",
+        "stream": true,
+        "path": "SFX/SCP/106/Breathing.mp3"
+      },
+      {
+        "name": "Corrosion1",
+        "stream": true,
+        "path": "SFX/SCP/106/Corrosion1.mp3"
+      },
+      {
+        "name": "Corrosion2",
+        "stream": true,
+        "path": "SFX/SCP/106/Corrosion2.mp3"
+      },
+      {
+        "name": "Corrosion3",
+        "stream": true,
+        "path": "SFX/SCP/106/Corrosion3.mp3"
+      },
+      {
+        "name": "Decay0",
+        "stream": true,
+        "path": "SFX/SCP/106/Decay0.mp3"
+      },
+      {
+        "name": "Decay1",
+        "stream": true,
+        "path": "SFX/SCP/106/Decay1.mp3"
+      },
+      {
+        "name": "Decay2",
+        "stream": true,
+        "path": "SFX/SCP/106/Decay2.mp3"
+      },
+      {
+        "name": "Decay3",
+        "stream": true,
+        "path": "SFX/SCP/106/Decay3.mp3"
+      },
+      {
+        "name": "Laugh",
+        "stream": true,
+        "path": "SFX/SCP/106/Laugh.mp3"
+      },
+      {
+        "name": "WallDecay1",
+        "stream": true,
+        "path": "SFX/SCP/106/WallDecay1.mp3"
+      },
+      {
+        "name": "WallDecay2",
+        "stream": true,
+        "path": "SFX/SCP/106/WallDecay2.mp3"
+      },
+      {
+        "name": "WallDecay3",
+        "stream": true,
+        "path": "SFX/SCP/106/WallDecay3.mp3"
+      }
+    ]
+  },
   // SCP-173
   {
     "name": "Billy", 
