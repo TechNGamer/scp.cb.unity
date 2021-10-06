@@ -27,6 +27,7 @@
       }
     ]
   },
+  // This section contains all the SCP's audio.
   // SCP-008 - Prion
   {
     "name": "SCP008",
@@ -1331,6 +1332,63 @@
         "name": "NostalgiaCancer10",
         "stream": true,
         "path": "SFX/SCP/1162/NostalgiaCancer10.mp3"
+      }
+    ]
+  },
+  // SCP-1499 - Russian Gasmask
+  {
+    "name": "SCP1499",
+    "audio": [
+      {
+        "name": "Enter",
+        "stream": true,
+        "path": "SFX/SCP/1499/Enter.mp3"
+      },
+      {
+        "name": "Exit",
+        "stream": true,
+        "path": "SFX/SCP/1499/Exit.mp3"
+      },
+      {
+        "name": "Triggered",
+        "stream": true,
+        "path": "SFX/SCP/1499/Triggered.mp3"
+      },
+      {
+        "name": "Idle1",
+        "stream": true,
+        "path": "SFX/SCP/1499/Idle1.mp3"
+      },
+      {
+        "name": "Idle2",
+        "stream": true,
+        "path": "SFX/SCP/1499/Idle2.mp3"
+      },
+      {
+        "name": "Idle3",
+        "stream": true,
+        "path": "SFX/SCP/1499/Idle3.mp3"
+      },
+      {
+        "name": "Idle4",
+        "stream": true,
+        "path": "SFX/SCP/1499/Idle4.mp3"
+      }
+    ]
+  },
+  // Joke SCP's
+  {
+    "name": "Jokes",
+    "audio": [
+      {
+        "name": "789J",
+        "stream": true,
+        "path": "SFX/SCP/Joke/789j.mp3"
+      },
+      {
+        "name": "SaxDuck",
+        "stream": true,
+        "path": "SFX/SCP/Joke/Saxophone.mp3"
       }
     ]
   }
