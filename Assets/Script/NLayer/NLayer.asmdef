@@ -3,12 +3,14 @@
     "rootNamespace": "NLayer",
     "references": [],
     "includePlatforms": [
+        "Android",
         "Editor",
+        "iOS",
         "LinuxStandalone64",
         "macOSStandalone",
-        "WebGL",
-        "WindowsStandalone32",
-        "WindowsStandalone64"
+        "PS4",
+        "PS5",
+        "WebGL"
     ],
     "excludePlatforms": [],
     "allowUnsafeCode": true,

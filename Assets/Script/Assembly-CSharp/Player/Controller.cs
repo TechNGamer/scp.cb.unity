@@ -5,7 +5,7 @@ using Unity.Mathematics;
 using UnityEngine;
 
 
-namespace SCPCB.Remaster {
+namespace SCPCB.Remaster.Player {
 	/// <summary>
 	/// The player controller.
 	/// </summary>

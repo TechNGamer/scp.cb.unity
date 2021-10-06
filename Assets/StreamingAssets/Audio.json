@@ -1,0 +1,37 @@
+[
+  {
+    "name": "SCP173",
+    "audio": [
+      {
+        "name": "snap1",
+        "stream": true,
+        "path": "SFX/SCP/173/NeckSnap1.mp3"
+      },
+      {
+        "name": "snap2",
+        "stream": true,
+        "path": "SFX/SCP/173/NeckSnap2.mp3"
+      }
+    ]
+  },
+  {
+    "name": "LightFX",
+    "audio": [
+      {
+        "name": "light1",
+        "stream": true,
+        "path": "SFX/Room/Intro/Light1.mp3"
+      },
+      {
+        "name": "light2",
+        "stream": true,
+        "path": "SFX/Room/Intro/Light2.mp3"
+      },
+      {
+        "name": "light3",
+        "stream": true,
+        "path": "SFX/Room/Intro/Light3.mp3"
+      }
+    ]
+  }
+]
