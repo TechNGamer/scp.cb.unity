@@ -830,5 +830,36 @@
         "path": "SFX/SCP/860/Chase2.mp3"
       }
     ]
+  },
+  // SCP-914 - Clockwork 
+  {
+    "name": "SCP914",
+    "audio": [
+      {
+        "name": "DoorClose",
+        "stream": true,
+        "path": "SFX/SCP/914/DoorClose.mp3"
+      },
+      {
+        "name": "DoorOpen",
+        "stream": true,
+        "path": "SFX/SCP/914/DoorOpen.mp3"
+      },
+      {
+        "name": "PlayerDeath",
+        "stream": true,
+        "path": "SFX/SCP/914/PlayerDeath.mp3"
+      },
+      {
+        "name": "PlayerUse",
+        "stream": true,
+        "path": "SFX/SCP/914/PlayerUse.mp3"
+      },
+      {
+        "name": "Refining",
+        "stream": true,
+        "path": "SFX/SCP/914/Refining.mp3"
+      }
+    ]
   }
 ]
