@@ -1263,6 +1263,198 @@
       }
     ]
   },
+  // "Scientist" - Maybe expanded later, but it is just the lady that dies at the start.
+  {
+    "name": "Scientist",
+    "audio": [
+      {
+        "name": "EmilyScream",
+        "stream": true,
+        "path": "SFX/Character/Scientist/EmilyScream.mp3"
+      }
+    ]
+  },
+  // Door sound effect.
+  {
+    "name": "Door",
+    "audio": [
+      {
+        "name": "Airlock",
+        "stream": true,
+        "path": "SFX/Door/Airlock.mp3"
+      },
+      {
+        "name": "BigDoorClose0",
+        "stream": true,
+        "path": "SFX/Door/BigDoorClose.mp3"
+      },
+      {
+        "name": "BigDoorClose1",
+        "stream": true,
+        "path": "SFX/Door/BigDoorClose1.mp3"
+      },
+      {
+        "name": "BigDoorClose2",
+        "stream": true,
+        "path": "SFX/Door/BigDoorClose2.mp3"
+      },
+      {
+        "name": "BigDoorOpen0",
+        "stream": true,
+        "path": "SFX/Door/BigDoorOpen.mp3"
+      },
+      {
+        "name": "BigDoorOpen1",
+        "stream": true,
+        "path": "SFX/Door/BigDoorOpen1.mp3"
+      },
+      {
+        "name": "BigDoorOpen2",
+        "stream": true,
+        "path": "SFX/Door/BigDoorOpen2.mp3"
+      },
+      {
+        "name": "Door2Close1",
+        "stream": true,
+        "path": "SFX/Door/Door2Close1.mp3"
+      },
+      {
+        "name": "Door2Close2",
+        "stream": true,
+        "path": "SFX/Door/Door2Close2.mp3"
+      },
+      {
+        "name": "Door2Close3",
+        "stream": true,
+        "path": "SFX/Door/Door2Close3.mp3"
+      },
+      {
+        "name": "Door2Open1",
+        "stream": true,
+        "path": "SFX/Door/Door2Open1.mp3"
+      },
+      {
+        "name": "Door2Open1Dist",
+        "stream": true,
+        "path": "SFX/Door/Door2Open1_dist.mp3"
+      },
+      {
+        "name": "Door2Open2",
+        "stream": true,
+        "path": "SFX/Door/Door2Open2.mp3"
+      },
+      {
+        "name": "Door2Open3",
+        "stream": true,
+        "path": "SFX/Door/Door2Open3.mp3"
+      },
+      {
+        "name": "DoorCheckpoint",
+        "stream": true,
+        "path": "SFX/Door/DoorCheckpoint.mp3"
+      },
+      {
+        "name": "DoorClose079",
+        "stream": true,
+        "path": "SFX/Door/DoorClose079.mp3"
+      },
+      {
+        "name": "DoorClose1",
+        "stream": true,
+        "path": "SFX/Door/DoorClose1.mp3"
+      },
+      {
+        "name": "DoorClose2",
+        "stream": true,
+        "path": "SFX/Door/DoorClose2.mp3"
+      },
+      {
+        "name": "DoorClose3",
+        "stream": true,
+        "path": "SFX/Door/DoorClose3.mp3"
+      },
+      {
+        "name": "DoorError",
+        "stream": true,
+        "path": "SFX/Door/DoorError.mp3"
+      },
+      {
+        "name": "DoorOpen079",
+        "stream": true,
+        "path": "SFX/Door/DoorOpen079.mp3"
+      },
+      {
+        "name": "DoorOpen1",
+        "stream": true,
+        "path": "SFX/Door/DoorOpen1.mp3"
+      },
+      {
+        "name": "DoorOpen2",
+        "stream": true,
+        "path": "SFX/Door/DoorOpen2.mp3"
+      },
+      {
+        "name": "DoorOpen2",
+        "stream": true,
+        "path": "SFX/Door/DoorOpen2.mp3"
+      },
+      {
+        "name": "DoorOpen3",
+        "stream": true,
+        "path": "SFX/Door/DoorOpen3.mp3"
+      },
+      {
+        "name": "DoorOpen173",
+        "stream": true,
+        "path": "SFX/Door/DoorOpen173.mp3"
+      },
+      {
+        "name": "DoorOpenFast",
+        "stream": true,
+        "path": "SFX/Door/DoorOpenFast.mp3"
+      },
+      {
+        "name": "DoorSparks",
+        "stream": true,
+        "path": "SFX/Door/DoorSparks.mp3"
+      },
+      {
+        "name": "ElevatorClose1",
+        "stream": true,
+        "path": "SFX/Door/ElevatorClose1.mp3"
+      },
+      {
+        "name": "ElevatorClose2",
+        "stream": true,
+        "path": "SFX/Door/ElevatorClose2.mp3"
+      },
+      {
+        "name": "ElevatorClose3",
+        "stream": true,
+        "path": "SFX/Door/ElevatorClose3.mp3"
+      },
+      {
+        "name": "ElevatorOpen1",
+        "stream": true,
+        "path": "SFX/Door/ElevatorOpen1.mp3"
+      },
+      {
+        "name": "ElevatorOpen2",
+        "stream": true,
+        "path": "SFX/Door/ElevatorOpen2.mp3"
+      },
+      {
+        "name": "ElevatorOpen3",
+        "stream": true,
+        "path": "SFX/Door/ElevatorOpen3.mp3"
+      },
+      {
+        "name": "EndroomDoor",
+        "stream": true,
+        "path": "SFX/Door/EndroomDoor.mp3"
+      }
+    ]
+  },
   // This section contains all the SCP's audio.
   // SCP-008 - Prion
   {
@@ -2021,7 +2213,7 @@
     ]
   },
   // SCP-860 - Blue Key
-  {
+ 2{
     "name": "SCP860",
     "audio": [
       // Have no idea why these files are called cancer,
@@ -2065,6 +2257,21 @@
         "name": "Chase2",
         "stream": true,
         "path": "SFX/SCP/860/Chase2.mp3"
+      },
+      {
+        "name": "WoodenDoorBudge",
+        "stream": true,
+        "path": "SFX/Door/WoodenDoorBudge.mp3"
+      },
+      {
+        "name": "WoodenDoorClose",
+        "stream": true,
+        "path": "SFX/Door/WoodenDoorClose.mp3"
+      },
+      {
+        "name": "WoodenDoorOpen",
+        "stream": true,
+        "path": "SFX/Door/WoodenDoorOpen.mp3"
       }
     ]
   },
@@ -2353,9 +2560,7 @@
         "stream": true,
         "path": "SFX/SCP/939/attack.mp3"
       }
-    ]
-  },
-  // SCP-966
+    Open0// SCP-966
   {
     "name": "SCP966",
     "audio": [
