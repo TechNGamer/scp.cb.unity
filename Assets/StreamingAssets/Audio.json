@@ -708,6 +708,94 @@
       }
     ]
   },
+  // Guard
+  {
+    "name": "Guard",
+    "audio": [
+      {
+        "name": "096ServerRoom1",
+        "stream": true,
+        "path": "SFX/Character/Guard/096ServerRoom1.mp3"
+      },
+      {
+        "name": "096ServerRoom2",
+        "stream": true,
+        "path": "SFX/Character/Guard/096ServerRoom2.mp3"
+      },
+      {
+        "name": "SuicideGuard1",
+        "stream": true,
+        "path": "SFX/Character/Guard/SuicideGuard1.mp3"
+      },
+      {
+        "name": "SuicideGuard2",
+        "stream": true,
+        "path": "SFX/Character/Guard/SuicideGuard2.mp3"
+      }
+    ]
+  },
+  // Janitor
+  {
+    "name": "Janitor",
+    "audio": [
+      {
+        "name": "106Abduct",
+        "stream": true,
+        "path": "SFX/Character/Janitor/106Abduct.mp3"
+      },
+      {
+        "name": "Idle",
+        "stream": true,
+        "path": "SFX/Character/Janitor/Idle.mp3"
+      }
+    ]
+  },
+  // Lure Subject
+  {
+    "name": "106Lure",
+    "audio": [
+      {
+        "name": "106Bait",
+        "stream": true,
+        "path": "SFX/Character/LureSubject/106Bait.mp3"
+      },
+      {
+        "name": "Idle1",
+        "stream": true,
+        "path": "SFX/Character/LureSubject/Idle1.mp3"
+      },
+      {
+        "name": "Idle2",
+        "stream": true,
+        "path": "SFX/Character/LureSubject/Idle2.mp3"
+      },
+      {
+        "name": "Idle3",
+        "stream": true,
+        "path": "SFX/Character/LureSubject/Idle3.mp3"
+      },
+      {
+        "name": "Idle4",
+        "stream": true,
+        "path": "SFX/Character/LureSubject/Idle4.mp3"
+      },
+      {
+        "name": "Idle5",
+        "stream": true,
+        "path": "SFX/Character/LureSubject/Idle5.mp3"
+      },
+      {
+        "name": "Idle6",
+        "stream": true,
+        "path": "SFX/Character/LureSubject/Idle6.mp3"
+      },
+      {
+        "name": "Sniffling",
+        "stream": true,
+        "path": "SFX/Character/LureSubject/Sniffling.mp3"
+      }
+    ]
+  },
   // This section contains all the SCP's audio.
   // SCP-008 - Prion
   {
