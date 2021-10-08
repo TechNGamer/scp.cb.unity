@@ -1748,6 +1748,11 @@
         "name": "Touch",
         "stream": true,
         "path": "SFX/SCP/1123/Touch.mp3"
+      },
+      {
+        "name": "DoorOpen",
+        "stream": true,
+        "path": "SFX/Door/1123DoorOpen.mp3"
       }
     ]
   },
