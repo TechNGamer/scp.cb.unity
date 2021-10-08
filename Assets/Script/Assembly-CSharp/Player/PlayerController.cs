@@ -96,16 +96,25 @@ namespace SCPCB.Remaster.Player {
 
 			input.Game.Look.performed += ctx => {
 				var value = ctx.ReadValue<Vector2>();
+				
 				moveCamRot = new Vector3( -value.y, value.x );
 			};
-			input.Game.Look.canceled += _ => moveCamRot = Vector3.zero;
+			input.Game.Look.canceled += _ => {
+				moveCamRot = Vector3.zero;
+			};
 
 			input.Game.Move.performed += ctx => {
 				var value = ctx.ReadValue<Vector2>();
 
 				moveDirection = new Vector3( value.y, 0f, value.x );
+				
+				Debug.Log( "Move Preformed has been called.", this );
 			};
-			input.Game.Move.canceled += _ => moveDirection = Vector3.zero;
+			input.Game.Move.canceled += _ => {
+				moveDirection = Vector3.zero;
+				
+				Debug.Log( "Move Canceled has been called.", this );
+			};
 
 			// The reason to use the underscore (aka, the discard variable) is that we do not care
 			// about the context.
@@ -115,13 +124,9 @@ namespace SCPCB.Remaster.Player {
 					IsRunning = false;
 				}
 
-				Debug.Log( "Player is crouching." );
-
 				IsCrouched = true;
 			};
 			input.Game.Crouch.canceled += _ => {
-				Debug.Log( "Player is no longer crouching." );
-
 				IsCrouched = false;
 			};
 
@@ -130,9 +135,16 @@ namespace SCPCB.Remaster.Player {
 					return;
 				}
 
+				if ( moveDirection == Vector3.zero ) {
+					return;
+				}
+
 				Debug.Log( "Player is running." );
 
 				IsRunning = true;
+			};
+			input.Game.Sprint.performed += _ => {
+				IsRunning = moveDirection != Vector3.zero;
 			};
 			input.Game.Sprint.canceled += _ => {
 				Debug.Log( "Player is no longer running." );
@@ -191,7 +203,6 @@ namespace SCPCB.Remaster.Player {
 
 			cc.Move( myDir );
 
-			Debug.Log( $"Movement: {myDir}\nMove Direction: {moveDirection}" );
 			Debug.DrawLine( camTransform.position, camTransform.position + myDir, Color.green, Time.deltaTime );
 		}
 
