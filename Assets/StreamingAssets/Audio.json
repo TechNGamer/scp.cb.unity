@@ -339,6 +339,211 @@
       }
     ]
   },
+  // Zone Ambience
+  // Zone 1 - Low Containment Zone
+  {
+    "name": "LCZAm",
+    "audio": [
+      {
+        "name": "Ambient1",
+        "stream": true,
+        "path": "SFX/Ambient/Zone1/Ambient1.mp3"
+      },
+      {
+        "name": "Ambient2",
+        "stream": true,
+        "path": "SFX/Ambient/Zone1/Ambient2.mp3"
+      },
+      {
+        "name": "Ambient3",
+        "stream": true,
+        "path": "SFX/Ambient/Zone1/Ambient3.mp3"
+      },
+      {
+        "name": "Ambient4",
+        "stream": true,
+        "path": "SFX/Ambient/Zone1/Ambient4.mp3"
+      },
+      {
+        "name": "Ambient5",
+        "stream": true,
+        "path": "SFX/Ambient/Zone1/Ambient5.mp3"
+      },
+      {
+        "name": "Ambient6",
+        "stream": true,
+        "path": "SFX/Ambient/Zone1/Ambient6.mp3"
+      },
+      {
+        "name": "Ambient7",
+        "stream": true,
+        "path": "SFX/Ambient/Zone1/Ambient7.mp3"
+      },
+      {
+        "name": "Ambient8",
+        "stream": true,
+        "path": "SFX/Ambient/Zone1/Ambient8.mp3"
+      },
+      {
+        "name": "Ambient9",
+        "stream": true,
+        "path": "SFX/Ambient/Zone1/Ambient9.mp3"
+      },
+      {
+        "name": "Ambient10",
+        "stream": true,
+        "path": "SFX/Ambient/Zone1/Ambient10.mp3"
+      },
+      {
+        "name": "Ambient11",
+        "stream": true,
+        "path": "SFX/Ambient/Zone1/Ambient11.mp3"
+      }
+    ]
+  },
+  // Zone 2 - High Containment Zone
+  {
+    "name": "HCZAm",
+    "audio": [
+      {
+        "name": "Ambient1",
+        "stream": true,
+        "path": "SFX/Ambient/Zone2/Ambient1.mp3"
+      },
+      {
+        "name": "Ambient2",
+        "stream": true,
+        "path": "SFX/Ambient/Zone2/Ambient2.mp3"
+      },
+      {
+        "name": "Ambient3",
+        "stream": true,
+        "path": "SFX/Ambient/Zone2/Ambient3.mp3"
+      },
+      {
+        "name": "Ambient4",
+        "stream": true,
+        "path": "SFX/Ambient/Zone2/Ambient4.mp3"
+      },
+      {
+        "name": "Ambient5",
+        "stream": true,
+        "path": "SFX/Ambient/Zone2/Ambient5.mp3"
+      },
+      {
+        "name": "Ambient6",
+        "stream": true,
+        "path": "SFX/Ambient/Zone2/Ambient6.mp3"
+      },
+      {
+        "name": "Ambient7",
+        "stream": true,
+        "path": "SFX/Ambient/Zone2/Ambient7.mp3"
+      },
+      {
+        "name": "Ambient8",
+        "stream": true,
+        "path": "SFX/Ambient/Zone2/Ambient8.mp3"
+      },
+      {
+        "name": "Ambient9",
+        "stream": true,
+        "path": "SFX/Ambient/Zone2/Ambient9.mp3"
+      },
+      {
+        "name": "Ambient10",
+        "stream": true,
+        "path": "SFX/Ambient/Zone2/Ambient10.mp3"
+      },
+      {
+        "name": "Ambient11",
+        "stream": true,
+        "path": "SFX/Ambient/Zone2/Ambient11.mp3"
+      }
+    ]
+  },
+  // Zone 3 - Entry Zone
+  {
+    "name": "EZAm",
+    "audio": [
+      {
+        "name": "Ambient1",
+        "stream": true,
+        "path": "SFX/Ambient/Zone3/Ambient1.mp3"
+      },
+      {
+        "name": "Ambient2",
+        "stream": true,
+        "path": "SFX/Ambient/Zone3/Ambient2.mp3"
+      },
+      {
+        "name": "Ambient3",
+        "stream": true,
+        "path": "SFX/Ambient/Zone3/Ambient3.mp3"
+      },
+      {
+        "name": "Ambient4",
+        "stream": true,
+        "path": "SFX/Ambient/Zone3/Ambient4.mp3"
+      },
+      {
+        "name": "Ambient5",
+        "stream": true,
+        "path": "SFX/Ambient/Zone3/Ambient5.mp3"
+      },
+      {
+        "name": "Ambient6",
+        "stream": true,
+        "path": "SFX/Ambient/Zone3/Ambient6.mp3"
+      },
+      {
+        "name": "Ambient7",
+        "stream": true,
+        "path": "SFX/Ambient/Zone3/Ambient7.mp3"
+      },
+      {
+        "name": "Ambient8",
+        "stream": true,
+        "path": "SFX/Ambient/Zone3/Ambient8.mp3"
+      },
+      {
+        "name": "Ambient9",
+        "stream": true,
+        "path": "SFX/Ambient/Zone3/Ambient9.mp3"
+      },
+      {
+        "name": "Ambient10",
+        "stream": true,
+        "path": "SFX/Ambient/Zone3/Ambient10.mp3"
+      },
+      {
+        "name": "Ambient11",
+        "stream": true,
+        "path": "SFX/Ambient/Zone3/Ambient11.mp3"
+      },
+      {
+        "name": "Ambient12",
+        "stream": true,
+        "path": "SFX/Ambient/Zone3/Ambient12.mp3"
+      }
+    ]
+  },
+  // Zone Transitions
+  {
+    "name": "ZoneTrans",
+    "audio": [
+      {
+        "name": "ToZone2",
+        "stream": true,
+        "path": "SFX/Ambient/ToZone2.mp3"
+      },
+      {
+        "name": "ToZone3",
+        "stream": true,
+        "path": "SFX/Ambient/ToZone3.mp3"
+      }
+    ]
+  },
   // This section contains all the SCP's audio.
   // SCP-008 - Prion
   {
