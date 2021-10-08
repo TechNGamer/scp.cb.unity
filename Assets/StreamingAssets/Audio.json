@@ -109,6 +109,63 @@
       }
     ]
   },
+  // Ambient sounds.
+  // Forest
+  {
+    "name": "forest",
+    "audio": [
+      {
+        "name": "ambient1",
+        "stream": true,
+        "path": "SFX/Ambient/Forest/ambient1.mp3"
+      },
+      {
+        "name": "ambient2",
+        "stream": true,
+        "path": "SFX/Ambient/Forest/ambient2.mp3"
+      },
+      {
+        "name": "ambient3",
+        "stream": true,
+        "path": "SFX/Ambient/Forest/ambient3.mp3"
+      },
+      {
+        "name": "ambient4",
+        "stream": true,
+        "path": "SFX/Ambient/Forest/ambient4.mp3"
+      },
+      {
+        "name": "ambient5",
+        "stream": true,
+        "path": "SFX/Ambient/Forest/ambient5.mp3"
+      },
+      {
+        "name": "ambient6",
+        "stream": true,
+        "path": "SFX/Ambient/Forest/ambient6.mp3"
+      },
+      {
+        "name": "ambient7",
+        "stream": true,
+        "path": "SFX/Ambient/Forest/ambient7.mp3"
+      },
+      {
+        "name": "ambient8",
+        "stream": true,
+        "path": "SFX/Ambient/Forest/ambient8.mp3"
+      },
+      {
+        "name": "ambient9",
+        "stream": true,
+        "path": "SFX/Ambient/Forest/ambient9.mp3"
+      },
+      {
+        "name": "ambient10",
+        "stream": true,
+        "path": "SFX/Ambient/Forest/ambient10.mp3"
+      }
+    ]
+  },
   // This section contains all the SCP's audio.
   // SCP-008 - Prion
   {
