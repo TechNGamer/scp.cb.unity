@@ -27,6 +27,88 @@
       }
     ]
   },
+  // General Sound Effects.
+  // Alarms
+  {
+    "name": "alarm",
+    "audio": [
+      {
+        "name": "Alarm",
+        "stream": true,
+        "path": "SFX/Alarm/Alarm.mp3"
+      },
+      {
+        "name": "Alarm2.1",
+        "stream": true,
+        "path": "SFX/Alarm/Alarm2_1.mp3"
+      },
+      {
+        "name": "Alarm2.2",
+        "stream": true,
+        "path": "SFX/Alarm/Alarm2_2.mp3"
+      },
+      {
+        "name": "Alarm2.3",
+        "stream": true,
+        "path": "SFX/Alarm/Alarm2_3.mp3"
+      },
+      {
+        "name": "Alarm2.4",
+        "stream": true,
+        "path": "SFX/Alarm/Alarm2_4.mp3"
+      },
+      {
+        "name": "Alarm2.5",
+        "stream": true,
+        "path": "SFX/Alarm/Alarm2_5.mp3"
+      },
+      {
+        "name": "Alarm2.6",
+        "stream": true,
+        "path": "SFX/Alarm/Alarm2_6.mp3"
+      },
+      {
+        "name": "Alarm2.7",
+        "stream": true,
+        "path": "SFX/Alarm/Alarm2_7.mp3"
+      },
+      {
+        "name": "Alarm2.8",
+        "stream": true,
+        "path": "SFX/Alarm/Alarm2_8.mp3"
+      },
+      {
+        "name": "Alarm2.9",
+        "stream": true,
+        "path": "SFX/Alarm/Alarm2_9.mp3"
+      },
+      {
+        "name": "Alarm2.10",
+        "stream": true,
+        "path": "SFX/Alarm/Alarm2_10.mp3"
+      },
+      {
+        "name": "Alarm2.11",
+        "stream": true,
+        "path": "SFX/Alarm/Alarm2_11.mp3"
+      },
+      {
+        "name": "Alarm3",
+        "stream": true,
+        "path": "SFX/Alarm/Alarm3.mp3"
+      },
+      {
+        "name": "Alarm4",
+        "stream": true,
+        "path": "SFX/Alarm/Alarm4.mp3"
+      },
+      {
+        "name": "Alarm5",
+        "stream": true,
+        "path": "SFX/Alarm/Alarm5.mp3"
+      }
+    ]
+  },
   // This section contains all the SCP's audio.
   // SCP-008 - Prion
   {
