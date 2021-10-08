@@ -2213,7 +2213,7 @@
     ]
   },
   // SCP-860 - Blue Key
- 2{
+ {
     "name": "SCP860",
     "audio": [
       // Have no idea why these files are called cancer,
@@ -2560,7 +2560,9 @@
         "stream": true,
         "path": "SFX/SCP/939/attack.mp3"
       }
-    Open0// SCP-966
+    ]
+  },
+    // SCP-966
   {
     "name": "SCP966",
     "audio": [
