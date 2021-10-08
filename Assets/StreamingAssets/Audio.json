@@ -247,6 +247,98 @@
       }
     ]
   },
+  // Pre-breach
+  {
+    "name": "prebreach",
+    "audio": [
+      {
+        "name": "Ambient1",
+        "stream": true,
+        "path": "SFX/Ambient/Pre-breach/Ambient1.mp3"
+      },
+      {
+        "name": "Ambient2",
+        "stream": true,
+        "path": "SFX/Ambient/Pre-breach/Ambient2.mp3"
+      },
+      {
+        "name": "Ambient3",
+        "stream": true,
+        "path": "SFX/Ambient/Pre-breach/Ambient3.mp3"
+      },
+      {
+        "name": "Ambient4",
+        "stream": true,
+        "path": "SFX/Ambient/Pre-breach/Ambient4.mp3"
+      },
+      {
+        "name": "Ambient5",
+        "stream": true,
+        "path": "SFX/Ambient/Pre-breach/Ambient5.mp3"
+      }
+    ]
+  },
+  // Room
+  {
+    "name": "RoomAm",
+    "audio": [
+      {
+        "name": "895",
+        "stream": true,
+        "path": "SFX/Ambient/Room ambience/895.mp3"
+      },
+      {
+        "name": "drip",
+        "stream": true,
+        "path": "SFX/Ambient/Room ambience/drip.mp3"
+      },
+      {
+        "name": "Fan",
+        "stream": true,
+        "path": "SFX/Ambient/Room ambience/Fan.mp3"
+      },
+      {
+        "name": "FanOff",
+        "stream": true,
+        "path": "SFX/Ambient/Room ambience/FanOff.mp3"
+      },
+      {
+        "name": "FanOn",
+        "stream": true,
+        "path": "SFX/Ambient/Room ambience/FanOn.mp3"
+      },
+      {
+        "name": "fuelpump",
+        "stream": true,
+        "path": "SFX/Ambient/Room ambience/fuelpump.mp3"
+      },
+      {
+        "name": "lowdrone",
+        "stream": true,
+        "path": "SFX/Ambient/Room ambience/lowdrone.mp3"
+      },
+      {
+        "name": "pulsing",
+        "stream": true,
+        "path": "SFX/Ambient/Room ambience/pulsing.mp3"
+      },
+      {
+        "name": "rumble",
+        "stream": true,
+        "path": "SFX/Ambient/Room ambience/rumble.mp3"
+      },
+      {
+        "name": "servers1",
+        "stream": true,
+        "path": "SFX/Ambient/Room ambience/servers1.mp3"
+      },
+      {
+        "name": "ventilation",
+        "stream": true,
+        "path": "SFX/Ambient/Room ambience/ventilation.mp3"
+      }
+    ]
+  },
   // This section contains all the SCP's audio.
   // SCP-008 - Prion
   {
