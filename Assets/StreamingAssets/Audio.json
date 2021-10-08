@@ -796,6 +796,473 @@
       }
     ]
   },
+  // MTF - Military Task Force
+  // Reaction to SCP-049 and SCP-049-2
+  {
+    "name": "MTF049",
+    "audio": [
+      {
+        "name": "Player0492_1",
+        "stream": false,
+        "path": "SFX/Character/MTF/049/Player0492_1.mp3"
+      },
+      {
+        "name": "Player0492_2",
+        "stream": false,
+        "path": "SFX/Character/MTF/049/Player0492_2.mp3"
+      },
+      {
+        "name": "Spotted1",
+        "stream": false,
+        "path": "SFX/Character/MTF/049/Spotted1.mp3"
+      },
+      {
+        "name": "Spotted2",
+        "stream": false,
+        "path": "SFX/Character/MTF/049/Spotted2.mp3"
+      },
+      {
+        "name": "Spotted3",
+        "stream": false,
+        "path": "SFX/Character/MTF/049/Spotted3.mp3"
+      },
+      {
+        "name": "Spotted4",
+        "stream": false,
+        "path": "SFX/Character/MTF/049/Spotted4.mp3"
+      },
+      {
+        "name": "Spotted5",
+        "stream": false,
+        "path": "SFX/Character/MTF/049/Spotted5.mp3"
+      }
+    ]
+  },
+  // Reaction to SCP-096
+  {
+    "name": "MTF096",
+    "audio": [
+      {
+        "name": "Spotted1.mp3",
+        "stream": true,
+        "path": "SFX/Character/MTF/096/Spotted1.mp3"
+      },
+      {
+        "name": "Spotted2.mp3",
+        "stream": true,
+        "path": "SFX/Character/MTF/096/Spotted2.mp3"
+      }
+    ]
+  },
+  // Reaction to SCP-106
+  {
+    "name": "MTF106",
+    "audio": [
+      {
+        "name": "Spotted1",
+        "stream": true,
+        "path": "SFX/Character/MTF/106/Spotted1.mp3"
+      },
+      {
+        "name": "Spotted2",
+        "stream": true,
+        "path": "SFX/Character/MTF/106/Spotted2.mp3"
+      },
+      {
+        "name": "Spotted3",
+        "stream": true,
+        "path": "SFX/Character/MTF/106/Spotted3.mp3"
+      },
+      {
+        "name": "Spotted4",
+        "stream": true,
+        "path": "SFX/Character/MTF/106/Spotted4.mp3"
+      }
+    ]
+  },
+  // Reaction to SCP-173
+  {
+    "name": "MTF173",
+    "audio": [
+      {
+        "name": "Blinking",
+        "stream": true,
+        "path": "SFX/Character/MTF/106/BLINKING.mp3"
+      },
+      {
+        "name": "Box1",
+        "stream": true,
+        "path": "SFX/Character/MTF/106/Box1.mp3"
+      },
+      {
+        "name": "Box2",
+        "stream": true,
+        "path": "SFX/Character/MTF/106/Box2.mp3"
+      },
+      {
+        "name": "Box3",
+        "stream": true,
+        "path": "SFX/Character/MTF/106/Box3.mp3"
+      },
+      {
+        "name": "Cont1",
+        "stream": true,
+        "path": "SFX/Character/MTF/106/Cont1.mp3"
+      },
+      {
+        "name": "Cont2",
+        "stream": true,
+        "path": "SFX/Character/MTF/106/Cont2.mp3"
+      },
+      {
+        "name": "Cont3",
+        "stream": true,
+        "path": "SFX/Character/MTF/106/Cont3.mp3"
+      },
+      {
+        "name": "Cont4",
+        "stream": true,
+        "path": "SFX/Character/MTF/106/Cont4.mp3"
+      },
+      {
+        "name": "Spotted1",
+        "stream": true,
+        "path": "SFX/Character/MTF/106/Spotted1.mp3"
+      },
+      {
+        "name": "Spotted2",
+        "stream": true,
+        "path": "SFX/Character/MTF/106/Spotted2.mp3"
+      },
+      {
+        "name": "Spotted3",
+        "stream": true,
+        "path": "SFX/Character/MTF/106/Spotted3.mp3"
+      }
+    ]
+  },
+  // MTF Talk
+  {
+    "name": "MTF",
+    "audio": [
+      {
+        "name": "Beep",
+        "stream": true,
+        "path": "SFX/Character/MTF/Beep.mp3"
+      },
+      {
+        "name": "Breath",
+        "stream": true,
+        "path": "SFX/Character/MTF/Breath.mp3"
+      },
+      {
+        "name": "ClassD1",
+        "stream": true,
+        "path": "SFX/Character/MTF/ClassD1.mp3"
+      },
+      {
+        "name": "ClassD2",
+        "stream": true,
+        "path": "SFX/Character/MTF/BClassD2mp3"
+      },
+      {
+        "name": "ClassD3",
+        "stream": true,
+        "path": "SFX/Character/MTF/BeClassD3p3"
+      },
+      {
+        "name": "ClassD4",
+        "stream": true,
+        "path": "SFX/Character/MTF/BeeClassD43"
+      },
+      {
+        "name": "GateB1",
+        "stream": true,
+        "path": "SFX/Character/MTF/BeeGateB13"
+      },
+      {
+        "name": "GateB2",
+        "stream": true,
+        "path": "SFX/Character/MTF/BeeGateB23"
+      },
+      {
+        "name": "GateB3",
+        "stream": true,
+        "path": "SFX/Character/MTF/BeeGateB33"
+      },
+      {
+        "name": "GateB4",
+        "stream": true,
+        "path": "SFX/Character/MTF/BeeGateB43"
+      },
+      {
+        "name": "Random1",
+        "stream": true,
+        "path": "SFX/Character/MTF/BeeRandom13"
+      },
+      {
+        "name": "Random2",
+        "stream": true,
+        "path": "SFX/Character/MTF/BeeRandom23"
+      },
+      {
+        "name": "Random3",
+        "stream": true,
+        "path": "SFX/Character/MTF/BeeRandom33"
+      },
+      {
+        "name": "Random4",
+        "stream": true,
+        "path": "SFX/Character/MTF/BeeRandom43"
+      },
+      {
+        "name": "Random5",
+        "stream": true,
+        "path": "SFX/Character/MTF/Random5.mp3"
+      },
+      {
+        "name": "Random6",
+        "stream": true,
+        "path": "SFX/Character/MTF/Random6.mp3"
+      },
+      {
+        "name": "Random7",
+        "stream": true,
+        "path": "SFX/Character/MTF/Random7.mp3"
+      },
+      {
+        "name": "Searching1",
+        "stream": true,
+        "path": "SFX/Character/MTF/Searching1.mp3"
+      },
+      {
+        "name": "Searching2",
+        "stream": true,
+        "path": "SFX/Character/MTF/Searching2.mp3"
+      },
+      {
+        "name": "Searching3",
+        "stream": true,
+        "path": "SFX/Character/MTF/Searching3.mp3"
+      },
+      {
+        "name": "Searching4",
+        "stream": true,
+        "path": "SFX/Character/MTF/Searching4.mp3"
+      },
+      {
+        "name": "Searching5",
+        "stream": true,
+        "path": "SFX/Character/MTF/Searching5.mp3"
+      },
+      {
+        "name": "Searching6",
+        "stream": true,
+        "path": "SFX/Character/MTF/Searching6.mp3"
+      },
+      {
+        "name": "Step1",
+        "stream": true,
+        "path": "SFX/Character/MTF/Step1.mp3"
+      },
+      {
+        "name": "Step2",
+        "stream": true,
+        "path": "SFX/Character/MTF/Step2.mp3"
+      },
+      {
+        "name": "Step3",
+        "stream": true,
+        "path": "SFX/Character/MTF/Step3.mp3"
+      },
+      {
+        "name": "Stop1",
+        "stream": true,
+        "path": "SFX/Character/MTF/Stop1.mp3"
+      },
+      {
+        "name": "Stop2",
+        "stream": true,
+        "path": "SFX/Character/MTF/Stop2.mp3"
+      },
+      {
+        "name": "Stop3",
+        "stream": true,
+        "path": "SFX/Character/MTF/Stop3.mp3"
+      },
+      {
+        "name": "Stop4",
+        "stream": true,
+        "path": "SFX/Character/MTF/Stop4.mp3"
+      },
+      {
+        "name": "Stop5",
+        "stream": true,
+        "path": "SFX/Character/MTF/Stop5.mp3"
+      },
+      {
+        "name": "Stop6",
+        "stream": true,
+        "path": "SFX/Character/MTF/Stop6.mp3"
+      },
+      {
+        "name": "TargetLost1",
+        "stream": true,
+        "path": "SFX/Character/MTF/TargetLost1.mp3"
+      },
+      {
+        "name": "TargetLost2",
+        "stream": true,
+        "path": "SFX/Character/MTF/TargetLost2.mp3"
+      },
+      {
+        "name": "TargetLost3",
+        "stream": true,
+        "path": "SFX/Character/MTF/TargetLost3.mp3"
+      },
+      {
+        "name": "TargetTerminated1",
+        "stream": true,
+        "path": "SFX/Character/MTF/Targetterminated1.mp3"
+      },
+      {
+        "name": "TargetTerminated2",
+        "stream": true,
+        "path": "SFX/Character/MTF/Targetterminated2.mp3"
+      },
+      {
+        "name": "TargetTerminated3",
+        "stream": true,
+        "path": "SFX/Character/MTF/Targetterminated3.mp3"
+      },
+      {
+        "name": "TargetTerminated3",
+        "stream": true,
+        "path": "SFX/Character/MTF/Targetterminated3.mp3"
+      },
+      {
+        "name": "Tesla0",
+        "stream": true,
+        "path": "SFX/Character/MTF/Tesla0.mp3"
+      },
+      {
+        "name": "ThereHeIs1",
+        "stream": true,
+        "path": "SFX/Character/MTF/ThereHeIs1.mp3"
+      },
+      {
+        "name": "ThereHeIs2",
+        "stream": true,
+        "path": "SFX/Character/MTF/ThereHeIs2.mp3"
+      },
+      {
+        "name": "ThereHeIs3",
+        "stream": true,
+        "path": "SFX/Character/MTF/ThereHeIs3.mp3"
+      },
+      {
+        "name": "ThereHeIs4",
+        "stream": true,
+        "path": "SFX/Character/MTF/ThereHeIs4.mp3"
+      },
+      {
+        "name": "ThereHeIs5",
+        "stream": true,
+        "path": "SFX/Character/MTF/ThereHeIs5.mp3"
+      },
+      {
+        "name": "ThereHeIs6",
+        "stream": true,
+        "path": "SFX/Character/MTF/ThereHeIs6.mp3"
+      }
+    ]
+  },
+  // Announcer
+  {
+    "name": "Announcer",
+    "audio": [
+      {
+        "name": "MTFAnnounce",
+        "stream": true,
+        "path": "SFX/Character/MTF/Announc.mp3"
+      },
+      {
+        "name": "Announce173Contained",
+        "stream": true,
+        "path": "SFX/Character/MTF/Announce173Contained.mp3"
+      },
+      {
+        "name": "AnnounceAfter1",
+        "stream": true,
+        "path": "SFX/Character/MTF/AnnounceAfter1.mp3"
+      },
+      {
+        "name": "AnnounceAfter2",
+        "stream": true,
+        "path": "SFX/Character/MTF/AnnounceAfter2.mp3"
+      },
+      {
+        "name": "AnnounceCameraCheck",
+        "stream": true,
+        "path": "SFX/Character/MTF/AnnounceCameraCheck.mp3"
+      },
+      {
+        "name": "AnnounceCameraFound1",
+        "stream": true,
+        "path": "SFX/Character/MTF/AnnounceCameraFound1.mp3"
+      },
+      {
+        "name": "AnnounceCameraFound2",
+        "stream": true,
+        "path": "SFX/Character/MTF/AnnounceCameraFound2.mp3"
+      },
+      {
+        "name": "AnnounceCameraNoFound",
+        "stream": true,
+        "path": "SFX/Character/MTF/AnnounceCameraNoFound.mp3"
+      },
+      {
+        "name": "Tesla1",
+        "stream": true,
+        "path": "SFX/Character/MTF/Tesla1.mp3"
+      },
+      {
+        "name": "Tesla2",
+        "stream": true,
+        "path": "SFX/Character/MTF/Tesla2.mp3"
+      },
+      {
+        "name": "Tesla3",
+        "stream": true,
+        "path": "SFX/Character/MTF/Tesla3.mp3"
+      },
+      {
+        "name": "ThreatAnnounce1",
+        "stream": true,
+        "path": "SFX/Character/MTF/ThreatAnnounce1.mp3"
+      },
+      {
+        "name": "ThreatAnnounce2",
+        "stream": true,
+        "path": "SFX/Character/MTF/ThreatAnnounce2.mp3"
+      },
+      {
+        "name": "ThreatAnnounce3",
+        "stream": true,
+        "path": "SFX/Character/MTF/ThreatAnnounce3.mp3"
+      },
+      {
+        "name": "ThreatAnnounceFinal",
+        "stream": true,
+        "path": "SFX/Character/MTF/ThreatAnnounceFinal.mp3"
+      },
+      {
+        "name": "ThreatAnnouncePossession",
+        "stream": true,
+        "path": "SFX/Character/MTF/ThreatAnnouncePossession.mp3"
+      }
+    ]
+  },
   // This section contains all the SCP's audio.
   // SCP-008 - Prion
   {
