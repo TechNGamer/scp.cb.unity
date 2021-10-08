@@ -544,6 +544,170 @@
       }
     ]
   },
+  // Characters
+  // Apache - I know this is a vehicle, but it's not like you or the AI can enter it.
+  {
+    "name": "Apache",
+    "audio": [
+      {
+        "name": "Crash1",
+        "stream": true,
+        "path": "SFX/Character/Apache/Crash1.mp3"
+      },
+      {
+        "name": "Crash2",
+        "stream": true,
+        "path": "SFX/Character/Apache/Crash2.mp3"
+      },
+      {
+        "name": "Propeller",
+        "stream": true,
+        "path": "SFX/Character/Apache/Propeller.mp3"
+      }
+    ]
+  },
+  // D9341 - Player
+  // I will load the player's audio files into memory because it will most likely be used a lot.
+  {
+    "name": "Player",
+    "audio": [
+      {
+        "name": "BloodDrip0",
+        "stream": false,
+        "path": "SFX/Character/D9341/BloodDrip0.mp3"
+      },
+      {
+        "name": "BloodDrip1",
+        "stream": false,
+        "path": "SFX/Character/D9341/BloodDrip1.mp3"
+      },
+      {
+        "name": "BloodDrip2",
+        "stream": false,
+        "path": "SFX/Character/D9341/BloodDrip2.mp3"
+      },
+      {
+        "name": "BloodDrip3",
+        "stream": false,
+        "path": "SFX/Character/D9341/BloodDrip3.mp3"
+      },
+      {
+        "name": "Breath1",
+        "stream": false,
+        "path": "SFX/Character/D9341/breath1.mp3"
+      },
+      {
+        "name": "Breath1Gas",
+        "stream": false,
+        "path": "SFX/Character/D9341/breath1gas.mp3"
+      },
+      {
+        "name": "Breath2",
+        "stream": false,
+        "path": "SFX/Character/D9341/breath2.mp3"
+      },
+      {
+        "name": "Breath2Gas",
+        "stream": false,
+        "path": "SFX/Character/D9341/breath2gas.mp3"
+      },
+      {
+        "name": "Breath3",
+        "stream": false,
+        "path": "SFX/Character/D9341/breath3.mp3"
+      },
+      {
+        "name": "Breath3Gas",
+        "stream": false,
+        "path": "SFX/Character/D9341/breath3gas.mp3"
+      },
+      {
+        "name": "Breath4",
+        "stream": false,
+        "path": "SFX/Character/D9341/breath4.mp3"
+      },
+      {
+        "name": "Breath4Gas",
+        "stream": false,
+        "path": "SFX/Character/D9341/breath4gas.mp3"
+      },
+      {
+        "name": "Cough1",
+        "stream": false,
+        "path": "SFX/Character/D9341/Cough1.mp3"
+      },
+      {
+        "name": "Cough2",
+        "stream": false,
+        "path": "SFX/Character/D9341/Cough2.mp3"
+      },
+      {
+        "name": "Cough3",
+        "stream": false,
+        "path": "SFX/Character/D9341/Cough3.mp3"
+      },
+      {
+        "name": "Damage1",
+        "stream": false,
+        "path": "SFX/Character/D9341/Damage1.mp3"
+      },
+      {
+        "name": "Damage2",
+        "stream": false,
+        "path": "SFX/Character/D9341/Damage2.mp3"
+      },
+      {
+        "name": "Damage3",
+        "stream": false,
+        "path": "SFX/Character/D9341/Damage3.mp3"
+      },
+      {
+        "name": "Damage4",
+        "stream": false,
+        "path": "SFX/Character/D9341/Damage4.mp3"
+      },
+      {
+        "name": "Damage5",
+        "stream": false,
+        "path": "SFX/Character/D9341/Damage5.mp3"
+      },
+      {
+        "name": "Damage6",
+        "stream": false,
+        "path": "SFX/Character/D9341/Damage6.mp3"
+      },
+      {
+        "name": "Damage7",
+        "stream": false,
+        "path": "SFX/Character/D9341/Damage7.mp3"
+      },
+      {
+        "name": "Damage8",
+        "stream": false,
+        "path": "SFX/Character/D9341/Damage8.mp3"
+      },
+      {
+        "name": "Damage9",
+        "stream": false,
+        "path": "SFX/Character/D9341/Damage9.mp3"
+      },
+      {
+        "name": "Heartbeat",
+        "stream": false,
+        "path": "SFX/Character/D9341/Heartbeat.mp3"
+      },
+      {
+        "name": "BloodDrip0",
+        "stream": false,
+        "path": "SFX/Character/D9341/BloodDrip0.mp3"
+      },
+      {
+        "name": "BloodDrip0",
+        "stream": false,
+        "path": "SFX/Character/D9341/BloodDrip0.mp3"
+      }
+    ]
+  },
   // This section contains all the SCP's audio.
   // SCP-008 - Prion
   {
