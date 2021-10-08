@@ -1,7 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using Unity.Mathematics;
 using UnityEngine;
 
 namespace SCPCB.Remaster.Player {
@@ -62,7 +58,7 @@ namespace SCPCB.Remaster.Player {
 
 		[SerializeField]
 		[Range( 30f, 90f )]
-		[Tooltip("The maximum vertical look angle that is allowed.")]
+		[Tooltip( "The maximum vertical look angle that is allowed." )]
 		private float maxLookAngle = 45f;
 
 		private float fallSpeed;
@@ -96,23 +92,22 @@ namespace SCPCB.Remaster.Player {
 
 			input.Game.Look.performed += ctx => {
 				var value = ctx.ReadValue<Vector2>();
-				
+
 				moveCamRot = new Vector3( -value.y, value.x );
 			};
-			input.Game.Look.canceled += _ => {
-				moveCamRot = Vector3.zero;
-			};
+			input.Game.Look.canceled += _ => { moveCamRot = Vector3.zero; };
 
+			// TODO: Figure out what is going on here and why Move.canceled isn't being called when the shit key is being held down.
 			input.Game.Move.performed += ctx => {
 				var value = ctx.ReadValue<Vector2>();
 
 				moveDirection = new Vector3( value.y, 0f, value.x );
-				
+
 				Debug.Log( "Move Preformed has been called.", this );
 			};
 			input.Game.Move.canceled += _ => {
 				moveDirection = Vector3.zero;
-				
+
 				Debug.Log( "Move Canceled has been called.", this );
 			};
 
@@ -126,9 +121,7 @@ namespace SCPCB.Remaster.Player {
 
 				IsCrouched = true;
 			};
-			input.Game.Crouch.canceled += _ => {
-				IsCrouched = false;
-			};
+			input.Game.Crouch.canceled += _ => { IsCrouched = false; };
 
 			input.Game.Sprint.started += _ => {
 				if ( IsCrouched ) {
@@ -143,9 +136,7 @@ namespace SCPCB.Remaster.Player {
 
 				IsRunning = true;
 			};
-			input.Game.Sprint.performed += _ => {
-				IsRunning = moveDirection != Vector3.zero;
-			};
+			input.Game.Sprint.performed += _ => { IsRunning = moveDirection != Vector3.zero; };
 			input.Game.Sprint.canceled += _ => {
 				Debug.Log( "Player is no longer running." );
 
@@ -180,7 +171,7 @@ namespace SCPCB.Remaster.Player {
 			var camForwardDirection = camTransform.forward * moveDirection.x;
 			var sideDirection       = camTransform.right * moveDirection.z;
 			var speedMul            = GetSpeed();
-			var myDir               = ( camForwardDirection + sideDirection ).normalized * speedMul * Time.deltaTime;
+			var myDir               = ( camForwardDirection + sideDirection ).normalized * ( speedMul * Time.deltaTime );
 
 			// Makes sure the player does not go down when looking down.
 			// TODO: Disable this if the noclip command is invoked is enabled.
@@ -202,8 +193,6 @@ namespace SCPCB.Remaster.Player {
 			myDir.y = fallSpeed;
 
 			cc.Move( myDir );
-
-			Debug.DrawLine( camTransform.position, camTransform.position + myDir, Color.green, Time.deltaTime );
 		}
 
 		private float GetSpeed() {
