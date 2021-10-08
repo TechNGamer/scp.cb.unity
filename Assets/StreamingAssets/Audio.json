@@ -166,6 +166,87 @@
       }
     ]
   },
+  // General
+  {
+    "name": "general",
+    "audio": [
+      {
+        "name": "Ambient1",
+        "stream": true,
+        "path": "SFX/Ambient/General/Ambient1.mp3"
+      },
+      {
+        "name": "Ambient2",
+        "stream": true,
+        "path": "SFX/Ambient/General/Ambient2.mp3"
+      },
+      {
+        "name": "Ambient3",
+        "stream": true,
+        "path": "SFX/Ambient/General/Ambient3.mp3"
+      },
+      {
+        "name": "Ambient4",
+        "stream": true,
+        "path": "SFX/Ambient/General/Ambient4.mp3"
+      },
+      {
+        "name": "Ambient5",
+        "stream": true,
+        "path": "SFX/Ambient/General/Ambient5.mp3"
+      },
+      {
+        "name": "Ambient6",
+        "stream": true,
+        "path": "SFX/Ambient/General/Ambient6.mp3"
+      },
+      {
+        "name": "Ambient7",
+        "stream": true,
+        "path": "SFX/Ambient/General/Ambient7.mp3"
+      },
+      {
+        "name": "Ambient8",
+        "stream": true,
+        "path": "SFX/Ambient/General/Ambient8.mp3"
+      },
+      {
+        "name": "Ambient9",
+        "stream": true,
+        "path": "SFX/Ambient/General/Ambient9.mp3"
+      },
+      {
+        "name": "Ambient10",
+        "stream": true,
+        "path": "SFX/Ambient/General/Ambient10.mp3"
+      },
+      {
+        "name": "Ambient11",
+        "stream": true,
+        "path": "SFX/Ambient/General/Ambient11.mp3"
+      },
+      {
+        "name": "Ambient12",
+        "stream": true,
+        "path": "SFX/Ambient/General/Ambient12.mp3"
+      },
+      {
+        "name": "Ambient13",
+        "stream": true,
+        "path": "SFX/Ambient/General/Ambient13.mp3"
+      },
+      {
+        "name": "Ambient14",
+        "stream": true,
+        "path": "SFX/Ambient/General/Ambient14.mp3"
+      },
+      {
+        "name": "Ambient15",
+        "stream": true,
+        "path": "SFX/Ambient/General/Ambient15.mp3"
+      }
+    ]
+  },
   // This section contains all the SCP's audio.
   // SCP-008 - Prion
   {
