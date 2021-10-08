@@ -17,7 +17,7 @@ namespace SCPCB.Remaster {
 			op.allowSceneActivation = false;
 
 			while ( !op.isDone ) {
-				Debug.Log( op.progress );
+				Debug.Log( op.progress, this );
 
 				yield return new WaitForEndOfFrame();
 			}
