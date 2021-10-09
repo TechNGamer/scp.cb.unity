@@ -4,6 +4,7 @@ namespace SCPCB.Remaster.Player {
 	/// <summary>
 	/// The player controller.
 	/// </summary>
+	[RequireComponent( typeof( AudioSource ) )]
 	public class PlayerController : MonoBehaviour {
 		private static PlayerController pPlayerController;
 
@@ -73,6 +74,7 @@ namespace SCPCB.Remaster.Player {
 		private Camera              cam;
 		private CharacterController cc;
 		private MainInput           input;
+		private AudioSource         aSource;
 
 		[SerializeField]
 		[Tooltip( "The object where a ground check occurs." )]
@@ -87,6 +89,9 @@ namespace SCPCB.Remaster.Player {
 
 			pPlayerController = this;
 
+			aSource = GetComponent<AudioSource>();
+
+			#region Input Assigning
 			// This section is mainly used to initialize the events of the new Input System.
 			input = new MainInput();
 
@@ -144,6 +149,7 @@ namespace SCPCB.Remaster.Player {
 			};
 
 			input.Game.Enable();
+			#endregion
 		}
 
 		// Start is called before the first frame update
@@ -162,6 +168,15 @@ namespace SCPCB.Remaster.Player {
 		private void Update() {
 			MoveCharacter();
 			MoveCamera();
+			PlayStepSound();
+		}
+
+		private void PlayStepSound() {
+			if ( moveDirection == Vector3.zero ) {
+				return;
+			}
+			
+			
 		}
 
 		private void MoveCharacter() {
