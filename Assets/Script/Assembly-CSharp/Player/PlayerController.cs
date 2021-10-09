@@ -1,3 +1,5 @@
+using System.Collections;
+using SCPCB.Remaster.Audio;
 using UnityEngine;
 
 namespace SCPCB.Remaster.Player {
@@ -75,6 +77,7 @@ namespace SCPCB.Remaster.Player {
 		private CharacterController cc;
 		private MainInput           input;
 		private AudioSource         aSource;
+		private AudioManager        audioManager;
 
 		[SerializeField]
 		[Tooltip( "The object where a ground check occurs." )]
@@ -88,8 +91,13 @@ namespace SCPCB.Remaster.Player {
 			}
 
 			pPlayerController = this;
+			audioManager = AudioManager.Singleton;
 
 			aSource = GetComponent<AudioSource>();
+
+			aSource.loop = false;
+
+			StartCoroutine( PlaySteps() );
 
 			#region Input Assigning
 			// This section is mainly used to initialize the events of the new Input System.
@@ -164,19 +172,20 @@ namespace SCPCB.Remaster.Player {
 			Cursor.visible   = false;
 		}
 
+		private IEnumerator PlaySteps() {
+			while ( true ) {
+				yield return new WaitUntil( () => moveDirection != Vector3.zero && !aSource.isPlaying );
+
+				aSource.clip = IsRunning ? audioManager["Steps"]["Run1"].Clip : audioManager["Steps"]["Step1"].Clip;
+
+				aSource.Play();
+			}
+		}
+
 		// Update is called once per frame
 		private void Update() {
 			MoveCharacter();
 			MoveCamera();
-			PlayStepSound();
-		}
-
-		private void PlayStepSound() {
-			if ( moveDirection == Vector3.zero ) {
-				return;
-			}
-			
-			
 		}
 
 		private void MoveCharacter() {
@@ -238,11 +247,11 @@ namespace SCPCB.Remaster.Player {
 		}
 
 		private void OnEnable() {
-			input.Game.Enable();
+			input?.Game.Enable();
 		}
 
 		private void OnDisable() {
-			input.Game.Disable();
+			input?.Game.Disable();
 		}
 	}
 }

@@ -88,6 +88,9 @@ namespace SCPCB.Remaster.Audio {
 				ReadData,
 				SetPosition
 			);
+			
+			stream.Flush();
+			stream.Position = 0;
 		}
 
 		private void LoadUsingNLayer( string file ) {
