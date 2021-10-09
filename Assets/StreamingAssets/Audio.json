@@ -1455,6 +1455,202 @@
       }
     ]
   },
+  // Step Sound Effects
+  {
+    "name": "Steps",
+    "audio": [
+      {
+        "name": "Run1",
+        "stream": false,
+        "path": "SFX/Step/Run1.mp3"
+      },
+      {
+        "name": "Run2",
+        "stream": false,
+        "path": "SFX/Step/Run2.mp3"
+      },
+      {
+        "name": "Run3",
+        "stream": false,
+        "path": "SFX/Step/Run3.mp3"
+      },
+      {
+        "name": "Run4",
+        "stream": false,
+        "path": "SFX/Step/Run4.mp3"
+      },
+      {
+        "name": "Run5",
+        "stream": false,
+        "path": "SFX/Step/Run5.mp3"
+      },
+      {
+        "name": "Run6",
+        "stream": false,
+        "path": "SFX/Step/Run6.mp3"
+      },
+      {
+        "name": "Run7",
+        "stream": false,
+        "path": "SFX/Step/Run7.mp3"
+      },
+      {
+        "name": "Run8",
+        "stream": false,
+        "path": "SFX/Step/Run8.mp3"
+      },
+      {
+        "name": "RunMetal1",
+        "stream": false,
+        "path": "SFX/Step/RunMetal1.mp3"
+      },
+      {
+        "name": "RunMetal2",
+        "stream": false,
+        "path": "SFX/Step/RunMetal2.mp3"
+      },
+      {
+        "name": "RunMetal3",
+        "stream": false,
+        "path": "SFX/Step/RunMetal3.mp3"
+      },
+      {
+        "name": "RunMetal4",
+        "stream": false,
+        "path": "SFX/Step/RunMetal4.mp3"
+      },
+      {
+        "name": "RunMetal5",
+        "stream": false,
+        "path": "SFX/Step/RunMetal5.mp3"
+      },
+      {
+        "name": "RunMetal6",
+        "stream": false,
+        "path": "SFX/Step/RunMetal6.mp3"
+      },
+      {
+        "name": "RunMetal7",
+        "stream": false,
+        "path": "SFX/Step/RunMetal7.mp3"
+      },
+      {
+        "name": "RunMetal8",
+        "stream": false,
+        "path": "SFX/Step/RunMetal8.mp3"
+      },
+      {
+        "name": "Step1",
+        "stream": false,
+        "path": "SFX/Step/Step1.mp3"
+      },
+      {
+        "name": "Step2",
+        "stream": false,
+        "path": "SFX/Step/Step2.mp3"
+      },
+      {
+        "name": "Step3",
+        "stream": false,
+        "path": "SFX/Step/Step3.mp3"
+      },
+      {
+        "name": "Step4",
+        "stream": false,
+        "path": "SFX/Step/Step4.mp3"
+      },
+      {
+        "name": "Step5",
+        "stream": false,
+        "path": "SFX/Step/Step5.mp3"
+      },,
+      {
+        "name": "Step6",
+        "stream": false,
+        "path": "SFX/Step/Step6.mp3"
+      },
+      {
+        "name": "Step7",
+        "stream": false,
+        "path": "SFX/Step/Step7.mp3"
+      },
+      {
+        "name": "Step8",
+        "stream": false,
+        "path": "SFX/Step/Step8.mp3"
+      },
+      {
+        "name": "StepForrest1",
+        "stream": false,
+        "path": "SFX/Step/StepForrest1.mp3"
+      },
+      {
+        "name": "StepForrest2",
+        "stream": false,
+        "path": "SFX/Step/StepForrest2.mp3"
+      },
+      {
+        "name": "StepForrest3",
+        "stream": false,
+        "path": "SFX/Step/StepForrest3.mp3"
+      },
+      {
+        "name": "StepMetal1",
+        "stream": false,
+        "path": "SFX/Step/StepMetal1.mp3"
+      },
+      {
+        "name": "StepMetal2",
+        "stream": false,
+        "path": "SFX/Step/StepMetal2.mp3"
+      },
+      {
+        "name": "StepMetal3",
+        "stream": false,
+        "path": "SFX/Step/StepMetal3.mp3"
+      },
+      {
+        "name": "StepMetal4",
+        "stream": false,
+        "path": "SFX/Step/StepMetal4.mp3"
+      },
+      {
+        "name": "StepMetal5",
+        "stream": false,
+        "path": "SFX/Step/StepMetal5.mp3"
+      },
+      {
+        "name": "StepMetal6",
+        "stream": false,
+        "path": "SFX/Step/StepMetal6.mp3"
+      },
+      {
+        "name": "StepMetal7",
+        "stream": false,
+        "path": "SFX/Step/StepMetal7.mp3"
+      },
+      {
+        "name": "StepMetal8",
+        "stream": false,
+        "path": "SFX/Step/StepMetal8.mp3"
+      },
+      {
+        "name": "StepPD1",
+        "stream": false,
+        "path": "SFX/Step/StepPD1.mp3"
+      },
+      {
+        "name": "StepPD2",
+        "stream": false,
+        "path": "SFX/Step/StepPD2.mp3"
+      },
+      {
+        "name": "StepPD3",
+        "stream": false,
+        "path": "SFX/Step/StepPD3.mp3"
+      }
+    ]
+  },
   // This section contains all the SCP's audio.
   // SCP-008 - Prion
   {
