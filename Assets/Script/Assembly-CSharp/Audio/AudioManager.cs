@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using Newtonsoft.Json;
 using UnityEngine;
+using UnityEngine.Networking;
 
 namespace SCPCB.Remaster.Audio {
 	/// <summary>
@@ -24,6 +26,8 @@ namespace SCPCB.Remaster.Audio {
 			public JsonAudio[] audios;
 		}
 
+		public static bool IsInitialized => _singleton != null;
+
 		// Going for a singleton model so that the array access property can be used.
 		/// <summary>
 		/// Grabs the singleton of this class.
@@ -31,6 +35,14 @@ namespace SCPCB.Remaster.Audio {
 		public static AudioManager Singleton => _singleton ??= new AudioManager();
 
 		private static AudioManager _singleton;
+
+		public static void Initialize() {
+			if ( _singleton != null ) {
+				throw new Exception( "AudioManager has already been initialized." );
+			}
+
+			_singleton = new AudioManager();
+		}
 
 		/// <summary>
 		/// Used to access the audio banks.
@@ -60,8 +72,15 @@ namespace SCPCB.Remaster.Audio {
 		#region JSON Reading
 		private void LoadAudioBanks() {
 			// This section is loading the json file, putting that stream into a reader, then passing that reader into the JsonTextReader to manually deserialize it.
-			using var fStream    = new FileStream( Path.Combine( Application.streamingAssetsPath, "Audio.json" ), FileMode.Open, FileAccess.Read, FileShare.Read );
-			using var reader     = new StreamReader( fStream, Encoding.UTF8 );
+			// Disabling Rider's styling suggestion because it is one declaration without having to add `var` to each stream line.
+			// ReSharper disable once JoinDeclarationAndInitializer
+			Stream stream;
+			#if UNITY_WEBGL || UNITY_ANDROID
+			stream = GetJson().GetAwaiter().GetResult();
+			#else
+			stream = new FileStream( Path.Combine( Application.streamingAssetsPath, "Audio.json" ), FileMode.Open, FileAccess.Read, FileShare.Read );
+			#endif
+			using var reader     = new StreamReader( stream, Encoding.UTF8 );
 			using var jsonReader = new JsonTextReader( reader );
 
 			while ( jsonReader.Read() && jsonReader.TokenType == JsonToken.Comment ) {
@@ -89,12 +108,27 @@ namespace SCPCB.Remaster.Audio {
 			}
 		}
 
+		#if UNITY_WEBGL || UNITY_ANDROID
+		private static async Task<Stream> GetJson() {
+			var       streamingUri = new Uri( Application.streamingAssetsPath );
+			using var webHelper    = UnityWebRequest.Get( new Uri( streamingUri, "Audio.json" ) );
+			var       request      = webHelper.SendWebRequest();
+
+			while ( !request.isDone ) {
+				await Task.Delay( 256 );
+			}
+
+			return new MemoryStream( webHelper.downloadHandler.data );
+		}
+		#endif
+
 		// This method knows which Audio object to hand off because of the pre-processors.
 		private static Audio GetAudioObject( string path, bool stream ) {
 			#if UNITY_EDITOR_WIN || UNITY_STANDALONE_WIN
 			return new WindowsAudio( Path.Combine( Application.streamingAssetsPath, path ), stream );
-			#elif UNITY_WEBGL
-			// TODO: Add WebGL Audio here.
+			#elif (UNITY_WEBGL || UNITY_ANDROID) && !UNITY_EDITOR
+			// Because this is going over the web, it is probably best to just download everything instead of streaming.
+			return new WebAudio( path );
 			#else
 			return new NixAudio( Path.Combine( Application.streamingAssetsPath, path ), stream );
 			#endif

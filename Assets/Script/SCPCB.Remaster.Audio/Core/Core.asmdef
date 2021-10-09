@@ -1,6 +1,6 @@
 {
     "name": "SCPCB.Remaster.Audio.Core",
-    "rootNamespace": "SCPCB.Remaster.Audio.Core",
+    "rootNamespace": "SCPCB.Remaster.Audio",
     "references": [],
     "includePlatforms": [],
     "excludePlatforms": [
