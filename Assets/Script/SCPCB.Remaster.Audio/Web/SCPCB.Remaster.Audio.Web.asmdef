@@ -1,0 +1,19 @@
+{
+    "name": "SCPCB.Remaster.Audio.Web",
+    "rootNamespace": "SCPCB.Remaster.Audio",
+    "references": [
+        "GUID:e498378621b177190b28147067177a8a"
+    ],
+    "includePlatforms": [
+        "Android",
+        "WebGL"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
