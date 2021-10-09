@@ -695,16 +695,6 @@
         "name": "Heartbeat",
         "stream": false,
         "path": "SFX/Character/D9341/Heartbeat.mp3"
-      },
-      {
-        "name": "BloodDrip0",
-        "stream": false,
-        "path": "SFX/Character/D9341/BloodDrip0.mp3"
-      },
-      {
-        "name": "BloodDrip0",
-        "stream": false,
-        "path": "SFX/Character/D9341/BloodDrip0.mp3"
       }
     ]
   },
@@ -887,57 +877,57 @@
       {
         "name": "Blinking",
         "stream": true,
-        "path": "SFX/Character/MTF/106/BLINKING.mp3"
+        "path": "SFX/Character/MTF/173/BLINKING.mp3"
       },
       {
         "name": "Box1",
         "stream": true,
-        "path": "SFX/Character/MTF/106/Box1.mp3"
+        "path": "SFX/Character/MTF/173/Box1.mp3"
       },
       {
         "name": "Box2",
         "stream": true,
-        "path": "SFX/Character/MTF/106/Box2.mp3"
+        "path": "SFX/Character/MTF/173/Box2.mp3"
       },
       {
         "name": "Box3",
         "stream": true,
-        "path": "SFX/Character/MTF/106/Box3.mp3"
+        "path": "SFX/Character/MTF/173/Box3.mp3"
       },
       {
         "name": "Cont1",
         "stream": true,
-        "path": "SFX/Character/MTF/106/Cont1.mp3"
+        "path": "SFX/Character/MTF/173/Cont1.mp3"
       },
       {
         "name": "Cont2",
         "stream": true,
-        "path": "SFX/Character/MTF/106/Cont2.mp3"
+        "path": "SFX/Character/MTF/173/Cont2.mp3"
       },
       {
         "name": "Cont3",
         "stream": true,
-        "path": "SFX/Character/MTF/106/Cont3.mp3"
+        "path": "SFX/Character/MTF/173/Cont3.mp3"
       },
       {
         "name": "Cont4",
         "stream": true,
-        "path": "SFX/Character/MTF/106/Cont4.mp3"
+        "path": "SFX/Character/MTF/173/Cont4.mp3"
       },
       {
         "name": "Spotted1",
         "stream": true,
-        "path": "SFX/Character/MTF/106/Spotted1.mp3"
+        "path": "SFX/Character/MTF/173/Spotted1.mp3"
       },
       {
         "name": "Spotted2",
         "stream": true,
-        "path": "SFX/Character/MTF/106/Spotted2.mp3"
+        "path": "SFX/Character/MTF/173/Spotted2.mp3"
       },
       {
         "name": "Spotted3",
         "stream": true,
-        "path": "SFX/Character/MTF/106/Spotted3.mp3"
+        "path": "SFX/Character/MTF/173/Spotted3.mp3"
       }
     ]
   },
@@ -963,57 +953,57 @@
       {
         "name": "ClassD2",
         "stream": true,
-        "path": "SFX/Character/MTF/BClassD2mp3"
+        "path": "SFX/Character/MTF/ClassD2.mp3"
       },
       {
         "name": "ClassD3",
         "stream": true,
-        "path": "SFX/Character/MTF/BeClassD3p3"
+        "path": "SFX/Character/MTF/ClassD3.mp3"
       },
       {
         "name": "ClassD4",
         "stream": true,
-        "path": "SFX/Character/MTF/BeeClassD43"
+        "path": "SFX/Character/MTF/ClassD4.mp3"
       },
       {
         "name": "GateB1",
         "stream": true,
-        "path": "SFX/Character/MTF/BeeGateB13"
+        "path": "SFX/Character/MTF/GateB1.mp3"
       },
       {
         "name": "GateB2",
         "stream": true,
-        "path": "SFX/Character/MTF/BeeGateB23"
+        "path": "SFX/Character/MTF/GateB2.mp3"
       },
       {
         "name": "GateB3",
         "stream": true,
-        "path": "SFX/Character/MTF/BeeGateB33"
+        "path": "SFX/Character/MTF/GateB3.mp3"
       },
       {
         "name": "GateB4",
         "stream": true,
-        "path": "SFX/Character/MTF/BeeGateB43"
+        "path": "SFX/Character/MTF/GateB4.mp3"
       },
       {
         "name": "Random1",
         "stream": true,
-        "path": "SFX/Character/MTF/BeeRandom13"
+        "path": "SFX/Character/MTF/Random1.mp3"
       },
       {
         "name": "Random2",
         "stream": true,
-        "path": "SFX/Character/MTF/BeeRandom23"
+        "path": "SFX/Character/MTF/Random2.mp3"
       },
       {
         "name": "Random3",
         "stream": true,
-        "path": "SFX/Character/MTF/BeeRandom33"
+        "path": "SFX/Character/MTF/Random3.mp3"
       },
       {
         "name": "Random4",
         "stream": true,
-        "path": "SFX/Character/MTF/BeeRandom43"
+        "path": "SFX/Character/MTF/Random4.mp3"
       },
       {
         "name": "Random5",
@@ -1123,22 +1113,22 @@
       {
         "name": "TargetTerminated1",
         "stream": true,
-        "path": "SFX/Character/MTF/Targetterminated1.mp3"
+        "path": "SFX/Character/MTF/TargetTerminated1.mp3"
       },
       {
         "name": "TargetTerminated2",
         "stream": true,
-        "path": "SFX/Character/MTF/Targetterminated2.mp3"
+        "path": "SFX/Character/MTF/TargetTerminated2.mp3"
       },
       {
         "name": "TargetTerminated3",
         "stream": true,
-        "path": "SFX/Character/MTF/Targetterminated3.mp3"
+        "path": "SFX/Character/MTF/TargetTerminated3.mp3"
       },
       {
-        "name": "TargetTerminated3",
+        "name": "TargetTerminated4",
         "stream": true,
-        "path": "SFX/Character/MTF/Targetterminated3.mp3"
+        "path": "SFX/Character/MTF/TargetTerminated4.mp3"
       },
       {
         "name": "Tesla0",
@@ -1189,37 +1179,37 @@
       {
         "name": "Announce173Contained",
         "stream": true,
-        "path": "SFX/Character/MTF/Announce173Contained.mp3"
+        "path": "SFX/Character/MTF/Announc173Contain.mp3"
       },
       {
         "name": "AnnounceAfter1",
         "stream": true,
-        "path": "SFX/Character/MTF/AnnounceAfter1.mp3"
+        "path": "SFX/Character/MTF/AnnouncAfter1.mp3"
       },
       {
         "name": "AnnounceAfter2",
         "stream": true,
-        "path": "SFX/Character/MTF/AnnounceAfter2.mp3"
+        "path": "SFX/Character/MTF/AnnouncAfter2.mp3"
       },
       {
         "name": "AnnounceCameraCheck",
         "stream": true,
-        "path": "SFX/Character/MTF/AnnounceCameraCheck.mp3"
+        "path": "SFX/Character/MTF/AnnouncCameraCheck.mp3"
       },
       {
         "name": "AnnounceCameraFound1",
         "stream": true,
-        "path": "SFX/Character/MTF/AnnounceCameraFound1.mp3"
+        "path": "SFX/Character/MTF/AnnouncCameraFound1.mp3"
       },
       {
         "name": "AnnounceCameraFound2",
         "stream": true,
-        "path": "SFX/Character/MTF/AnnounceCameraFound2.mp3"
+        "path": "SFX/Character/MTF/AnnouncCameraFound2.mp3"
       },
       {
         "name": "AnnounceCameraNoFound",
         "stream": true,
-        "path": "SFX/Character/MTF/AnnounceCameraNoFound.mp3"
+        "path": "SFX/Character/MTF/AnnouncCameraNoFound.mp3"
       },
       {
         "name": "Tesla1",
@@ -1239,27 +1229,27 @@
       {
         "name": "ThreatAnnounce1",
         "stream": true,
-        "path": "SFX/Character/MTF/ThreatAnnounce1.mp3"
+        "path": "SFX/Character/MTF/ThreatAnnounc1.mp3"
       },
       {
         "name": "ThreatAnnounce2",
         "stream": true,
-        "path": "SFX/Character/MTF/ThreatAnnounce2.mp3"
+        "path": "SFX/Character/MTF/ThreatAnnounc2.mp3"
       },
       {
         "name": "ThreatAnnounce3",
         "stream": true,
-        "path": "SFX/Character/MTF/ThreatAnnounce3.mp3"
+        "path": "SFX/Character/MTF/ThreatAnnounc3.mp3"
       },
       {
         "name": "ThreatAnnounceFinal",
         "stream": true,
-        "path": "SFX/Character/MTF/ThreatAnnounceFinal.mp3"
+        "path": "SFX/Character/MTF/ThreatAnnouncFinal.mp3"
       },
       {
         "name": "ThreatAnnouncePossession",
         "stream": true,
-        "path": "SFX/Character/MTF/ThreatAnnouncePossession.mp3"
+        "path": "SFX/Character/MTF/ThreatAnnouncPossession.mp3"
       }
     ]
   },
@@ -1387,11 +1377,6 @@
         "name": "DoorOpen1",
         "stream": true,
         "path": "SFX/Door/DoorOpen1.mp3"
-      },
-      {
-        "name": "DoorOpen2",
-        "stream": true,
-        "path": "SFX/Door/DoorOpen2.mp3"
       },
       {
         "name": "DoorOpen2",
@@ -1563,7 +1548,7 @@
         "name": "Step5",
         "stream": false,
         "path": "SFX/Step/Step5.mp3"
-      },,
+      },
       {
         "name": "Step6",
         "stream": false,
@@ -1582,17 +1567,17 @@
       {
         "name": "StepForrest1",
         "stream": false,
-        "path": "SFX/Step/StepForrest1.mp3"
+        "path": "SFX/Step/StepForest1.mp3"
       },
       {
         "name": "StepForrest2",
         "stream": false,
-        "path": "SFX/Step/StepForrest2.mp3"
+        "path": "SFX/Step/StepForest2.mp3"
       },
       {
         "name": "StepForrest3",
         "stream": false,
-        "path": "SFX/Step/StepForrest3.mp3"
+        "path": "SFX/Step/StepForest3.mp3"
       },
       {
         "name": "StepMetal1",
@@ -1667,39 +1652,39 @@
         "path": "SFX/SCP/008/KillScientist2.mp3"
       },
       {
-        "name": "Voice0",
+        "name": "Voices0",
         "stream": true,
-        "path": "SFX/SCP/008/Voice0.mp3"
+        "path": "SFX/SCP/008/Voices0.mp3"
       },
       {
-        "name": "Voice1",
+        "name": "Voices1",
         "stream": true,
-        "path": "SFX/SCP/008/Voice1.mp3"
+        "path": "SFX/SCP/008/Voices1.mp3"
       },
       {
-        "name": "Voice2",
+        "name": "Voices2",
         "stream": true,
-        "path": "SFX/SCP/008/Voice2.mp3"
+        "path": "SFX/SCP/008/Voices2.mp3"
       },
       {
-        "name": "Voice3",
+        "name": "Voices3",
         "stream": true,
-        "path": "SFX/SCP/008/Voice3.mp3"
+        "path": "SFX/SCP/008/Voices3.mp3"
       },
       {
-        "name": "Voice4",
+        "name": "Voices4",
         "stream": true,
-        "path": "SFX/SCP/008/Voice4.mp3"
+        "path": "SFX/SCP/008/Voices4.mp3"
       },
       {
-        "name": "Voice5",
+        "name": "Voices5",
         "stream": true,
-        "path": "SFX/SCP/008/Voice5.mp3"
+        "path": "SFX/SCP/008/Voices5.mp3"
       },
       {
-        "name": "Voice6",
+        "name": "Voices6",
         "stream": true,
-        "path": "SFX/SCP/008/Voice6.mp3"
+        "path": "SFX/SCP/008/Voices6.mp3"
       }
     ]
   },
@@ -2812,12 +2797,12 @@
       {
         "name": "CWM1",
         "stream": true,
-        "path": "SFX/SCP/990/CWM1.mp3"
+        "path": "SFX/SCP/990/cwm1.mp3"
       },
       {
         "name": "CWM2",
         "stream": true,
-        "path": "SFX/SCP/990/CWM2.mp3"
+        "path": "SFX/SCP/990/cwm2.mp3"
       }
     ]
   },
@@ -3027,7 +3012,7 @@
       {
         "name": "789J",
         "stream": true,
-        "path": "SFX/SCP/Joke/789j.mp3"
+        "path": "SFX/SCP/Joke/789J.mp3"
       },
       {
         "name": "SaxDuck",
