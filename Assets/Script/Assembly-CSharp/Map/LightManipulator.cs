@@ -74,6 +74,12 @@ namespace SCPCB.Remaster.Map {
 			}
 		}
 
+		private enum LightSettings : byte {
+			On      = 0,
+			Off     = 1,
+			Flicker = 2
+		}
+
 		// This hodge bodge of placing fields is weird, but meant to help within the inspector.
 		[Header( "Light Information" )]
 		[SerializeField]
@@ -105,6 +111,13 @@ namespace SCPCB.Remaster.Map {
 		[Tooltip( "How the light is to dim." )]
 		private AnimationCurve dimCurve;
 
+		// Stuff that isn't going to get serialized by the editor.
+		private LightSettings[] lightSettings;
+
+		private void Awake() {
+			lightSettings = new LightSettings[lights.Length];
+		}
+
 		private void Start() {
 			TurnRandomLightsOff();
 			RandomLightFlicker();
@@ -114,9 +127,14 @@ namespace SCPCB.Remaster.Map {
 			var flickers = 0;
 
 			while ( flickers != numFlickerLights ) {
-				var lightObj = lights[Random.Range( 0, lights.Length )];
+				var index    = Random.Range( 0, lights.Length );
+				var lightObj = lights[index];
 
-				if ( !lightObj.activeInHierarchy ) {
+				if ( lightSettings[index] == LightSettings.Off ) {
+					continue;
+				}
+
+				if ( lightSettings[index] == LightSettings.Flicker ) {
 					continue;
 				}
 
