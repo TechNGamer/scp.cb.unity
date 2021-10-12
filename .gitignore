@@ -26,7 +26,6 @@ x64/
 x86/
 bld/
 [Bb]in/
-[Oo]bj/
 [Ll]og/
 
 # Visual Studio 2015 cache/options directory
@@ -272,15 +271,8 @@ ExportedObj/
 *.csproj
 *.unityproj
 *.sln
-*.suo
-*.tmp
-*.user
-*.userprefs
-*.pidb
 *.booproj
 *.svd
-*.pdb
-*.opendb
 
 # Unity3D generated meta files
 *.pidb.meta
@@ -308,7 +300,6 @@ Thumbs.db
 [Dd]esktop.ini
 
 [Ll]ogs/
-[Bb]uilds/
 
 [M]emory[C]aptures/
 
