@@ -1848,7 +1848,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7318059504231633933}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 60}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4654039417605492103}
@@ -1870,7 +1870,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxNumOnLights: 5
-  numFlickerLights: 1
   lights:
   - {fileID: 545625043279502595}
   - {fileID: 545625045159038528}
@@ -1882,6 +1881,15 @@ MonoBehaviour:
   - {fileID: 545625044151661483}
   - {fileID: 545625043494634721}
   - {fileID: 545625043273020484}
+  numFlickerLights: 1
+  flickRate: 2
+  randomInterval: 1
+  dimCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &7397738401387751784
 GameObject:
   m_ObjectHideFlags: 0
