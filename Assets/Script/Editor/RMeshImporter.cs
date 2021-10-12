@@ -102,7 +102,7 @@ namespace SCPCB.Remaster {
 	 *		}
 	 * } */
 	[ScriptedImporter( 1, "rmesh" )]
-	public class RMesshImporter : ScriptedImporter {
+	public class RMeshImporter : ScriptedImporter {
 		// This is the property for the shader.
 		private static readonly int BASE_MAP = Shader.PropertyToID( "_BaseMap" );
 
@@ -203,8 +203,6 @@ namespace SCPCB.Remaster {
 		public override void OnImportAsset( AssetImportContext ctx ) {
 			texPath    = Path.Combine( Application.dataPath, "Textures", "Rooms" );
 			usedShader = Shader.Find( "Universal Render Pipeline/Lit" );
-
-			ctx.AddObjectToAsset( "commonShader", usedShader );
 
 			// Opens the file for importing into Unity.
 			using var fStream   = new FileStream( ctx.assetPath, FileMode.Open, FileAccess.Read );
