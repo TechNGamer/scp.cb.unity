@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Networking;
 
 namespace SCPCB.Remaster.Audio {
-	public class WebAudio : Audio {
+	public class WebAudio : AudioCore {
 		public static readonly Uri STREAMING_ASSETS = new Uri( Application.streamingAssetsPath );
 		
 		public WebAudio( string subPath ) {

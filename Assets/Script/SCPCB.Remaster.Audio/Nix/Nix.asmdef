@@ -2,8 +2,8 @@
     "name": "SCPCB.Remaster.Audio.Nix",
     "rootNamespace": "SCPCB.Remaster.Audio.Nix",
     "references": [
-        "GUID:be3a2a102a400a141a3afe70ad086b3c",
-        "GUID:e498378621b177190b28147067177a8a"
+        "NLayer",
+        "SCPCB.Remaster.Audio.Core"
     ],
     "includePlatforms": [
         "Editor",

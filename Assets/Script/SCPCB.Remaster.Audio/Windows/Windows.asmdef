@@ -2,7 +2,7 @@
     "name": "SCPCB.Remaster.Audio.Windows",
     "rootNamespace": "SCPCB.Remaster.Audio.Windows",
     "references": [
-        "GUID:e498378621b177190b28147067177a8a"
+        "SCPCB.Remaster.Audio.Core"
     ],
     "includePlatforms": [
         "Editor",

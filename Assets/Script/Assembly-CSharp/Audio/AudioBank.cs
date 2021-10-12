@@ -8,19 +8,19 @@ namespace SCPCB.Remaster.Audio {
 	/// </summary>
 	public class AudioBank {
 
-		public Audio this[ string key ] => bank[key];
+		public AudioCore this[ string key ] => bank[key];
 
 		public string[] GetKeys => bank.Keys.ToArray();
 
-		private Dictionary<string, Audio> bank;
+		private Dictionary<string, AudioCore> bank;
 
 		// This is internal so as not to allow other to create them willy nilly.
-		internal AudioBank( Audio[] audioList, string[] audioNames ) {
+		internal AudioBank( AudioCore[] audioList, string[] audioNames ) {
 			if ( audioList.Length != audioNames.Length ) {
 				throw new ArgumentOutOfRangeException($"{nameof(audioList)} and {nameof(audioNames)} must be the same length");
 			}
 
-			bank = new Dictionary<string, Audio>();
+			bank = new Dictionary<string, AudioCore>();
 			
 			for ( var i = 0; i < audioList.Length; ++i ) {
 				var audio = audioList[i];

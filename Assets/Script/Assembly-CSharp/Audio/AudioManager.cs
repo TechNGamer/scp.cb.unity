@@ -92,7 +92,7 @@ namespace SCPCB.Remaster.Audio {
 			}
 
 			foreach ( var jsonBank in ReadJsonBank( jsonReader ) ) {
-				var audios = new Audio[jsonBank.audios.Length];
+				var audios = new AudioCore[jsonBank.audios.Length];
 				var names  = new string[jsonBank.audios.Length];
 
 				for ( var i = 0; i < audios.Length; ++i ) {
@@ -123,7 +123,7 @@ namespace SCPCB.Remaster.Audio {
 		#endif
 
 		// This method knows which Audio object to hand off because of the pre-processors.
-		private static Audio GetAudioObject( string path, bool stream ) {
+		private static AudioCore GetAudioObject( string path, bool stream ) {
 			#if UNITY_EDITOR_WIN || UNITY_STANDALONE_WIN
 			return new WindowsAudio( Path.Combine( Application.streamingAssetsPath, path ), stream );
 			#elif (UNITY_WEBGL || UNITY_ANDROID) && !UNITY_EDITOR

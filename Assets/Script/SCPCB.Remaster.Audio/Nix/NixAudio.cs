@@ -8,7 +8,7 @@ namespace SCPCB.Remaster.Audio {
 	/// <summary>
 	/// This class represents an audio file in a basic form.
 	/// </summary>
-	public class NixAudio : Audio {
+	public class NixAudio : AudioCore {
 		private static string GetTempLocation( FileSystemInfo fsInfo ) {
 			if ( fsInfo.Name == "StreamingAssets" ) {
 				return Path.Combine( Application.temporaryCachePath, "Audio" );

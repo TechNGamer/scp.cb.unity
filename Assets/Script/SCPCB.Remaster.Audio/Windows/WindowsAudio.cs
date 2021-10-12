@@ -5,8 +5,8 @@ using NAudio.Wave.SampleProviders;
 using NAudio.Wave;
 using UnityEngine;
 
-namespace SCPCB.Remaster.Audio.Windows {
-	public class WindowsAudio : Audio {
+namespace SCPCB.Remaster.Audio {
+	public class WindowsAudio : AudioCore {
 		
 		private Mp3FileReader mp3FileReader;
 		private SampleChannel sampleChannel;
