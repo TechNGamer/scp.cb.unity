@@ -37,7 +37,7 @@ or run it through Wine/Proton. Which has it's own problems as well.
     * Visual Studio Code
       * Unity Extension should be used.
     * Any other IDE that supports C#/Unity.
-  * Unity 2020.3.16
+  * Unity 2020.3.20
   
 # How to build
 Check [here](https://docs.unity3d.com/Manual/BuildSettings.html) on how to build Unity projects.
