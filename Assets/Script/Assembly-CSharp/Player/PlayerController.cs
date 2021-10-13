@@ -8,7 +8,10 @@ namespace SCPCB.Remaster.Player {
 	/// </summary>
 	[RequireComponent( typeof( AudioSource ) )]
 	public class PlayerController : MonoBehaviour {
-		private static PlayerController pPlayerController;
+		public static PlayerController Player {
+			get;
+			private set;
+		}
 
 		/// <summary>
 		/// If the player is touching the ground.
@@ -85,12 +88,12 @@ namespace SCPCB.Remaster.Player {
 
 		private void Awake() {
 			// Want to make sure that there is only one player controller.
-			if ( pPlayerController ) {
+			if ( Player ) {
 				Destroy( this );
 				return;
 			}
 
-			pPlayerController = this;
+			Player = this;
 			audioManager = AudioManager.Singleton;
 
 			aSource = GetComponent<AudioSource>();
