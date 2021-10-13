@@ -197,7 +197,7 @@ namespace SCPCB.Remaster {
 		private static bool IsRMesh( Stream stream ) {
 			var header = GetString( stream );
 
-			return header == "RoomMesh";
+			return header == "RoomMesh" || header == "RoomMesh.HasTriggerBox";
 		}
 
 		public override void OnImportAsset( AssetImportContext ctx ) {
