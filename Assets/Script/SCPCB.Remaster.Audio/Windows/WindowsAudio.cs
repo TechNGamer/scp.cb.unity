@@ -1,4 +1,3 @@
-using System;
 using System.IO;
 using System.Reflection;
 using NAudio.Wave.SampleProviders;
@@ -7,7 +6,6 @@ using UnityEngine;
 
 namespace SCPCB.Remaster.Audio {
 	public class WindowsAudio : AudioCore {
-		
 		private Mp3FileReader mp3FileReader;
 		private SampleChannel sampleChannel;
 
@@ -15,13 +13,31 @@ namespace SCPCB.Remaster.Audio {
 			IsStreamed = isStreamed;
 
 			if ( IsStreamed ) {
-				
+				Stream( file );
 			} else {
-				LoadUsingNAudio( file );
+				Load( file );
 			}
 		}
-		
-		private void LoadUsingNAudio( string file ) {
+
+		private void Load( string file ) {
+			using var memStream = new MemoryStream();
+
+			stream        = new FileStream( file, FileMode.Open, FileAccess.Read, FileShare.Read );
+			mp3FileReader = new Mp3FileReader( stream );
+			sampleChannel = new SampleChannel( mp3FileReader, false );
+
+			mp3FileReader.CopyTo( memStream );
+
+			Clip = AudioClip.Create(
+				string.Empty,
+				GetNumberOfSamples( mp3FileReader ),
+				sampleChannel.WaveFormat.Channels,
+				sampleChannel.WaveFormat.SampleRate,
+				false
+			);
+		}
+
+		private void Stream( string file ) {
 			stream        = new FileStream( file, FileMode.Open, FileAccess.Read, FileShare.Read );
 			mp3FileReader = new Mp3FileReader( stream );
 			sampleChannel = new SampleChannel( mp3FileReader, false );
@@ -40,10 +56,10 @@ namespace SCPCB.Remaster.Audio {
 		// This method here is to grab the total samples field from NAudio, because who needs that exposed?
 		private static int GetNumberOfSamples( Mp3FileReader reader ) {
 			var type      = reader.GetType().BaseType;
-			var fieldInfo = type.GetField( "totalSamples", BindingFlags.NonPublic | BindingFlags.Instance);
+			var fieldInfo = type.GetField( "totalSamples", BindingFlags.NonPublic | BindingFlags.Instance );
 			var value     = fieldInfo.GetValue( reader );
 
-			return value is long valL ? (int)valL : -1;
+			return value is long valL ? ( int )valL : -1;
 		}
 
 		private void ReadData( float[] samples ) {
@@ -58,6 +74,5 @@ namespace SCPCB.Remaster.Audio {
 			mp3FileReader?.Dispose();
 			stream?.Dispose();
 		}
-		
 	}
 }
