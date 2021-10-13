@@ -39,7 +39,7 @@ namespace SCPCB.Remaster.Map.Lighting {
 				var flicker = light.gameObject.AddComponent<LightFlicker>();
 
 				flicker.DimCurve       = dimCurve;
-				flicker.FlickRate      = ( int )( flickRate * 1000 );
+				flicker.FlickRate      = flickRate;
 				flicker.RandomAddition = randomInterval;
 
 				++flickers;

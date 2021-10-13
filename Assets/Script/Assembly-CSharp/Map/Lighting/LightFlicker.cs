@@ -1,21 +1,21 @@
 ﻿using System;
-using System.Threading.Tasks;
+using System.Collections;
+using System.Diagnostics.CodeAnalysis;
 using SCPCB.Remaster.Audio;
 using UnityEngine;
 using Random = UnityEngine.Random;
-using ULight = UnityEngine.Light;
 
 namespace SCPCB.Remaster.Map.Lighting {
 	/// <summary>
 	/// Lights that are meant to flicker.
 	/// </summary>
-	[RequireComponent( typeof( ULight ) )]
+	[RequireComponent( typeof( Light ) )]
 	[RequireComponent( typeof( AudioSource ) )]
 	public class LightFlicker : MonoBehaviour {
 		/// <summary>
 		/// How often the light dims in seconds.
 		/// </summary>
-		public int FlickRate { get; set; }
+		public float FlickRate { get; set; }
 
 		public float RandomAddition { get; set; }
 
@@ -23,13 +23,17 @@ namespace SCPCB.Remaster.Map.Lighting {
 
 		private float originalIntensity;
 
-		private new ULight       light;
+		private new Light        light;
 		private     AudioSource  source;
 		private     AudioManager audioManager;
+		private     Coroutine    flickerRoutine;
 
 		private void Start() {
-			light  = GetComponent<ULight>();
-			source = GetComponent<AudioSource>();
+			light        = GetComponent<Light>();
+			source       = GetComponent<AudioSource>();
+			audioManager = AudioManager.Singleton;
+
+			originalIntensity = light.intensity;
 
 			source.maxDistance  = 10f;
 			source.spatialBlend = 1f;
@@ -37,36 +41,50 @@ namespace SCPCB.Remaster.Map.Lighting {
 			source.loop         = false;
 		}
 
-		// Totally forgot I can make Update be async, makes it easier to halt it until it needs to resume again.
-		private async void Update() {
-			var additionalSeconds = ( int )( Random.Range( 0f, RandomAddition ) * 1000 );
+		private void OnEnable() {
+			flickerRoutine = StartCoroutine( FlickerLightUpdate() );
+		}
 
-			await Task.Delay( additionalSeconds + FlickRate );
+		private void OnDisable() {
+			StopCoroutine( flickerRoutine );
+		}
 
-			try {
-				source.clip = audioManager["LightFX"]["light1"].Clip;
-				source.time = 0f;
-			} catch ( Exception e ) {
-				Debug.LogException( e, this );
-			}
+		[SuppressMessage( "ReSharper", "IteratorNeverReturns", Justification = "Doing this since async causes issues." )]
+		private IEnumerator FlickerLightUpdate() {
+			while ( true ) {
+				var additionalSeconds = Random.Range( 0f, RandomAddition );
 
-			try {
-				source.Play();
-			} catch ( Exception e ) {
-				Debug.LogException( e, this );
-			}
+				yield return new WaitForSeconds( additionalSeconds + FlickRate );
 
-			await Task.Run( () => {
+				try {
+					source.clip = audioManager["LightFX"]["light1"].Clip;
+					source.time = 0f;
+				} catch ( Exception e ) {
+					Debug.LogException( e, this );
+				}
+
+				try {
+					source.Play();
+				} catch ( Exception e ) {
+					Debug.LogException( e, this );
+				}
+
+				light.intensity = originalIntensity;
+
 				var time = 0f;
 
-				while ( time < 1f ) {
+				// I don't know why there isn't a property to get where the last keyframe is.
+				while ( time < DimCurve[DimCurve.length - 1].time ) {
 					light.intensity = originalIntensity * DimCurve.Evaluate( time );
 
 					time += Time.deltaTime;
-				}
-			} );
 
-			light.intensity = originalIntensity;
+					// Wait for next frame.
+					yield return null;
+				}
+
+				light.intensity = originalIntensity;
+			}
 		}
 	}
 }
