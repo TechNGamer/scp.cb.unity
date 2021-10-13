@@ -2177,7 +2177,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2639844407970777852}
-  - component: {fileID: 8841991284464005953}
+  - component: {fileID: 179604334}
   m_Layer: 0
   m_Name: Closet.2
   m_TagString: Untagged
@@ -2201,7 +2201,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8841991284464005953
+--- !u!114 &179604334
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2210,50 +2210,41 @@ MonoBehaviour:
   m_GameObject: {fileID: 8841991284464005952}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0fb8eec47c30e75439f216f3ca96138d, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b7044b2cc2b4502bab541c8b93352ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   maxNumOnLights: 4
-  lights:
-  - {fileID: 6341640263793485126}
-  - {fileID: 6341640263344818706}
-  - {fileID: 6341640263209516930}
-  - {fileID: 6341640262046912880}
-  - {fileID: 6341640263002343094}
-  - {fileID: 6341640262012392492}
   numFlickerLights: 2
   flickRate: 2
-  randomInterval: 2
+  randomInterval: 1
   dimCurve:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 1
-      inSlope: -6.6666665
-      outSlope: -6.6666665
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 0.15
       value: 0
-      inSlope: 0
-      outSlope: 0
+      inSlope: Infinity
+      outSlope: 0.051647034
+      tangentMode: 7
+      weightedMode: 0
+      inWeight: 0.050946236
+      outWeight: 0.1149927
+    - serializedVersion: 3
+      time: 0.5
+      value: 1
+      inSlope: 0.02684704
+      outSlope: 0.02684704
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.20873123
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 1.1764705
-      outSlope: 1.1764705
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0.33333334
+      inWeight: 0.11062598
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  lights:
+  - {fileID: 6341640263793485124}
+  - {fileID: 6341640263344818704}
+  - {fileID: 6341640263209516928}
+  - {fileID: 6341640262046912846}
+  - {fileID: 6341640263002343092}
+  - {fileID: 6341640262012392490}

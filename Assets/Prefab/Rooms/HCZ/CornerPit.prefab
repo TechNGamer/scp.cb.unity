@@ -130,7 +130,7 @@ Light:
   m_InnerSpotAngle: 45
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 0
+    m_Type: 1
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1
@@ -223,7 +223,7 @@ Light:
   m_InnerSpotAngle: 90
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 0
+    m_Type: 1
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1
@@ -316,7 +316,7 @@ Light:
   m_InnerSpotAngle: 90
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 0
+    m_Type: 1
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1
@@ -409,7 +409,7 @@ Light:
   m_InnerSpotAngle: 90
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 0
+    m_Type: 1
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1
@@ -502,7 +502,7 @@ Light:
   m_InnerSpotAngle: 90
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 0
+    m_Type: 1
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1
@@ -635,7 +635,7 @@ Light:
   m_InnerSpotAngle: 90
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 0
+    m_Type: 1
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1
@@ -728,7 +728,7 @@ Light:
   m_InnerSpotAngle: 90
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 0
+    m_Type: 1
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1
@@ -821,7 +821,7 @@ Light:
   m_InnerSpotAngle: 90
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 0
+    m_Type: 1
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1
@@ -914,7 +914,7 @@ Light:
   m_InnerSpotAngle: 90
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 0
+    m_Type: 1
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1
@@ -1007,7 +1007,7 @@ Light:
   m_InnerSpotAngle: 90
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 0
+    m_Type: 1
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1
@@ -1866,30 +1866,48 @@ MonoBehaviour:
   m_GameObject: {fileID: 7318059504231633933}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0fb8eec47c30e75439f216f3ca96138d, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b7044b2cc2b4502bab541c8b93352ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   maxNumOnLights: 5
-  lights:
-  - {fileID: 545625043279502595}
-  - {fileID: 545625045159038528}
-  - {fileID: 545625043327490216}
-  - {fileID: 545625043902683069}
-  - {fileID: 545625044104785839}
-  - {fileID: 545625043483221010}
-  - {fileID: 545625044485896305}
-  - {fileID: 545625044151661483}
-  - {fileID: 545625043494634721}
-  - {fileID: 545625043273020484}
-  numFlickerLights: 1
+  numFlickerLights: 2
   flickRate: 2
-  randomInterval: 1
+  randomInterval: 4
   dimCurve:
     serializedVersion: 2
-    m_Curve: []
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0.029424364
+      outSlope: 0.029424364
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.1513828
+    - serializedVersion: 3
+      time: 0.5
+      value: 1
+      inSlope: -0.029142756
+      outSlope: -0.029142756
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.15283853
+      outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  lights:
+  - {fileID: 545625043279502593}
+  - {fileID: 545625045159038542}
+  - {fileID: 545625043327490230}
+  - {fileID: 545625043902683067}
+  - {fileID: 545625044104785837}
+  - {fileID: 545625043483221008}
+  - {fileID: 545625044485896319}
+  - {fileID: 545625044151661481}
+  - {fileID: 545625043494634735}
+  - {fileID: 545625043273020482}
 --- !u!1 &7397738401387751784
 GameObject:
   m_ObjectHideFlags: 0
