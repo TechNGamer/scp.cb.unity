@@ -1,36 +1,42 @@
-using System;
+using System.Diagnostics.CodeAnalysis;
 using SCPCB.Remaster.Audio;
-using SCPCB.Remaster.Map;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace SCPCB.Remaster.Door {
 	[RequireComponent( typeof( Animator ) )]
 	[RequireComponent( typeof( AudioSource ) )]
+	[SuppressMessage( "ReSharper", "ClassWithVirtualMembersNeverInherited.Global" )]
+	[SuppressMessage( "ReSharper", "MemberCanBePrivate.Global" )]
 	public class Door : MonoBehaviour {
 		private static readonly int OPEN  = Animator.StringToHash( "Open" );
 		private static readonly int CLOSE = Animator.StringToHash( "Close" );
 
+		public bool Open {
+			get => _open;
+			protected set => _open = value;
+		}
+
+		public bool IsMoving => animator.GetCurrentAnimatorStateInfo( 0 ).normalizedTime < 1f;
+
+		[FormerlySerializedAs( "doorOpen" )]
 		[SerializeField]
 		[Tooltip( "Determines if the door is open or not." )]
-		private bool doorOpen;
+		private bool _open;
 
-		[SerializeField]
-		[Tooltip( "The location of the buttons." )]
-		private Button[] buttons;
+		protected Animator    animator;
+		protected AudioSource source;
 
-		private Animator    animator;
-		private AudioSource source;
-
-		public void ToggleDoor() {
-			if ( animator.GetCurrentAnimatorStateInfo( 0 ).normalizedTime < 1f ) {
+		public virtual void ToggleDoor() {
+			if ( IsMoving ) {
 				return;
 			}
 
-			doorOpen = !doorOpen;
+			Open = !Open;
 
-			animator.SetTrigger( doorOpen ? OPEN : CLOSE );
+			animator.SetTrigger( Open ? OPEN : CLOSE );
 
-			source.clip = AudioManager.Singleton["Door"][doorOpen ? "DoorOpen1" : "DoorClose1"].Clip;
+			source.clip = AudioManager.Singleton["Door"][Open ? "DoorOpen1" : "DoorClose1"].Clip;
 
 			source.Play();
 		}
@@ -39,7 +45,7 @@ namespace SCPCB.Remaster.Door {
 			animator = GetComponent<Animator>();
 			source   = GetComponent<AudioSource>();
 
-			if ( doorOpen ) {
+			if ( Open ) {
 				animator.SetTrigger( OPEN );
 			}
 		}
