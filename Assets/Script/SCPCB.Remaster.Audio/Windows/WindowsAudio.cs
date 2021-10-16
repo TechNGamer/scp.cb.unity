@@ -1,5 +1,6 @@
 using System.IO;
 using System.Reflection;
+using System.Security.Cryptography;
 using NAudio.Wave.SampleProviders;
 using NAudio.Wave;
 using UnityEngine;
@@ -20,13 +21,13 @@ namespace SCPCB.Remaster.Audio {
 		}
 
 		private void Load( string file ) {
-			using var memStream = new MemoryStream();
-
 			stream        = new FileStream( file, FileMode.Open, FileAccess.Read, FileShare.Read );
 			mp3FileReader = new Mp3FileReader( stream );
 			sampleChannel = new SampleChannel( mp3FileReader, false );
 
-			mp3FileReader.CopyTo( memStream );
+			var samples = new float[mp3FileReader.Length];
+
+			sampleChannel.Read( samples, 0, samples.Length );
 
 			Clip = AudioClip.Create(
 				string.Empty,
@@ -35,6 +36,8 @@ namespace SCPCB.Remaster.Audio {
 				sampleChannel.WaveFormat.SampleRate,
 				false
 			);
+
+			Clip.SetData( samples, 0 );
 		}
 
 		private void Stream( string file ) {
