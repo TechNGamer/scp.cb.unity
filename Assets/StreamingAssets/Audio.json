@@ -1636,6 +1636,66 @@
       }
     ]
   },
+  {
+    "name": "Interact",
+    "audio": [
+      {
+        "name": "ButtonSuccess",
+        "stream": false,
+        "path": "SFX/Interact/Button.mp3"
+      },
+      {
+        "name": "ButtonFailed",
+        "stream": false,
+        "path": "SFX/Interact/Button2.mp3"
+      },
+      {
+        "name": "KeycardSuccess",
+        "stream": false,
+        "path": "SFX/Interact/KeycardUse1.mp3"
+      },
+      {
+        "name": "KeycardFailed",
+        "stream": false,
+        "path": "SFX/Interact/KeycardUse2.mp3"
+      },
+      {
+        "name": "ScannerSuccess",
+        "stream": false,
+        "path": "SFX/Interact/ScannerUse1.mp3"
+      },
+      {
+        "name": "ScannerFailed",
+        "stream": false,
+        "path": "SFX/Interact/ScannerUse2.mp3"
+      },
+      {
+        "name": "LeverFlip",
+        "stream": false,
+        "path": "SFX/Interact/LeverFlip.mp3"
+      },
+      {
+        "name": "PickItem0",
+        "stream": false,
+        "path": "SFX/Interact/PickItem0.mp3"
+      },
+      {
+        "name": "PickItem1",
+        "stream": false,
+        "path": "SFX/Interact/PickItem1.mp3"
+      },
+      {
+        "name": "PickItem2",
+        "stream": false,
+        "path": "SFX/Interact/PickItem2.mp3"
+      },
+      {
+        "name": "PickItem3",
+        "stream": false,
+        "path": "SFX/Interact/PickItem3.mp3"
+      }
+    ]
+  },
   // This section contains all the SCP's audio.
   // SCP-008 - Prion
   {
