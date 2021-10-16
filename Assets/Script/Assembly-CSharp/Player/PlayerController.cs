@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using SCPCB.Remaster.Audio;
+using SCPCB.Remaster.Map;
 using UnityEngine;
 
 namespace SCPCB.Remaster.Player {
@@ -8,10 +10,7 @@ namespace SCPCB.Remaster.Player {
 	/// </summary>
 	[RequireComponent( typeof( AudioSource ) )]
 	public class PlayerController : MonoBehaviour {
-		public static PlayerController Player {
-			get;
-			private set;
-		}
+		public static PlayerController Player { get; private set; }
 
 		/// <summary>
 		/// If the player is touching the ground.
@@ -86,6 +85,11 @@ namespace SCPCB.Remaster.Player {
 		[Tooltip( "The object where a ground check occurs." )]
 		private Transform groundCheck;
 
+		[SerializeField]
+		private LayerMask interactMask;
+
+		private IInteractable interactable;
+
 		private void Awake() {
 			// Want to make sure that there is only one player controller.
 			if ( Player ) {
@@ -93,7 +97,7 @@ namespace SCPCB.Remaster.Player {
 				return;
 			}
 
-			Player = this;
+			Player       = this;
 			audioManager = AudioManager.Singleton;
 
 			aSource = GetComponent<AudioSource>();
@@ -160,7 +164,76 @@ namespace SCPCB.Remaster.Player {
 			};
 
 			input.Game.Enable();
+
+			input.Game.Interact.started += _ => {
+				if ( interactable == null ) {
+					return;
+				}
+
+				interactable.Interact();
+			};
 			#endregion
+		}
+
+		private void FixedUpdate() {
+			var camTransform = cam.transform;
+			var checkPos     = camTransform.forward + camTransform.position;
+			var hits         = Physics.BoxCastAll( checkPos, Vector3.one, camTransform.forward );
+
+			if ( hits == null || hits.Length == 0 ) {
+				interactable = null;
+
+				return;
+			}
+
+			foreach ( var hit in hits ) {
+				CalculateInteractable( hit );
+			}
+		}
+
+		private void CalculateInteractable( RaycastHit hit ) {
+			var camTransform = cam.transform;
+			var camPos       = camTransform.position;
+			var otherPos     = hit.transform.position;
+			var hitObj       = hit.transform.gameObject;
+
+			Debug.DrawLine( camPos, otherPos, Color.cyan );
+			Debug.Log( $"Looking at `{hitObj}`.", hitObj );
+
+			var viewedInteractable = hit.transform.gameObject.GetComponent<IInteractable>();
+
+			if ( !( viewedInteractable is MonoBehaviour ) ) {
+				if ( !( hitObj.GetComponentInParent<IInteractable>() is MonoBehaviour intMono ) ) {
+					return;
+				}
+
+				viewedInteractable = ( IInteractable )intMono;
+			}
+
+
+			if ( interactable == null ) {
+				interactable = viewedInteractable;
+			} else {
+				var myPos         = transform.position;
+				var distToOther   = Vector3.Distance( ( ( MonoBehaviour )viewedInteractable ).transform.position, myPos );
+				var distToCurrent = Vector3.Distance( ( ( MonoBehaviour )interactable ).transform.position, myPos );
+
+				if ( distToOther < distToCurrent ) {
+					interactable = viewedInteractable;
+				}
+			}
+		}
+
+		private void OnTriggerEnter( Collider other ) {
+		}
+
+		private void OnDrawGizmosSelected() {
+			var camTransform = cam.transform;
+			var checkPos     = camTransform.forward + camTransform.position;
+
+			Gizmos.color = Color.blue;
+
+			Gizmos.DrawWireCube( checkPos, Vector3.one );
 		}
 
 		// Start is called before the first frame update
