@@ -1,5 +1,4 @@
-using System;
-using System.Collections;
+using System.Diagnostics.CodeAnalysis;
 using SCPCB.Remaster.Audio;
 using SCPCB.Remaster.Map;
 using UnityEngine;
@@ -9,8 +8,11 @@ namespace SCPCB.Remaster.Player {
 	/// The player controller.
 	/// </summary>
 	[RequireComponent( typeof( AudioSource ) )]
+	[SuppressMessage( "ReSharper", "MemberCanBePrivate.Global" )]
 	public class PlayerController : MonoBehaviour {
 		public static PlayerController Player { get; private set; }
+
+		private static readonly Vector3 BOX_SIZE = new Vector3( 0.5f, 0.5f, 0.5f );
 
 		/// <summary>
 		/// If the player is touching the ground.
@@ -88,8 +90,10 @@ namespace SCPCB.Remaster.Player {
 		[SerializeField]
 		private LayerMask interactMask;
 
-		private IInteractable interactable;
+		private          IInteractable interactable;
+		private readonly RaycastHit[]  hits = new RaycastHit[16];
 
+		#region Unity Methods
 		private void Awake() {
 			// Want to make sure that there is only one player controller.
 			if ( Player ) {
@@ -103,8 +107,6 @@ namespace SCPCB.Remaster.Player {
 			aSource = GetComponent<AudioSource>();
 
 			aSource.loop = false;
-
-			StartCoroutine( PlaySteps() );
 
 			#region Input Assigning
 			// This section is mainly used to initialize the events of the new Input System.
@@ -122,13 +124,9 @@ namespace SCPCB.Remaster.Player {
 				var value = ctx.ReadValue<Vector2>();
 
 				moveDirection = new Vector3( value.y, 0f, value.x );
-
-				Debug.Log( "Move Preformed has been called.", this );
 			};
 			input.Game.Move.canceled += _ => {
 				moveDirection = Vector3.zero;
-
-				Debug.Log( "Move Canceled has been called.", this );
 			};
 
 			// The reason to use the underscore (aka, the discard variable) is that we do not care
@@ -152,14 +150,10 @@ namespace SCPCB.Remaster.Player {
 					return;
 				}
 
-				Debug.Log( "Player is running." );
-
 				IsRunning = true;
 			};
 			input.Game.Sprint.performed += _ => { IsRunning = moveDirection != Vector3.zero; };
 			input.Game.Sprint.canceled += _ => {
-				Debug.Log( "Player is no longer running." );
-
 				IsRunning = false;
 			};
 
@@ -175,20 +169,62 @@ namespace SCPCB.Remaster.Player {
 			#endregion
 		}
 
+		// Start is called before the first frame update
+		private void Start() {
+			// Instead of having it be associated within the editor, it will grab it during runtime.
+			// This is better in my opinion because if anything changes with the Character PlayerController
+			// or the Camera, then it will be picked up during runtime instead of erroring out and forgetting.
+			cam = GetComponentInChildren<Camera>();
+			cc  = GetComponent<CharacterController>();
+
+			Cursor.lockState = CursorLockMode.Locked;
+			Cursor.visible   = false;
+		}
+
+		// Update is called once per frame
+		private void Update() {
+			MoveCharacter();
+			MoveCamera();
+			PlayCharacterSounds();
+		}
+
 		private void FixedUpdate() {
 			var camTransform = cam.transform;
-			var checkPos     = camTransform.forward + camTransform.position;
-			var hits         = Physics.BoxCastAll( checkPos, Vector3.one, camTransform.forward );
+			var forward      = camTransform.forward;
+			var checkPos     = forward + camTransform.position;
+			var size         = Physics.BoxCastNonAlloc( checkPos, BOX_SIZE, forward, hits );
 
-			if ( hits == null || hits.Length == 0 ) {
+			if ( size == 0 ) {
 				interactable = null;
 
 				return;
 			}
 
-			foreach ( var hit in hits ) {
+			for ( var i = 0; i < size; ++i ) {
+				var hit = hits[i];
+				
 				CalculateInteractable( hit );
 			}
+		}
+
+		private void OnDrawGizmosSelected() {
+			var camTransform = cam.transform;
+			var checkPos     = camTransform.forward + camTransform.position;
+
+			Gizmos.color = Color.blue;
+
+			Gizmos.DrawWireCube( checkPos, BOX_SIZE * 2f );
+		}
+		#endregion
+
+		private void PlayCharacterSounds() {
+			if ( moveDirection.x == 0 && moveDirection.z == 0 || aSource.isPlaying ) {
+				return;
+			}
+
+			aSource.clip = IsRunning ? audioManager["Steps"]["Run1"].Clip : audioManager["Steps"]["Step1"].Clip;
+
+			aSource.Play();
 		}
 
 		private void CalculateInteractable( RaycastHit hit ) {
@@ -198,7 +234,6 @@ namespace SCPCB.Remaster.Player {
 			var hitObj       = hit.transform.gameObject;
 
 			Debug.DrawLine( camPos, otherPos, Color.cyan );
-			Debug.Log( $"Looking at `{hitObj}`.", hitObj );
 
 			var viewedInteractable = hit.transform.gameObject.GetComponent<IInteractable>();
 
@@ -222,46 +257,6 @@ namespace SCPCB.Remaster.Player {
 					interactable = viewedInteractable;
 				}
 			}
-		}
-
-		private void OnTriggerEnter( Collider other ) {
-		}
-
-		private void OnDrawGizmosSelected() {
-			var camTransform = cam.transform;
-			var checkPos     = camTransform.forward + camTransform.position;
-
-			Gizmos.color = Color.blue;
-
-			Gizmos.DrawWireCube( checkPos, Vector3.one );
-		}
-
-		// Start is called before the first frame update
-		private void Start() {
-			// Instead of having it be associated within the editor, it will grab it during runtime.
-			// This is better in my opinion because if anything changes with the Character PlayerController
-			// or the Camera, then it will be picked up during runtime instead of erroring out and forgetting.
-			cam = GetComponentInChildren<Camera>();
-			cc  = GetComponent<CharacterController>();
-
-			Cursor.lockState = CursorLockMode.Locked;
-			Cursor.visible   = false;
-		}
-
-		private IEnumerator PlaySteps() {
-			while ( true ) {
-				yield return new WaitUntil( () => moveDirection != Vector3.zero && !aSource.isPlaying );
-
-				aSource.clip = IsRunning ? audioManager["Steps"]["Run1"].Clip : audioManager["Steps"]["Step1"].Clip;
-
-				aSource.Play();
-			}
-		}
-
-		// Update is called once per frame
-		private void Update() {
-			MoveCharacter();
-			MoveCamera();
 		}
 
 		private void MoveCharacter() {
