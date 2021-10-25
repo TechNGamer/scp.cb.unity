@@ -6,7 +6,6 @@ using UnityEngine.Serialization;
 namespace SCPCB.Remaster.Door {
 	[RequireComponent( typeof( Animator ) )]
 	[RequireComponent( typeof( AudioSource ) )]
-	[SuppressMessage( "ReSharper", "ClassWithVirtualMembersNeverInherited.Global" )]
 	[SuppressMessage( "ReSharper", "MemberCanBePrivate.Global" )]
 	public class Door : MonoBehaviour {
 		private static readonly int OPEN  = Animator.StringToHash( "Open" );
@@ -22,6 +21,7 @@ namespace SCPCB.Remaster.Door {
 		[FormerlySerializedAs( "doorOpen" )]
 		[SerializeField]
 		[Tooltip( "Determines if the door is open or not." )]
+		// ReSharper disable once InconsistentNaming
 		private bool _open;
 
 		protected Animator    animator;
