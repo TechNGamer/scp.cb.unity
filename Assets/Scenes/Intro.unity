@@ -1704,7 +1704,15 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9114455988683452146, guid: 82211ebac3a97db43821304433befa8c, type: 3}
+      propertyPath: buttonPressed.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9114455988683452146, guid: 82211ebac3a97db43821304433befa8c, type: 3}
       propertyPath: ButtonPressed.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9114455988683452146, guid: 82211ebac3a97db43821304433befa8c, type: 3}
+      propertyPath: buttonPressed.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9114455988683452146, guid: 82211ebac3a97db43821304433befa8c, type: 3}
@@ -1712,7 +1720,15 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 330080148}
     - target: {fileID: 9114455988683452146, guid: 82211ebac3a97db43821304433befa8c, type: 3}
+      propertyPath: buttonPressed.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 330080148}
+    - target: {fileID: 9114455988683452146, guid: 82211ebac3a97db43821304433befa8c, type: 3}
       propertyPath: ButtonPressed.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 9114455988683452146, guid: 82211ebac3a97db43821304433befa8c, type: 3}
+      propertyPath: buttonPressed.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 9114455988683452146, guid: 82211ebac3a97db43821304433befa8c, type: 3}
@@ -1720,11 +1736,23 @@ PrefabInstance:
       value: ToggleDoor
       objectReference: {fileID: 0}
     - target: {fileID: 9114455988683452146, guid: 82211ebac3a97db43821304433befa8c, type: 3}
+      propertyPath: buttonPressed.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ToggleDoor
+      objectReference: {fileID: 0}
+    - target: {fileID: 9114455988683452146, guid: 82211ebac3a97db43821304433befa8c, type: 3}
       propertyPath: ButtonPressed.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: SCPCB.Remaster.Door.Door, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 9114455988683452146, guid: 82211ebac3a97db43821304433befa8c, type: 3}
+      propertyPath: buttonPressed.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: SCPCB.Remaster.Door.Door, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 9114455988683452146, guid: 82211ebac3a97db43821304433befa8c, type: 3}
       propertyPath: ButtonPressed.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 9114455988683452146, guid: 82211ebac3a97db43821304433befa8c, type: 3}
+      propertyPath: buttonPressed.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     m_RemovedComponents: []
