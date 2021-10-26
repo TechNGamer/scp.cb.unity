@@ -7,7 +7,6 @@ namespace SCPCB.Remaster.Player {
 	/// <summary>
 	/// The player controller.
 	/// </summary>
-	[RequireComponent( typeof( AudioSource ) )]
 	[SuppressMessage( "ReSharper", "MemberCanBePrivate.Global" )]
 	public class PlayerController : MonoBehaviour {
 		public static PlayerController Player { get; private set; }
@@ -38,7 +37,7 @@ namespace SCPCB.Remaster.Player {
 
 		// This region is a mess because it needs to be laid out in this way for the editor.
 		#region Editor Manipulated Fields
-		[Header("Speed")]
+		[Header( "Speed" )]
 		[SerializeField]
 		[Range( 1f, 100f )]
 		[Tooltip( "The speed at which the camera moves." )]
@@ -59,16 +58,16 @@ namespace SCPCB.Remaster.Player {
 		[Tooltip( "The speed at which the player runs." )]
 		private float sprintSpeed = 1f;
 
-		[Header("Camera")]
+		[Header( "Camera" )]
 		[SerializeField]
 		private Camera cam;
-		
+
 		[SerializeField]
 		[Range( 30f, 90f )]
 		[Tooltip( "The maximum vertical look angle that is allowed." )]
 		private float maxLookAngle = 45f;
 
-		[Header("Ground Check")]
+		[Header( "Ground Check" )]
 		[SerializeField]
 		[Range( 0.125f, 1 )]
 		[Tooltip( "The distance before snapping to the ground." )]
@@ -82,12 +81,12 @@ namespace SCPCB.Remaster.Player {
 		[Tooltip( "The object where a ground check occurs." )]
 		private Transform groundCheck;
 
-		[Header("Interactions")]
+		[Header( "Interactions" )]
 		[SerializeField]
 		private LayerMask interactMask;
 
 		[SerializeField]
-		[Range(0.75f, 2f)]
+		[Range( 0.75f, 2f )]
 		private float checkRadius = 1.25f;
 		#endregion
 
@@ -96,10 +95,10 @@ namespace SCPCB.Remaster.Player {
 		private          Vector3             moveCamRot;
 		private          Vector3             moveDirection;
 		private          IInteractable       interactable;
-		private readonly RaycastHit[]        hits = new RaycastHit[16];
-		private          CharacterController cc;
+		private readonly Collider[]          overlaps = new Collider[32];
+		private          CharacterController charController;
 		private          MainInput           input;
-		private          AudioSource         aSource;
+		private          AudioSource         feetSource, injureSource, mouthSource;
 		private          AudioManager        audioManager;
 
 		#region Unity Methods
@@ -109,15 +108,27 @@ namespace SCPCB.Remaster.Player {
 				Destroy( this );
 				return;
 			}
-			
+
 			DontDestroyOnLoad( gameObject );
 
 			Player       = this;
 			audioManager = AudioManager.Singleton;
 
-			aSource = GetComponent<AudioSource>();
+			/* Each of these sources are created for a reason.
+			 *
+			 * The first one, feetSource, this one is used to play audio that is related to walking/running.
+			 * The second one, injureSource, this one is used to play when the player is injured/getting hit.
+			 * The third one, mouthSource, this is for sound effects like panting, drinking, swallowing, and eating.
+			 *
+			 * Because the original game allows for these three sound effects to play at the same time, this script is
+			 * going to need a way to reproduce that. */
+			feetSource   = gameObject.AddComponent<AudioSource>();
+			injureSource = gameObject.AddComponent<AudioSource>();
+			mouthSource  = gameObject.AddComponent<AudioSource>();
 
-			aSource.loop = false;
+			feetSource.loop   = false;
+			injureSource.loop = false;
+			mouthSource.loop  = false;
 
 			#region Input Assigning
 			// This section is mainly used to initialize the events of the new Input System.
@@ -136,9 +147,7 @@ namespace SCPCB.Remaster.Player {
 
 				moveDirection = new Vector3( value.y, 0f, value.x );
 			};
-			input.Game.Move.canceled += _ => {
-				moveDirection = Vector3.zero;
-			};
+			input.Game.Move.canceled += _ => { moveDirection = Vector3.zero; };
 
 			// The reason to use the underscore (aka, the discard variable) is that we do not care
 			// about the context.
@@ -164,9 +173,7 @@ namespace SCPCB.Remaster.Player {
 				IsRunning = true;
 			};
 			input.Game.Sprint.performed += _ => { IsRunning = moveDirection != Vector3.zero; };
-			input.Game.Sprint.canceled += _ => {
-				IsRunning = false;
-			};
+			input.Game.Sprint.canceled  += _ => { IsRunning = false; };
 
 			input.Game.Enable();
 
@@ -182,7 +189,7 @@ namespace SCPCB.Remaster.Player {
 
 		// Start is called before the first frame update
 		private void Start() {
-			cc  = GetComponent<CharacterController>();
+			charController = GetComponent<CharacterController>();
 
 			if ( cam == null ) {
 				cam = GetComponentInChildren<Camera>();
@@ -201,8 +208,7 @@ namespace SCPCB.Remaster.Player {
 
 		private void FixedUpdate() {
 			var camTransform = cam.transform;
-			var forward      = camTransform.forward;
-			var size         = Physics.SphereCastNonAlloc( camTransform.position, checkRadius, forward, hits );
+			var size         = Physics.OverlapSphereNonAlloc( camTransform.position, checkRadius, overlaps, interactMask );
 
 			if ( size == 0 ) {
 				interactable = null;
@@ -211,14 +217,12 @@ namespace SCPCB.Remaster.Player {
 			}
 
 			for ( var i = 0; i < size; ++i ) {
-				var hit = hits[i];
-
-				// Checking to see if the object is actually visible.
-				if ( Physics.Linecast( camTransform.position, hit.collider.gameObject.transform.position, interactMask ) ) {
+				// Checks to see if it is in line of interaction.
+				if ( !Physics.Linecast( camTransform.position, overlaps[i].transform.position, out var hitInfo, interactMask ) ) {
 					continue;
 				}
-				
-				CalculateInteractable( hit );
+
+				CheckForInteractable( hitInfo );
 			}
 		}
 
@@ -232,16 +236,17 @@ namespace SCPCB.Remaster.Player {
 		#endregion
 
 		private void PlayCharacterSounds() {
-			if ( moveDirection.x == 0 && moveDirection.z == 0 || aSource.isPlaying ) {
+			if ( moveDirection.x == 0 && moveDirection.z == 0 || feetSource.isPlaying ) {
 				return;
 			}
 
-			aSource.clip = IsRunning ? audioManager["Steps"]["Run1"].Clip : audioManager["Steps"]["Step1"].Clip;
+			feetSource.clip = IsRunning ? audioManager["Steps"]["Run1"].Clip : audioManager["Steps"]["Step1"].Clip;
 
-			aSource.Play();
+			feetSource.Play();
 		}
 
-		private void CalculateInteractable( RaycastHit hit ) {
+		// This method checks for the closest interactable around the player.
+		private void CheckForInteractable( RaycastHit hit ) {
 			var camTransform = cam.transform;
 			var camPos       = camTransform.position;
 			var otherPos     = hit.transform.position;
@@ -251,6 +256,8 @@ namespace SCPCB.Remaster.Player {
 
 			var viewedInteractable = hit.transform.gameObject.GetComponent<IInteractable>();
 
+			// Checks to see if it hit an IInteractable. If not, it checks to see if it is on the parent.
+			// Assumes that it will never be on a child, because logically it shouldn't.
 			if ( !( viewedInteractable is MonoBehaviour ) ) {
 				if ( !( hitObj.GetComponentInParent<IInteractable>() is MonoBehaviour intMono ) ) {
 					return;
@@ -261,8 +268,10 @@ namespace SCPCB.Remaster.Player {
 
 
 			if ( interactable == null ) {
+				// Assumes there are no other close intractables.
 				interactable = viewedInteractable;
 			} else {
+				// Calculates the distance between the current hit object, the previous interactable, and the player to see which is closer.
 				var myPos         = transform.position;
 				var distToOther   = Vector3.Distance( ( ( MonoBehaviour )viewedInteractable ).transform.position, myPos );
 				var distToCurrent = Vector3.Distance( ( ( MonoBehaviour )interactable ).transform.position, myPos );
@@ -301,7 +310,7 @@ namespace SCPCB.Remaster.Player {
 
 			myDir.y = fallSpeed;
 
-			cc.Move( myDir );
+			charController.Move( myDir );
 		}
 
 		private float GetSpeed() {
