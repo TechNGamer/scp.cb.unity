@@ -12,8 +12,6 @@ namespace SCPCB.Remaster.Player {
 	public class PlayerController : MonoBehaviour {
 		public static PlayerController Player { get; private set; }
 
-		private static readonly Vector3 BOX_SIZE = new Vector3( 0.5f, 0.5f, 0.5f );
-
 		/// <summary>
 		/// If the player is touching the ground.
 		/// </summary>
