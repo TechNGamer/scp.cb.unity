@@ -32,17 +32,20 @@ namespace SCPCB.Remaster.Door {
 				return;
 			}
 
-			if ( Debug.isDebugBuild ) {
-				Debug.Log( "Opening door.", this );
-			}
-
 			Open = !Open;
 
 			animator.SetTrigger( Open ? OPEN : CLOSE );
 
-			source.clip = AudioManager.Singleton["Door"][Open ? "DoorOpen1" : "DoorClose1"].Clip;
+			var rand = Random.Range( 1, 4 );
+			var clip = Open ? $"DoorOpen{rand}" : $"DoorClose{rand}";
+
+			source.clip = AudioManager.Singleton["Door"][clip].Clip;
 
 			source.Play();
+
+			if ( Debug.isDebugBuild ) {
+				Debug.Log( $"Playing `{clip}`." );
+			}
 		}
 
 		private void Start() {
