@@ -111,6 +111,8 @@ namespace SCPCB.Remaster.Player {
 				Destroy( this );
 				return;
 			}
+			
+			DontDestroyOnLoad( gameObject );
 
 			Player       = this;
 			audioManager = AudioManager.Singleton;
