@@ -31,8 +31,10 @@ namespace SCPCB.Remaster.Door {
 			if ( IsMoving ) {
 				return;
 			}
-			
-			Debug.Log( "Opening door.", this );
+
+			if ( Debug.isDebugBuild ) {
+				Debug.Log( "Opening door.", this );
+			}
 
 			Open = !Open;
 
