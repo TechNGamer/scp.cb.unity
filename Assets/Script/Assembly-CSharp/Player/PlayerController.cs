@@ -38,6 +38,9 @@ namespace SCPCB.Remaster.Player {
 		/// </remarks>
 		public bool IsRunning { get; private set; }
 
+		// This region is a mess because it needs to be laid out in this way for the editor.
+		#region Editor Manipulated Fields
+		[Header("Speed")]
 		[SerializeField]
 		[Range( 1f, 100f )]
 		[Tooltip( "The speed at which the camera moves." )]
@@ -58,40 +61,48 @@ namespace SCPCB.Remaster.Player {
 		[Tooltip( "The speed at which the player runs." )]
 		private float sprintSpeed = 1f;
 
+		[Header("Camera")]
+		[SerializeField]
+		private Camera cam;
+		
+		[SerializeField]
+		[Range( 30f, 90f )]
+		[Tooltip( "The maximum vertical look angle that is allowed." )]
+		private float maxLookAngle = 45f;
+
+		[Header("Ground Check")]
 		[SerializeField]
 		[Range( 0.125f, 1 )]
 		[Tooltip( "The distance before snapping to the ground." )]
 		private float groundDistance = 0.25f;
 
 		[SerializeField]
-		[Range( 30f, 90f )]
-		[Tooltip( "The maximum vertical look angle that is allowed." )]
-		private float maxLookAngle = 45f;
-
-		private float fallSpeed;
-
-		private Vector3 moveCamRot;
-		private Vector3 moveDirection;
-
-		[SerializeField]
 		[Tooltip( "The mask for the ground." )]
 		private LayerMask groundMask;
-
-		private Camera              cam;
-		private CharacterController cc;
-		private MainInput           input;
-		private AudioSource         aSource;
-		private AudioManager        audioManager;
 
 		[SerializeField]
 		[Tooltip( "The object where a ground check occurs." )]
 		private Transform groundCheck;
 
+		[Header("Interactions")]
 		[SerializeField]
 		private LayerMask interactMask;
 
-		private          IInteractable interactable;
-		private readonly RaycastHit[]  hits = new RaycastHit[16];
+		[SerializeField]
+		[Range(0.75f, 2f)]
+		private float checkRadius = 1.25f;
+		#endregion
+
+		private float fallSpeed;
+
+		private          Vector3             moveCamRot;
+		private          Vector3             moveDirection;
+		private          IInteractable       interactable;
+		private readonly RaycastHit[]        hits = new RaycastHit[16];
+		private          CharacterController cc;
+		private          MainInput           input;
+		private          AudioSource         aSource;
+		private          AudioManager        audioManager;
 
 		#region Unity Methods
 		private void Awake() {
@@ -171,11 +182,11 @@ namespace SCPCB.Remaster.Player {
 
 		// Start is called before the first frame update
 		private void Start() {
-			// Instead of having it be associated within the editor, it will grab it during runtime.
-			// This is better in my opinion because if anything changes with the Character PlayerController
-			// or the Camera, then it will be picked up during runtime instead of erroring out and forgetting.
-			cam = GetComponentInChildren<Camera>();
 			cc  = GetComponent<CharacterController>();
+
+			if ( cam == null ) {
+				cam = GetComponentInChildren<Camera>();
+			}
 
 			Cursor.lockState = CursorLockMode.Locked;
 			Cursor.visible   = false;
@@ -191,8 +202,7 @@ namespace SCPCB.Remaster.Player {
 		private void FixedUpdate() {
 			var camTransform = cam.transform;
 			var forward      = camTransform.forward;
-			var checkPos     = forward + camTransform.position;
-			var size         = Physics.BoxCastNonAlloc( checkPos, BOX_SIZE, forward, hits );
+			var size         = Physics.SphereCastNonAlloc( camTransform.position, checkRadius, forward, hits );
 
 			if ( size == 0 ) {
 				interactable = null;
@@ -202,6 +212,11 @@ namespace SCPCB.Remaster.Player {
 
 			for ( var i = 0; i < size; ++i ) {
 				var hit = hits[i];
+
+				// Checking to see if the object is actually visible.
+				if ( Physics.Linecast( camTransform.position, hit.collider.gameObject.transform.position, interactMask ) ) {
+					continue;
+				}
 				
 				CalculateInteractable( hit );
 			}
@@ -209,11 +224,10 @@ namespace SCPCB.Remaster.Player {
 
 		private void OnDrawGizmosSelected() {
 			var camTransform = cam.transform;
-			var checkPos     = camTransform.forward + camTransform.position;
 
 			Gizmos.color = Color.blue;
 
-			Gizmos.DrawWireCube( checkPos, BOX_SIZE * 2f );
+			Gizmos.DrawWireSphere( camTransform.position, checkRadius );
 		}
 		#endregion
 
