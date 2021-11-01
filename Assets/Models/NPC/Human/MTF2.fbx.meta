@@ -5,52 +5,31 @@ ModelImporter:
   internalIDToNameTable:
   - first:
       74: 4638314392595156386
-    second: Combat.Shooting
+    second: Death
   - first:
-      74: -629269042502995633
-    second: Combat.Death
+      74: -6185155371445809522
+    second: Throw
   - first:
-      74: -6190880421363547102
-    second: Combat.Grenade
+      74: -6058902949032593793
+    second: Idle0
   - first:
-      74: -6937722760589363356
-    second: Combat.Idle.0
+      74: -6775884027671718737
+    second: Idle1
   - first:
-      74: 6388246575282982611
-    second: Combat.Idle.1
+      74: -1610863427237328480
+    second: Walking
   - first:
-      74: -2469787991007051344
-    second: Combat.Moving
+      74: -4910691073650510074
+    second: Signal0
   - first:
-      74: 2844588803691866930
-    second: Combat.Signal.0
+      74: -3428995504525330079
+    second: Signal1
   - first:
-      74: -7597233306459568951
-    second: Combat.Signal.1
+      74: 4650759605469818607
+    second: Armed-To-Idle
   - first:
-      74: -8517273366557710070
-    second: Combat.ToRelaxed
-  - first:
-      74: -4283182641871810891
-    second: Death.Pos.0
-  - first:
-      74: 1855487343617421656
-    second: Death.Pos.1
-  - first:
-      74: 8921547578746460332
-    second: Relaxed.Idle.0
-  - first:
-      74: 2676300322937040477
-    second: Relaxed.Idle.1
-  - first:
-      74: -7496208785050766534
-    second: Relaxed.Idle.2
-  - first:
-      74: 7385463673881430461
-    second: Relaxed.Idle.3
-  - first:
-      74: 9085802619438881807
-    second: Relaxed.ToIdle
+      74: -6303194015647886255
+    second: DeadWall
   externalObjects: {}
   materials:
     materialImportMode: 2
@@ -80,39 +59,10 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Combat.Shooting
+      name: Death
       takeName: MTF2.ms3d.ao|MTF2.ms3d.act
       internalID: 0
-      firstFrame: 1
-      lastFrame: 6
-      wrapMode: 0
-      orientationOffsetY: 0
-      level: 0
-      cycleOffset: 0
-      loop: 0
-      hasAdditiveReferencePose: 0
-      loopTime: 1
-      loopBlend: 1
-      loopBlendOrientation: 0
-      loopBlendPositionY: 0
-      loopBlendPositionXZ: 0
-      keepOriginalOrientation: 0
-      keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 0
-      heightFromFeet: 0
-      mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
-      events: []
-      transformMask: []
-      maskType: 3
-      maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
-    - serializedVersion: 16
-      name: Combat.Death
-      takeName: MTF2.ms3d.ao|MTF2.ms3d.act
-      internalID: 0
-      firstFrame: 7
+      firstFrame: 3
       lastFrame: 26
       wrapMode: 0
       orientationOffsetY: 0
@@ -138,11 +88,11 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Combat.Grenade
+      name: Throw
       takeName: MTF2.ms3d.ao|MTF2.ms3d.act
       internalID: 0
-      firstFrame: 27
-      lastFrame: 75
+      firstFrame: 28
+      lastFrame: 82
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -167,10 +117,10 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Combat.Idle.0
+      name: Idle0
       takeName: MTF2.ms3d.ao|MTF2.ms3d.act
       internalID: 0
-      firstFrame: 76
+      firstFrame: 84
       lastFrame: 194
       wrapMode: 0
       orientationOffsetY: 0
@@ -196,69 +146,11 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Combat.Idle.1
+      name: Idle1
       takeName: MTF2.ms3d.ao|MTF2.ms3d.act
       internalID: 0
-      firstFrame: 195
-      lastFrame: 309
-      wrapMode: 0
-      orientationOffsetY: 0
-      level: 0
-      cycleOffset: 0
-      loop: 0
-      hasAdditiveReferencePose: 0
-      loopTime: 1
-      loopBlend: 1
-      loopBlendOrientation: 0
-      loopBlendPositionY: 0
-      loopBlendPositionXZ: 0
-      keepOriginalOrientation: 0
-      keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 0
-      heightFromFeet: 0
-      mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
-      events: []
-      transformMask: []
-      maskType: 3
-      maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
-    - serializedVersion: 16
-      name: Combat.Moving
-      takeName: MTF2.ms3d.ao|MTF2.ms3d.act
-      internalID: 0
-      firstFrame: 310
-      lastFrame: 343
-      wrapMode: 0
-      orientationOffsetY: 0
-      level: 0
-      cycleOffset: 0
-      loop: 0
-      hasAdditiveReferencePose: 0
-      loopTime: 1
-      loopBlend: 1
-      loopBlendOrientation: 0
-      loopBlendPositionY: 0
-      loopBlendPositionXZ: 0
-      keepOriginalOrientation: 0
-      keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 0
-      heightFromFeet: 0
-      mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
-      events: []
-      transformMask: []
-      maskType: 3
-      maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
-    - serializedVersion: 16
-      name: Combat.Signal.0
-      takeName: MTF2.ms3d.ao|MTF2.ms3d.act
-      internalID: 0
-      firstFrame: 344
-      lastFrame: 421
+      firstFrame: 196
+      lastFrame: 306
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -283,11 +175,40 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Combat.Signal.1
+      name: Walking
       takeName: MTF2.ms3d.ao|MTF2.ms3d.act
       internalID: 0
-      firstFrame: 422
-      lastFrame: 461
+      firstFrame: 312
+      lastFrame: 344
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 1
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Signal0
+      takeName: MTF2.ms3d.ao|MTF2.ms3d.act
+      internalID: 0
+      firstFrame: 348
+      lastFrame: 422
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -312,11 +233,11 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Combat.ToRelaxed
+      name: Signal1
       takeName: MTF2.ms3d.ao|MTF2.ms3d.act
       internalID: 0
-      firstFrame: 462
-      lastFrame: 485
+      firstFrame: 424
+      lastFrame: 464
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -341,185 +262,11 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Death.Pos.0
+      name: Armed-To-Idle
       takeName: MTF2.ms3d.ao|MTF2.ms3d.act
       internalID: 0
-      firstFrame: 523
-      lastFrame: 524
-      wrapMode: 0
-      orientationOffsetY: 0
-      level: 0
-      cycleOffset: 0
-      loop: 0
-      hasAdditiveReferencePose: 0
-      loopTime: 1
-      loopBlend: 1
-      loopBlendOrientation: 0
-      loopBlendPositionY: 0
-      loopBlendPositionXZ: 0
-      keepOriginalOrientation: 0
-      keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 0
-      heightFromFeet: 0
-      mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
-      events: []
-      transformMask: []
-      maskType: 3
-      maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
-    - serializedVersion: 16
-      name: Death.Pos.1
-      takeName: MTF2.ms3d.ao|MTF2.ms3d.act
-      internalID: 0
-      firstFrame: 528
-      lastFrame: 529
-      wrapMode: 0
-      orientationOffsetY: 0
-      level: 0
-      cycleOffset: 0
-      loop: 0
-      hasAdditiveReferencePose: 0
-      loopTime: 1
-      loopBlend: 1
-      loopBlendOrientation: 0
-      loopBlendPositionY: 0
-      loopBlendPositionXZ: 0
-      keepOriginalOrientation: 0
-      keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 0
-      heightFromFeet: 0
-      mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
-      events: []
-      transformMask: []
-      maskType: 3
-      maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
-    - serializedVersion: 16
-      name: Relaxed.Idle.0
-      takeName: MTF2.ms3d.ao|MTF2.ms3d.act
-      internalID: 0
-      firstFrame: 962
-      lastFrame: 1055
-      wrapMode: 0
-      orientationOffsetY: 0
-      level: 0
-      cycleOffset: 0
-      loop: 0
-      hasAdditiveReferencePose: 0
-      loopTime: 1
-      loopBlend: 1
-      loopBlendOrientation: 0
-      loopBlendPositionY: 0
-      loopBlendPositionXZ: 0
-      keepOriginalOrientation: 0
-      keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 0
-      heightFromFeet: 0
-      mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
-      events: []
-      transformMask: []
-      maskType: 3
-      maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
-    - serializedVersion: 16
-      name: Relaxed.Idle.1
-      takeName: MTF2.ms3d.ao|MTF2.ms3d.act
-      internalID: 0
-      firstFrame: 1056
-      lastFrame: 1150
-      wrapMode: 0
-      orientationOffsetY: 0
-      level: 0
-      cycleOffset: 0
-      loop: 0
-      hasAdditiveReferencePose: 0
-      loopTime: 1
-      loopBlend: 1
-      loopBlendOrientation: 0
-      loopBlendPositionY: 0
-      loopBlendPositionXZ: 0
-      keepOriginalOrientation: 0
-      keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 0
-      heightFromFeet: 0
-      mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
-      events: []
-      transformMask: []
-      maskType: 3
-      maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
-    - serializedVersion: 16
-      name: Relaxed.Idle.2
-      takeName: MTF2.ms3d.ao|MTF2.ms3d.act
-      internalID: 0
-      firstFrame: 1151
-      lastFrame: 1251
-      wrapMode: 0
-      orientationOffsetY: 0
-      level: 0
-      cycleOffset: 0
-      loop: 0
-      hasAdditiveReferencePose: 0
-      loopTime: 1
-      loopBlend: 1
-      loopBlendOrientation: 0
-      loopBlendPositionY: 0
-      loopBlendPositionXZ: 0
-      keepOriginalOrientation: 0
-      keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 0
-      heightFromFeet: 0
-      mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
-      events: []
-      transformMask: []
-      maskType: 3
-      maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
-    - serializedVersion: 16
-      name: Relaxed.Idle.3
-      takeName: MTF2.ms3d.ao|MTF2.ms3d.act
-      internalID: 0
-      firstFrame: 1252
-      lastFrame: 1373
-      wrapMode: 0
-      orientationOffsetY: 0
-      level: 0
-      cycleOffset: 0
-      loop: 0
-      hasAdditiveReferencePose: 0
-      loopTime: 1
-      loopBlend: 1
-      loopBlendOrientation: 0
-      loopBlendPositionY: 0
-      loopBlendPositionXZ: 0
-      keepOriginalOrientation: 0
-      keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 0
-      heightFromFeet: 0
-      mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
-      events: []
-      transformMask: []
-      maskType: 3
-      maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
-    - serializedVersion: 16
-      name: Relaxed.ToIdle
-      takeName: MTF2.ms3d.ao|MTF2.ms3d.act
-      internalID: 0
-      firstFrame: 1374
-      lastFrame: 1383
+      firstFrame: 468
+      lastFrame: 486
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -528,6 +275,35 @@ ModelImporter:
       hasAdditiveReferencePose: 0
       loopTime: 0
       loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: DeadWall
+      takeName: MTF2.ms3d.ao|MTF2.ms3d.act
+      internalID: 0
+      firstFrame: 524
+      lastFrame: 526
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 1
       loopBlendOrientation: 0
       loopBlendPositionY: 0
       loopBlendPositionXZ: 0
@@ -546,7 +322,7 @@ ModelImporter:
     isReadable: 0
   meshes:
     lODScreenPercentages: []
-    globalScale: 40
+    globalScale: 1
     meshCompression: 0
     addColliders: 0
     useSRGBMaterialColor: 1
@@ -597,7 +373,7 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
-    globalScale: 40
+    globalScale: 1
     rootMotionBoneName: 
     hasTranslationDoF: 0
     hasExtraRoot: 0
