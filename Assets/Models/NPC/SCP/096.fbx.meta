@@ -50,19 +50,19 @@ ModelImporter:
     second: Run.Attack.Loop
   - first:
       74: -653219619677281079
-    second: Sit.Loop
+    second: Sit.Loop.Down
   - first:
       74: -1728095166833285044
-    second: Sit.Start.1
+    second: Sit.Resume
   - first:
       74: 6096745938766346640
-    second: Sit.Loop.1
+    second: Sit.Loop.Main
   - first:
       74: -7631416307832126593
-    second: Sit.End.1
+    second: Sit.Start.Down
   - first:
       74: 3764411460892012074
-    second: Sit.Back
+    second: Sit.Start
   - first:
       74: -434835089747155227
     second: Run.Tesla
@@ -539,7 +539,7 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Sit.Loop
+      name: Sit.Loop.Down
       takeName: scp096.ms3d.ao|scp096.ms3d.act
       internalID: 0
       firstFrame: 935
@@ -568,7 +568,7 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Sit.Start.1
+      name: Sit.Resume
       takeName: scp096.ms3d.ao|scp096.ms3d.act
       internalID: 0
       firstFrame: 999
@@ -597,7 +597,7 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Sit.Loop.1
+      name: Sit.Loop.Main
       takeName: scp096.ms3d.ao|scp096.ms3d.act
       internalID: 0
       firstFrame: 1069
@@ -626,7 +626,7 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Sit.End.1
+      name: Sit.Start.Down
       takeName: scp096.ms3d.ao|scp096.ms3d.act
       internalID: 0
       firstFrame: 1189
@@ -655,7 +655,7 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Sit.Back
+      name: Sit.Start
       takeName: scp096.ms3d.ao|scp096.ms3d.act
       internalID: 0
       firstFrame: 1263
