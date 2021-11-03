@@ -20,7 +20,7 @@ ModelImporter:
     second: Idle
   - first:
       74: 7271092042750260512
-    second: Idle.Wall.0
+    second: Idle.Wall
   - first:
       74: -8988032908003346729
     second: Idle.Wall.End.0
@@ -249,7 +249,7 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Idle.Wall.0
+      name: Idle.Wall
       takeName: scp096.ms3d.ao|scp096.ms3d.act
       internalID: 0
       firstFrame: 478
