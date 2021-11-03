@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace SCPCB.Remaster {
+namespace SCPCB.Remaster.NPC.SCP.Eric {
 	public class IdleStateManager : StateMachineBehaviour {
 		private static readonly int IDLE = Animator.StringToHash( "Idle" );
 
