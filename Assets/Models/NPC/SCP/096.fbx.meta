@@ -8,7 +8,7 @@ ModelImporter:
     second: Jump.Attack
   - first:
       74: 2372028448007352197
-    second: Attack.0
+    second: Attack
   - first:
       74: -1935857681655961946
     second: GetUp.Panic
@@ -17,7 +17,7 @@ ModelImporter:
     second: GetUp.Regular
   - first:
       74: 7482654284421101929
-    second: Idle.0
+    second: Idle
   - first:
       74: 7271092042750260512
     second: Idle.Wall.0
@@ -62,19 +62,19 @@ ModelImporter:
     second: Sit.End.1
   - first:
       74: 3764411460892012074
-    second: Sit.Back.1
+    second: Sit.Back
   - first:
       74: -434835089747155227
     second: Run.Tesla
   - first:
       74: -4864622213116935628
-    second: Walk.Start.2
+    second: Walk.Start
   - first:
       74: 934665161720907391
-    second: Walk2
+    second: Walk
   - first:
       74: 5108775681063412284
-    second: Walk.End.2
+    second: Walk.End
   externalObjects: {}
   materials:
     materialImportMode: 2
@@ -133,7 +133,7 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Attack.0
+      name: Attack
       takeName: scp096.ms3d.ao|scp096.ms3d.act
       internalID: 0
       firstFrame: 27
@@ -220,7 +220,7 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Idle.0
+      name: Idle
       takeName: scp096.ms3d.ao|scp096.ms3d.act
       internalID: 0
       firstFrame: 428
@@ -655,7 +655,7 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Sit.Back.1
+      name: Sit.Back
       takeName: scp096.ms3d.ao|scp096.ms3d.act
       internalID: 0
       firstFrame: 1263
@@ -713,7 +713,7 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Walk.Start.2
+      name: Walk.Start
       takeName: scp096.ms3d.ao|scp096.ms3d.act
       internalID: 0
       firstFrame: 1368
@@ -742,7 +742,7 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Walk2
+      name: Walk
       takeName: scp096.ms3d.ao|scp096.ms3d.act
       internalID: 0
       firstFrame: 1380
@@ -771,7 +771,7 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Walk.End.2
+      name: Walk.End
       takeName: scp096.ms3d.ao|scp096.ms3d.act
       internalID: 0
       firstFrame: 1453
