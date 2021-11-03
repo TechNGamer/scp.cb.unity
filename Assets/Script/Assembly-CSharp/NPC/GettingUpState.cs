@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace SCPCB.Remaster {
+namespace SCPCB.Remaster.NPC {
 	// This state object is used to rotate the Generic Humanoid to the correct position before the animation plays.
 	public class GettingUpState : StateMachineBehaviour {
 		private static readonly int HIT_DIR = Animator.StringToHash( "HitDir" );
