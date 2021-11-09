@@ -8,13 +8,45 @@ using System.Threading.Tasks;
 using UnityEngine;
 
 namespace SCPCB.Remaster.Utility {
-	public class AStarGridManager : MonoBehaviour {
+	/// <summary>
+	/// This class helps compute a path using A*, and must be part of a game object.
+	/// </summary>
+	/// <remarks>
+	/// This class does not keep track of any other A* managers, that is because this class is not meant as a single A* manager.
+	/// There can be multiple A* managers, thus, in order to use one, you must have a reference to it.
+	/// </remarks>
+	public sealed class AStarGridManager : MonoBehaviour {
+		// Since these can add a lot of lines, and it looks ugly to be included, I'm putting them in the region pre-processor.
+		#region Nested Types
+		/// <summary>
+		/// Represents a node on the grid system.
+		/// </summary>
 		[SuppressMessage( "ReSharper", "MemberCanBePrivate.Global" )]
 		public class Node : IEquatable<Node> {
+			public static bool operator ==( Node l, Node r ) => !ReferenceEquals( l, null ) && l.Equals( r );
+
+			public static bool operator !=( Node l, Node r ) => !( l == r );
+
+			// This is meant as a shortcut, and to make sure that the world position does not change.
+
+			/// <summary>
+			/// The X position it is located at in the world.
+			/// </summary>
 			public float WorldX => worldPosition.x;
+
+			/// <summary>
+			/// The Y location of where it is at in the world.
+			/// </summary>
 			public float WorldY => worldPosition.y;
+
+			/// <summary>
+			/// The Z location of where it is at in the world.
+			/// </summary>
 			public float WorldZ => worldPosition.z;
 
+			/// <summary>
+			/// If this node is walkable or not.
+			/// </summary>
 			public readonly bool walkable;
 
 			internal readonly Vector3    worldPosition;
@@ -68,6 +100,7 @@ namespace SCPCB.Remaster.Utility {
 		/// </remarks>
 		[SuppressMessage( "ReSharper", "NonReadonlyMemberInGetHashCode" )]
 		private class NodePath : IEquatable<Node>, IEquatable<NodePath> {
+			// Overriding the equality operator means that it can forward the check to the node.
 			public static bool operator ==( NodePath l, NodePath r ) {
 				var leftNull  = ReferenceEquals( l, null );
 				var rightNull = ReferenceEquals( r, null );
@@ -76,7 +109,7 @@ namespace SCPCB.Remaster.Utility {
 					return true;
 				}
 
-				if ( leftNull ^ !rightNull ) {
+				if ( leftNull ^ rightNull ) {
 					return false;
 				}
 
@@ -92,12 +125,12 @@ namespace SCPCB.Remaster.Utility {
 
 			// Object
 
+			// Is meant as a quick access.
 			public bool Walkable => node.walkable;
 
 			public int FCost => gCost + hCost;
 
 			public Vector3 WorldPosition => node.worldPosition;
-
 
 			public int gCost;
 			public int hCost;
@@ -105,6 +138,7 @@ namespace SCPCB.Remaster.Utility {
 			public readonly Node     node;
 			public          NodePath parent;
 
+			// The constructor helps ensures that a node was passed to it.
 			public NodePath( Node node ) {
 				if ( node == null ) {
 					throw new ArgumentNullException( nameof( node ), "A node must be provided in order to build a proper path." );
@@ -113,6 +147,7 @@ namespace SCPCB.Remaster.Utility {
 				this.node = node;
 			}
 
+			// This method will throw an exception if the node is null, since this object's hash is the same as the nodes.
 			public override int GetHashCode() {
 				if ( node == null ) {
 					throw new NullReferenceException( "Node must be non-null to generate hash." );
@@ -156,7 +191,15 @@ namespace SCPCB.Remaster.Utility {
 
 			return 14 * smaller + 10 * ( bigger - smaller );
 		}
+		#endregion
 
+		/// <summary>
+		/// How big the nodes are from their center out in a single direction.
+		/// </summary>
+		/// <remarks>
+		/// Even though it says it is a diameter, the nodes are square.
+		/// This property is meant as quick way to get the half measure.
+		/// </remarks>
 		// ReSharper disable once MemberCanBePrivate.Global
 		public float NodeDiameter => nodeSize / 2f;
 
