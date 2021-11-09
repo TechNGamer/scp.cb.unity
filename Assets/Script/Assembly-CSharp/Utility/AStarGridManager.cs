@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using UnityEngine;
@@ -19,28 +20,34 @@ namespace SCPCB.Remaster.Utility {
 			internal readonly Vector3    worldPosition;
 			internal readonly Vector2Int gridPos;
 
-			public Node( bool walkable, Vector3 worldPos, Vector2Int gridPos ) {
+			internal Node( bool walkable, Vector3 worldPos, Vector2Int gridPos ) {
 				this.walkable = walkable;
 				worldPosition = worldPos;
 				this.gridPos  = gridPos;
 			}
 
 			public bool Equals( Node other ) {
-				if ( ReferenceEquals( null, other ) )
+				if ( ReferenceEquals( null, other ) ) {
 					return false;
-				if ( ReferenceEquals( this, other ) )
+				}
+
+				if ( ReferenceEquals( this, other ) ) {
 					return true;
-				return walkable == other.walkable && worldPosition.Equals( other.worldPosition ) && gridPos.Equals( other.gridPos );
+				}
+
+				return GetHashCode() == other.GetHashCode();
 			}
 
 			public override bool Equals( object obj ) {
-				if ( ReferenceEquals( null, obj ) )
+				if ( ReferenceEquals( null, obj ) ) {
 					return false;
-				if ( ReferenceEquals( this, obj ) )
+				}
+
+				if ( ReferenceEquals( this, obj ) ) {
 					return true;
-				if ( obj.GetType() != this.GetType() )
-					return false;
-				return Equals( ( Node )obj );
+				}
+
+				return obj.GetType() == GetType() && Equals( ( Node )obj );
 			}
 
 			public override int GetHashCode() {
@@ -73,6 +80,9 @@ namespace SCPCB.Remaster.Utility {
 					return false;
 				}
 
+				Debug.Assert( l != null );
+				Debug.Assert( r != null );
+
 				return l.Equals( r );
 			}
 
@@ -96,6 +106,10 @@ namespace SCPCB.Remaster.Utility {
 			public          NodePath parent;
 
 			public NodePath( Node node ) {
+				if ( node == null ) {
+					throw new ArgumentNullException( nameof( node ), "A node must be provided in order to build a proper path." );
+				}
+
 				this.node = node;
 			}
 
@@ -120,6 +134,28 @@ namespace SCPCB.Remaster.Utility {
 
 			public override string ToString() => WorldPosition.ToString();
 		}
+		#endregion
+
+		// Everything that is static of this class belongs here.
+		#region Static
+		/* As the method name says, it get's the distance between 2 nodes.
+		 * However, it also adds some weights to the values so they are not small. */
+		private static int GetDistance( Node nodeA, Node nodeB ) {
+			var distX = Mathf.Abs( nodeA.gridPos.x - nodeB.gridPos.x );
+			var distY = Mathf.Abs( nodeA.gridPos.y - nodeB.gridPos.y );
+			int bigger;
+			int smaller;
+
+			if ( distX > distY ) {
+				bigger  = distX;
+				smaller = distY;
+			} else {
+				bigger  = distY;
+				smaller = distX;
+			}
+
+			return 14 * smaller + 10 * ( bigger - smaller );
+		}
 
 		// ReSharper disable once MemberCanBePrivate.Global
 		public float NodeDiameter => nodeSize / 2f;
@@ -136,15 +172,67 @@ namespace SCPCB.Remaster.Utility {
 		[Tooltip( "The size of the grid to make." )]
 		private Vector2 gridSize;
 
+		private Vector3 position;
+
 		private Node[,] grid;
 
-		// ReSharper disable once MemberCanBePrivate.Global
-		public Node GetNodeFromWorld( Vector3 position ) {
-			var perX = Mathf.Clamp01( ( position.x + gridSize.x / 2 ) / gridSize.x );
-			var perY = Mathf.Clamp01( ( position.z + gridSize.y / 2 ) / gridSize.y );
-			var x    = Mathf.RoundToInt( perX * ( grid.GetLength( 0 ) - 1 ) );
-			var y    = Mathf.RoundToInt( perY * ( grid.GetLength( 1 ) - 1 ) );
+		#region Unity Events
+		private void Awake() {
+			var gridSizeX = Mathf.RoundToInt( gridSize.x / nodeSize );
+			var gridSizeY = Mathf.RoundToInt( gridSize.y / nodeSize );
 
+			// Since the grid should never move from where it is placed, we can do this and now that objPos is accessible on any thread.
+			position = transform.position;
+
+			CreateGrid( gridSizeX, gridSizeY );
+		}
+
+		private void Reset() => Awake();
+
+		[SuppressMessage( "ReSharper", "LocalVariableHidesMember" )]
+		private void OnDrawGizmosSelected() {
+			if ( gridSize == Vector2.zero ) {
+				return;
+			}
+
+			var position = transform.position;
+
+			Gizmos.DrawWireCube( position, new Vector3( gridSize.x, 1f, gridSize.y ) );
+
+			// Bottom Left
+			Gizmos.color = Color.black;
+
+			var bottomLeft = position - new Vector3( gridSize.x, 0f, gridSize.y ) / 2f;
+			Gizmos.DrawWireSphere( bottomLeft, 1f );
+
+			if ( grid == null ) {
+				return;
+			}
+
+			for ( var x = 0; x < grid.GetLength( 0 ); ++x ) {
+				for ( var y = 0; y < grid.GetLength( 1 ); ++y ) {
+					Gizmos.color = grid[x, y].walkable ? Color.white : Color.red;
+
+					Gizmos.DrawCube( grid[x, y].worldPosition, new Vector3( nodeSize, 0.25f, nodeSize ) );
+				}
+			}
+		}
+		#endregion
+
+		// ReSharper disable once MemberCanBePrivate.Global
+		public Node GetNodeFromWorld( Vector3 objPos ) {
+			// Makes an obsolete position a relative one. Which makes it good to use anywhere.
+			objPos -= position;
+
+			// Get's the X and Y percentage of where they are on the 2D grid.
+			var perX = Mathf.Clamp01( ( objPos.x + gridSize.x / 2 ) / gridSize.x );
+			var perY = Mathf.Clamp01( ( objPos.z + gridSize.y / 2 ) / gridSize.y );
+
+			// Get's the XY coords by multiplying the grid size by the percentage, then subtracting 1.
+			var x = Mathf.RoundToInt( perX * gridSize.x - 1 );
+			var y = Mathf.RoundToInt( perY * gridSize.y - 1 );
+
+			// Returns that node at that position.
 			return grid[x, y];
 		}
 
@@ -194,17 +282,10 @@ namespace SCPCB.Remaster.Utility {
 				// Which means that we are reversing the list while also adding it to another. Then we use Linq to return an array.
 				if ( currentNode == targetNode ) {
 					var list = new LinkedList<Node>();
-					var node = targetNode;
+					var node = currentNode;
 
 					do {
 						list.AddFirst( node.node );
-
-						#if UNITY_EDITOR
-						if ( node.parent != null ) {
-							// This is just to debug the path finding.
-							Debug.DrawLine( node.WorldPosition, node.parent.WorldPosition, Color.red );
-						}
-						#endif
 
 						node = node.parent;
 					} while ( node != null );
@@ -233,44 +314,7 @@ namespace SCPCB.Remaster.Utility {
 				}
 			}
 
-			throw new Exception( "Something happened that shouldn't have." );
-		}
-
-		private void Awake() {
-			var gridSizeX = Mathf.RoundToInt( gridSize.x / ( nodeSize / 1f ) );
-			var gridSizeY = Mathf.RoundToInt( gridSize.y / ( nodeSize / 1f ) );
-
-			CreateGrid( gridSizeX, gridSizeY );
-		}
-
-		private void Reset() => Awake();
-
-		private void OnDrawGizmos() {
-			if ( gridSize == Vector2.zero ) {
-				return;
-			}
-
-			var position = transform.position;
-
-			Gizmos.DrawWireCube( position, new Vector3( gridSize.x, 1f, gridSize.y ) );
-
-			// Bottom Left
-			Gizmos.color = Color.black;
-
-			var bottomLeft = position - new Vector3( gridSize.x, 0f, gridSize.y ) / 2f;
-			Gizmos.DrawWireSphere( bottomLeft, 1f );
-
-			if ( grid == null ) {
-				return;
-			}
-
-			for ( var x = 0; x < grid.GetLength( 0 ); ++x ) {
-				for ( var y = 0; y < grid.GetLength( 1 ); ++y ) {
-					Gizmos.color = grid[x, y].walkable ? Color.white : Color.red;
-
-					Gizmos.DrawCube( grid[x, y].worldPosition, new Vector3( nodeSize, 0.25f, nodeSize ) );
-				}
-			}
+			return null;
 		}
 
 		private void CreateGrid( int sizeX, int sizeY ) {
@@ -287,23 +331,6 @@ namespace SCPCB.Remaster.Utility {
 					grid[x, y] = new Node( notBlocked, worldPoint, new Vector2Int( x, y ) );
 				}
 			}
-		}
-
-		private int GetDistance( Node nodeA, Node nodeB ) {
-			var distX = Mathf.Abs( nodeA.gridPos.x - nodeB.gridPos.x );
-			var distY = Mathf.Abs( nodeA.gridPos.y - nodeB.gridPos.y );
-			int bigger;
-			int smaller;
-
-			if ( distX > distY ) {
-				bigger  = distX;
-				smaller = distY;
-			} else {
-				bigger  = distY;
-				smaller = distX;
-			}
-
-			return 14 * smaller + 10 * ( bigger - smaller );
 		}
 
 		/// <summary>
