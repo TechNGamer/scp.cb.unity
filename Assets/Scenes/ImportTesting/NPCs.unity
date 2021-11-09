@@ -1063,7 +1063,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80ff8a4c1661440d85c058426ba35574, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nodeSize: 1
+  nodeSize: 0.5
   blockMask:
     serializedVersion: 2
     m_Bits: 384
