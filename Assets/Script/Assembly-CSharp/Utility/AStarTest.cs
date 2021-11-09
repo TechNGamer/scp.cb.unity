@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Threading;
 using System.Threading.Tasks;
 using UnityEngine;
@@ -19,9 +18,25 @@ namespace SCPCB.Remaster.Utility {
 
 		public void Start() {
 			oldPos      = target.transform.position;
+
+			if ( tokenSource != null ) {
+				tokenSource.Cancel();
+				
+				Application.quitting -= tokenSource.Cancel;
+			}
+			
 			tokenSource = new CancellationTokenSource();
 
+			Application.quitting += tokenSource.Cancel;
+
 			task = gridManager.FindPathAsync( transform.position, oldPos, tokenSource.Token );
+		}
+
+		private void Reset() {
+			Application.quitting -= tokenSource.Cancel;
+			
+			tokenSource.Cancel();
+			tokenSource = null;
 		}
 
 		public void Update() {
@@ -48,10 +63,20 @@ namespace SCPCB.Remaster.Utility {
 			}
 		}
 
-		public IEnumerator WalkToTarget() {
-			for ( var i = 0; i < walkTos.Length; ++i ) {
-				var node = walkTos[i];
+		public void OnDrawGizmos() {
+			if ( walkTos == null ) {
+				return;
+			}
 
+			for ( var i = 1; i < walkTos.Length; ++i ) {
+				Gizmos.color = Color.HSVToRGB( i / ( float )walkTos.Length, 1, 1 );
+
+				Gizmos.DrawLine( walkTos[i - 1].worldPosition, walkTos[i].worldPosition );
+			}
+		}
+
+		private IEnumerator WalkToTarget() {
+			foreach ( var node in walkTos ) {
 				while ( transform.position != node.worldPosition ) {
 					yield return new WaitForEndOfFrame();
 
@@ -65,7 +90,7 @@ namespace SCPCB.Remaster.Utility {
 						break;
 					}
 
-					position -= direction * 3f * Time.deltaTime;
+					position -= direction * 2.5f * Time.deltaTime;
 
 					myTransform.position = position;
 				}

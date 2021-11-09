@@ -297,7 +297,14 @@ namespace SCPCB.Remaster.Utility {
 		/// <param name="end">The end world position.</param>
 		/// <param name="token">The token to cancel the job.</param>
 		/// <returns>An array of nodes to follow.</returns>
-		public Task<Node[]> FindPathAsync( Vector3 start, Vector3 end, CancellationToken token ) => Task.Run( () => FindPath( start, end ), token );
+		public Task<Node[]> FindPathAsync( Vector3 start, Vector3 end, CancellationToken token ) => Task.Run( () => {
+			try {
+				return FindPath( start, end );
+			} catch ( Exception e ) {
+				Debug.LogException( e );
+				throw;
+			}
+		}, token );
 
 		/// <summary>
 		/// Calculates the path from the <paramref name="start"/> to the <paramref name="end"/>.
@@ -314,21 +321,13 @@ namespace SCPCB.Remaster.Utility {
 		public Node[] FindPath( Vector3 start, Vector3 end ) {
 			var startNode  = new NodePath( GetNodeFromWorld( start ) );
 			var targetNode = new NodePath( GetNodeFromWorld( end ) );
-			var openSet    = new List<NodePath>();
+			var openSet    = new Heap<NodePath>( grid.Length );
 			var closedSet  = new HashSet<NodePath>();
 
 			openSet.Add( startNode );
 
 			while ( openSet.Count > 0 ) {
-				var currentNode = openSet[0];
-
-				for ( var i = 1; i < openSet.Count; ++i ) {
-					if ( openSet[i].FCost < currentNode.FCost || openSet[i].FCost == currentNode.FCost && openSet[i].hCost < currentNode.hCost ) {
-						currentNode = openSet[i];
-					}
-				}
-
-				openSet.Remove( currentNode );
+				var currentNode = openSet.RemoveFirst();
 				closedSet.Add( currentNode );
 
 				// This is the first time where a LinkedList actually comes in handy.
@@ -343,7 +342,7 @@ namespace SCPCB.Remaster.Utility {
 
 						node = node.parent;
 					} while ( node != null );
-
+					
 					return list.ToArray();
 				}
 

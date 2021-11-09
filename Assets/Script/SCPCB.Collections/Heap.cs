@@ -17,27 +17,30 @@ namespace SCPCB.Remaster.Data {
 		}
 
 		public void Add( T item ) {
-			items[Count++] = item;
+			item.HeapIndex        = Count++;
+			items[item.HeapIndex] = item;
 
 			SortUp( item );
 		}
 
-		public T Remove() {
+		public T RemoveFirst() {
 			var first = items[0];
 
-			--Count;
-
-			items[0]           = items[Count];
+			items[0]           = items[--Count];
 			items[0].HeapIndex = 0;
 
-			SortDown( first );
+			SortDown( items[0] );
 
 			return first;
 		}
 
 		public bool Contains( T item ) {
-			foreach ( var heapItem in items ) {
-				if ( Equals( heapItem, item ) ) {
+			foreach ( var oItem in items ) {
+				if ( oItem == null ) {
+					break;
+				}
+				
+				if ( oItem.Equals( item ) ) {
 					return true;
 				}
 			}
