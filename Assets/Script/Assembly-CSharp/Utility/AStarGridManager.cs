@@ -4,6 +4,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using SCPCB.Remaster.Data;
 using UnityEngine;
 
 namespace SCPCB.Remaster.Utility {
@@ -98,7 +99,7 @@ namespace SCPCB.Remaster.Utility {
 		/// This class is meant as a thread-safe way to calculate a path without modifying the actual <see cref="AStarGridManager.Node"/>.
 		/// </remarks>
 		[SuppressMessage( "ReSharper", "NonReadonlyMemberInGetHashCode" )]
-		private class NodePath : IEquatable<Node>, IEquatable<NodePath> {
+		private class NodePath : IEquatable<Node>, IEquatable<NodePath>, Heap<NodePath>.IHeapItem<NodePath> {
 			// Overriding the equality operator means that it can forward the check to the node.
 			public static bool operator ==( NodePath l, NodePath r ) {
 				var leftNull  = ReferenceEquals( l, null );
@@ -123,6 +124,7 @@ namespace SCPCB.Remaster.Utility {
 			public static implicit operator Node( NodePath n ) => n.node;
 
 			// Object
+			public int HeapIndex { get; set; }
 
 			// Is meant as a quick access.
 			public bool Walkable => node.walkable;
@@ -158,6 +160,16 @@ namespace SCPCB.Remaster.Utility {
 			public bool Equals( Node other ) => Equals( ( object )other );
 
 			public bool Equals( NodePath other ) => Equals( ( object )other );
+
+			public int CompareTo( NodePath other ) {
+				var compareNum = FCost.CompareTo( other.FCost );
+
+				if ( compareNum != 0 ) {
+					return compareNum;
+				}
+
+				return -hCost.CompareTo( other.hCost );
+			}
 
 			public override bool Equals( object obj ) =>
 				obj switch {
