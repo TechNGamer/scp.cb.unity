@@ -87,6 +87,8 @@ namespace SCPCB.Remaster.Data {
 				} else {
 					break;
 				}
+				
+				parentIndex = ( item.HeapIndex - 1 ) / 2;
 			}
 		}
 
