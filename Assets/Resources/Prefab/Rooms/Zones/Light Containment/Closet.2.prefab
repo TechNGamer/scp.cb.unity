@@ -2529,7 +2529,7 @@ Light:
   m_Type: 0
   m_Shape: 0
   m_Color: {r: 1, g: 0.5990566, b: 0.5990566, a: 1}
-  m_Intensity: 2.5
+  m_Intensity: 1
   m_Range: 5
   m_SpotAngle: 179
   m_InnerSpotAngle: 179
@@ -2622,8 +2622,8 @@ Light:
   m_Type: 0
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 2.5
-  m_Range: 15
+  m_Intensity: 1
+  m_Range: 4.25
   m_SpotAngle: 179
   m_InnerSpotAngle: 179
   m_CookieSize: 10
@@ -2751,7 +2751,7 @@ Light:
   m_Type: 0
   m_Shape: 0
   m_Color: {r: 1, g: 0.5990566, b: 0.5990566, a: 1}
-  m_Intensity: 2.5
+  m_Intensity: 1
   m_Range: 5
   m_SpotAngle: 179
   m_InnerSpotAngle: 179
@@ -2844,8 +2844,8 @@ Light:
   m_Type: 0
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 2.5
-  m_Range: 15
+  m_Intensity: 1
+  m_Range: 4.25
   m_SpotAngle: 179
   m_InnerSpotAngle: 179
   m_CookieSize: 10
@@ -2937,8 +2937,8 @@ Light:
   m_Type: 0
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 2.5
-  m_Range: 15
+  m_Intensity: 1
+  m_Range: 4.25
   m_SpotAngle: 179
   m_InnerSpotAngle: 179
   m_CookieSize: 10
@@ -3030,8 +3030,8 @@ Light:
   m_Type: 0
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 2.5
-  m_Range: 15
+  m_Intensity: 1
+  m_Range: 4.25
   m_SpotAngle: 179
   m_InnerSpotAngle: 179
   m_CookieSize: 10
@@ -3740,7 +3740,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxNumOnLights: 4
-  numFlickerLights: 2
+  numFlickerLights: 1
   flickRate: 2
   randomInterval: 1
   dimCurve:
