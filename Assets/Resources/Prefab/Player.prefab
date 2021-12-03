@@ -191,7 +191,7 @@ CharacterController:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Height: 2
+  m_Height: 1.75
   m_Radius: 0.5
   m_SlopeLimit: 45
   m_StepOffset: 0.3
@@ -216,7 +216,7 @@ MonoBehaviour:
   sprintSpeed: 4
   cam: {fileID: 5741147661058512180}
   maxLookAngle: 90
-  groundDistance: 0.25
+  groundDistance: 0.125
   groundMask:
     serializedVersion: 2
     m_Bits: 128
