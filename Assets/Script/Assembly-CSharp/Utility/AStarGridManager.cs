@@ -6,6 +6,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using SCPCB.Remaster.Data;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace SCPCB.Remaster.Utility {
 	/// <summary>
@@ -164,11 +165,7 @@ namespace SCPCB.Remaster.Utility {
 			public int CompareTo( NodePath other ) {
 				var compareNum = FCost.CompareTo( other.FCost );
 
-				if ( compareNum != 0 ) {
-					return compareNum;
-				}
-
-				return -hCost.CompareTo( other.hCost );
+				return compareNum == 0 ? hCost.CompareTo( other.hCost ) : -compareNum;
 			}
 
 			public override bool Equals( object obj ) =>
@@ -223,19 +220,23 @@ namespace SCPCB.Remaster.Utility {
 		private LayerMask blockMask;
 
 		[SerializeField]
+		[FormerlySerializedAs("gridSize")]
 		[Tooltip( "The size of the grid to make." )]
-		private Vector2 gridSize;
+		private Vector2 gridWorldSize;
 
-		private Vector3 position;
+		private Vector2Int gridSize;
+		private Vector3    position;
 
 		private Node[,] grid;
 
 		#region Unity Events
 		private void Awake() {
-			var gridSizeX = Mathf.RoundToInt( gridSize.x / nodeSize );
-			var gridSizeY = Mathf.RoundToInt( gridSize.y / nodeSize );
+			var gridSizeX = Mathf.RoundToInt( gridWorldSize.x / nodeSize );
+			var gridSizeY = Mathf.RoundToInt( gridWorldSize.y / nodeSize );
 
-			// Since the grid should never move from where it is placed, we can do this and now that objPos is accessible on any thread.
+			gridSize = new Vector2Int( gridSizeX, gridSizeY );
+
+			// Since the grid should never move from where it is placed, we can do this and now that worldPos is accessible on any thread.
 			position = transform.position;
 
 			CreateGrid( gridSizeX, gridSizeY );
@@ -245,18 +246,18 @@ namespace SCPCB.Remaster.Utility {
 
 		[SuppressMessage( "ReSharper", "LocalVariableHidesMember" )]
 		private void OnDrawGizmosSelected() {
-			if ( gridSize == Vector2.zero ) {
+			if ( gridWorldSize == Vector2.zero ) {
 				return;
 			}
 
 			var position = transform.position;
 
-			Gizmos.DrawWireCube( position, new Vector3( gridSize.x, 1f, gridSize.y ) );
+			Gizmos.DrawWireCube( position, new Vector3( gridWorldSize.x, 1f, gridWorldSize.y ) );
 
 			// Bottom Left
 			Gizmos.color = Color.black;
 
-			var bottomLeft = position - new Vector3( gridSize.x, 0f, gridSize.y ) / 2f;
+			var bottomLeft = position - new Vector3( gridWorldSize.x, 0f, gridWorldSize.y ) / 2f;
 			Gizmos.DrawWireSphere( bottomLeft, 1f );
 
 			if ( grid == null ) {
@@ -274,17 +275,17 @@ namespace SCPCB.Remaster.Utility {
 		#endregion
 
 		// ReSharper disable once MemberCanBePrivate.Global
-		public Node GetNodeFromWorld( Vector3 objPos ) {
+		public Node GetNodeFromWorld( Vector3 worldPos ) {
 			// Makes an obsolete position a relative one. Which makes it good to use anywhere.
-			objPos -= position;
+			worldPos -= position;
 
 			// Get's the X and Y percentage of where they are on the 2D grid.
-			var perX = Mathf.Clamp01( ( objPos.x + gridSize.x / 2 ) / gridSize.x );
-			var perY = Mathf.Clamp01( ( objPos.z + gridSize.y / 2 ) / gridSize.y );
+			var perX = Mathf.Clamp01( ( worldPos.x + gridWorldSize.x / 2 ) / gridWorldSize.x );
+			var perY = Mathf.Clamp01( ( worldPos.z + gridWorldSize.y / 2 ) / gridWorldSize.y );
 
 			// Get's the XY coords by multiplying the grid size by the percentage, then subtracting 1.
-			var x = Mathf.RoundToInt( perX * gridSize.x - 1 );
-			var y = Mathf.RoundToInt( perY * gridSize.y - 1 );
+			var x = Mathf.RoundToInt( perX * (gridSize.x - 1) );
+			var y = Mathf.RoundToInt( perY * (gridSize.y - 1) );
 
 			// Returns that node at that position.
 			return grid[x, y];
@@ -371,7 +372,7 @@ namespace SCPCB.Remaster.Utility {
 		}
 
 		private void CreateGrid( int sizeX, int sizeY ) {
-			var bottomLeft = transform.position - new Vector3( gridSize.x, 0f, gridSize.y ) / 2f;
+			var bottomLeft = transform.position - new Vector3( gridWorldSize.x, 0f, gridWorldSize.y ) / 2f;
 			var boxCheck   = new Vector3( nodeSize, 0.5f, nodeSize ) / 2f;
 
 			grid = new Node[sizeX, sizeY];
@@ -381,6 +382,11 @@ namespace SCPCB.Remaster.Utility {
 					var worldPoint = bottomLeft + new Vector3( x * nodeSize + NodeDiameter, 0.5f, y * nodeSize + NodeDiameter );
 					var notBlocked = !Physics.CheckBox( worldPoint, boxCheck, Quaternion.identity, blockMask );
 
+					/* Resetting the Y position back down to 0 so that it isn't floating in the air.
+					 * Now it might be desired for some SCP/NPC's, but more than likely floating isn't
+					 * something that the path should recommend. Also, this might need improving later. */
+					worldPoint.y = 0f;
+					
 					grid[x, y] = new Node( notBlocked, worldPoint, new Vector2Int( x, y ) );
 				}
 			}
