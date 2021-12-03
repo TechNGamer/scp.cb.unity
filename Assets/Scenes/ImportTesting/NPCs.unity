@@ -428,6 +428,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: 049
       objectReference: {fileID: 0}
+    - target: {fileID: 288025777141969709, guid: c0af80a8085e846478e6c011cac5c16e, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 627290382669162903, guid: c0af80a8085e846478e6c011cac5c16e, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -1032,7 +1036,7 @@ MonoBehaviour:
   blockMask:
     serializedVersion: 2
     m_Bits: 384
-  gridSize: {x: 25, y: 75}
+  gridWorldSize: {x: 25, y: 100}
 --- !u!4 &1362033060
 Transform:
   m_ObjectHideFlags: 0
@@ -1041,7 +1045,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1362033058}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2, y: 0, z: 19}
+  m_LocalPosition: {x: 0, y: 0, z: 19.35}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
