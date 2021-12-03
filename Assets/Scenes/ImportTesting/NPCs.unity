@@ -491,6 +491,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c14b29d8a51b441d9ee2b2192f207fa6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gridManager: {fileID: 1362033059}
 --- !u!1001 &355119013
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -733,15 +734,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5741147661811590157, guid: b9658394a34329e4e91b7195c468e3a1, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.93
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5741147661811590157, guid: b9658394a34329e4e91b7195c468e3a1, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 43
       objectReference: {fileID: 0}
     - target: {fileID: 5741147661811590157, guid: b9658394a34329e4e91b7195c468e3a1, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5741147661811590157, guid: b9658394a34329e4e91b7195c468e3a1, type: 3}
       propertyPath: m_LocalRotation.x
@@ -749,7 +750,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5741147661811590157, guid: b9658394a34329e4e91b7195c468e3a1, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5741147661811590157, guid: b9658394a34329e4e91b7195c468e3a1, type: 3}
       propertyPath: m_LocalRotation.z
@@ -761,7 +762,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5741147661811590157, guid: b9658394a34329e4e91b7195c468e3a1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: 180
       objectReference: {fileID: 0}
     - target: {fileID: 5741147661811590157, guid: b9658394a34329e4e91b7195c468e3a1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
@@ -1027,7 +1028,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80ff8a4c1661440d85c058426ba35574, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nodeSize: 1
+  nodeSize: 0.25
   blockMask:
     serializedVersion: 2
     m_Bits: 384
