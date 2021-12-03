@@ -35,8 +35,9 @@ namespace SCPCB.Remaster.Map.Lighting {
 
 			originalIntensity = light.intensity;
 
-			source.maxDistance  = 10f;
 			source.spatialBlend = 1f;
+			source.maxDistance  = 5f;
+			source.minDistance  = 0.25f;
 			source.mute         = false;
 			source.loop         = false;
 		}
@@ -49,7 +50,8 @@ namespace SCPCB.Remaster.Map.Lighting {
 			StopCoroutine( flickerRoutine );
 		}
 
-		[SuppressMessage( "ReSharper", "IteratorNeverReturns", Justification = "Doing this since async causes issues." )]
+		[SuppressMessage( "ReSharper", "IteratorNeverReturns",
+			Justification = "Doing this since async causes issues." )]
 		private IEnumerator FlickerLightUpdate() {
 			while ( true ) {
 				var additionalSeconds = Random.Range( 0f, RandomAddition );
