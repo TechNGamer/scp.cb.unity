@@ -382,7 +382,7 @@ namespace SCPCB.Remaster.Utility {
 					return list.ToArray();
 				}
 
-				foreach ( var neighborNode in GetNeighborNodePaths( currentNode ) ) {
+				foreach ( var neighborNode in GetNeighborNodes( currentNode ) ) {
 					if ( !neighborNode.IsWalkable || closedSet.Contains( neighborNode ) ) {
 						continue;
 					}
@@ -464,7 +464,7 @@ namespace SCPCB.Remaster.Utility {
 		/// Since <paramref name="node"/> is already known, it can be excluded from the set.
 		/// </remarks>
 		/// <returns>An <see cref="IEnumerable{T}"/> of <see cref="Node"/>s that surround <paramref name="node"/>.</returns>
-		private IEnumerable<NodePath> GetNeighborNodePaths( Node node ) {
+		private IEnumerable<NodePath> GetNeighborNodes( Node node ) {
 			for ( var x = -1; x <= 1; ++x ) {
 				var gridX = node.gridPos.x + x;
 
@@ -473,13 +473,13 @@ namespace SCPCB.Remaster.Utility {
 				}
 
 				for ( var y = -1; y <= 1; ++y ) {
-					if ( x == 0 && y == 0 ) {
-						continue;
-					}
-
 					var gridY = node.gridPos.y + y;
 
 					if ( gridY < 0 || gridY >= gridSize.y ) {
+						continue;
+					}
+
+					if ( node.IsGround && y < 0 ) {
 						continue;
 					}
 
@@ -487,6 +487,10 @@ namespace SCPCB.Remaster.Utility {
 						var gridZ = node.gridPos.z + z;
 
 						if ( gridZ < 0 || gridZ >= gridSize.z ) {
+							continue;
+						}
+
+						if ( x == 0 && y == 0 && z == 0 ) {
 							continue;
 						}
 
