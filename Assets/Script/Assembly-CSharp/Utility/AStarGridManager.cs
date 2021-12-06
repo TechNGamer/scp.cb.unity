@@ -407,7 +407,7 @@ namespace SCPCB.Remaster.Utility {
 		}
 
 		private IEnumerator CreateGrid( int sizeX, int sizeY, int sizeZ ) {
-			const float waitFramerate = 1f / 24f;
+			const float WAIT_FRAMERATE = 1f / 24f;
 			var         bottomLeft    = transform.position - gridWorldSize / 2f;
 			var         boxCheck      = new Vector3( nodeSize, nodeSize, nodeSize ) / 2f;
 
@@ -440,13 +440,13 @@ namespace SCPCB.Remaster.Utility {
 							);
 						}
 
-						if ( Time.realtimeSinceStartup / Time.frameCount <= waitFramerate ) {
+						if ( Time.realtimeSinceStartup / Time.frameCount <= WAIT_FRAMERATE ) {
 							continue;
 						}
 
 						Debug.Log( "Waiting until 24 FPS" );
 
-						yield return new WaitForSecondsRealtime( waitFramerate );
+						yield return new WaitForSecondsRealtime( WAIT_FRAMERATE );
 					}
 				}
 			}
