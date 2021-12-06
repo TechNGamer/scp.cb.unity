@@ -20,93 +20,10 @@ namespace SCPCB.Remaster.Utility.PathFinding {
 	public sealed class AStarGridManager : MonoBehaviour {
 		// Since these can add a lot of lines, and it looks ugly to be included, I'm putting them in the region pre-processor.
 		#region Nested Types
-		/// <summary>
-		/// Represents a node on the grid system.
-		/// </summary>
-		[SuppressMessage( "ReSharper", "MemberCanBePrivate.Global" )]
-		public class Node : IEquatable<Node> {
-			public static bool operator ==( Node l, Node r ) => !ReferenceEquals( l, null ) && l.Equals( r );
-
-			public static bool operator !=( Node l, Node r ) => !( l == r );
-
-			// This is meant as a shortcut, and to make sure that the world position does not change.
-
-			/// <summary>
-			/// The X position it is located at in the world.
-			/// </summary>
-			public float WorldX => worldPosition.x;
-
-			/// <summary>
-			/// The Y location of where it is at in the world.
-			/// </summary>
-			public float WorldY => worldPosition.y;
-
-			/// <summary>
-			/// The Z location of where it is at in the world.
-			/// </summary>
-			public float WorldZ => worldPosition.z;
-
-			/// <summary>
-			/// If this node is walkable or not.
-			/// </summary>
-			public bool IsWalkable { get; }
-
-			public bool IsGround { get; }
-
-			internal readonly Vector3    worldPosition;
-			internal readonly Vector3Int gridPos;
-
-			internal Node( Vector3 worldPos, Vector3Int gridPos, bool isWalkable, bool isGround = true ) {
-				IsWalkable = isWalkable;
-				IsGround   = isGround;
-
-				worldPosition = worldPos;
-				this.gridPos  = gridPos;
-			}
-
-			public bool Equals( Node other ) {
-				if ( ReferenceEquals( null, other ) ) {
-					return false;
-				}
-
-				if ( ReferenceEquals( this, other ) ) {
-					return true;
-				}
-
-				return GetHashCode() == other.GetHashCode();
-			}
-
-			public override bool Equals( object obj ) {
-				if ( ReferenceEquals( null, obj ) ) {
-					return false;
-				}
-
-				if ( ReferenceEquals( this, obj ) ) {
-					return true;
-				}
-
-				return obj.GetType() == GetType() && Equals( ( Node )obj );
-			}
-
-			public override int GetHashCode() {
-				unchecked {
-					var hashCode = IsWalkable.GetHashCode();
-					hashCode = ( hashCode * 397 ) ^ worldPosition.GetHashCode();
-					hashCode = ( hashCode * 397 ) ^ gridPos.GetHashCode();
-					return hashCode;
-				}
-			}
-		}
-
-		/// <summary>
-		/// Represents a node on a path.
-		/// </summary>
-		/// <remarks>
-		/// This class is meant as a thread-safe way to calculate a path without modifying the actual <see cref="AStarGridManager.Node"/>.
-		/// </remarks>
+		// This class is meant to be thread safe, along with call agnostic.
 		[SuppressMessage( "ReSharper", "NonReadonlyMemberInGetHashCode" )]
 		[SuppressMessage( "ReSharper", "MemberCanBePrivate.Local" )]
-		private class NodePath : IEquatable<Node>, IEquatable<NodePath>, Heap<NodePath>.IHeapItem<NodePath> {
+		private class NodePath : IEquatable<AStarNode>, IEquatable<NodePath>, Heap<NodePath>.IHeapItem<NodePath> {
 			// Overriding the equality operator means that it can forward the check to the node.
 			public static bool operator ==( NodePath l, NodePath r ) {
 				var leftNull  = ReferenceEquals( l, null );
@@ -128,46 +45,48 @@ namespace SCPCB.Remaster.Utility.PathFinding {
 
 			public static bool operator !=( NodePath l, NodePath r ) => !( l == r );
 
-			public static implicit operator Node( NodePath n ) => n.node;
+			public static implicit operator AStarNode( NodePath n ) => n.aStarNode;
 
 			// Object
 			public int HeapIndex { get; set; }
 
 			// Is meant as a quick access.
-			public bool IsWalkable => node.IsWalkable;
+			public bool IsWalkable => aStarNode.IsWalkable;
+
+			public bool IsGround => aStarNode.IsGround;
 
 			public int FCost => gCost + hCost;
 
-			public Vector3 WorldPosition => node.worldPosition;
+			public Vector3 WorldPosition => aStarNode.WorldPosition;
 
 			public int gCost;
 			public int hCost;
 
-			public readonly Node     node;
-			public          NodePath parent;
+			public readonly AStarNode aStarNode;
+			public          NodePath  parent;
 
 			// The constructor helps ensures that a node was passed to it.
-			public NodePath( Node node ) {
-				if ( node == null ) {
+			public NodePath( AStarNode aStarNode ) {
+				if ( aStarNode == null ) {
 					throw new ArgumentNullException(
-						nameof( node ),
+						nameof( aStarNode ),
 						"A node must be provided in order to build a proper path."
 					);
 				}
 
-				this.node = node;
+				this.aStarNode = aStarNode;
 			}
 
 			// This method will throw an exception if the node is null, since this object's hash is the same as the nodes.
 			public override int GetHashCode() {
-				if ( node == null ) {
+				if ( aStarNode == null ) {
 					throw new NullReferenceException( "Node must be non-null to generate hash." );
 				}
 
-				return node.GetHashCode();
+				return aStarNode.GetHashCode();
 			}
 
-			public bool Equals( Node other ) => Equals( ( object )other );
+			public bool Equals( AStarNode other ) => Equals( ( object )other );
 
 			public bool Equals( NodePath other ) => Equals( ( object )other );
 
@@ -179,8 +98,8 @@ namespace SCPCB.Remaster.Utility.PathFinding {
 
 			public override bool Equals( object obj ) =>
 				obj switch {
-					NodePath np => node == np.node,
-					Node n      => node == n,
+					NodePath np => aStarNode == np.aStarNode,
+					AStarNode n => aStarNode == n,
 					_           => ReferenceEquals( this, obj )
 				};
 
@@ -192,9 +111,9 @@ namespace SCPCB.Remaster.Utility.PathFinding {
 		#region Static
 		/* As the method name says, it get's the distance between 2 nodes.
 		 * However, it also adds some weights to the values so they are not small. */
-		private static int GetDistance( Node nodeA, Node nodeB ) {
-			var distX = Mathf.Abs( nodeA.gridPos.x - nodeB.gridPos.x );
-			var distY = Mathf.Abs( nodeA.gridPos.y - nodeB.gridPos.y );
+		private static int GetDistance( AStarNode aStarNodeA, AStarNode aStarNodeB ) {
+			var distX = Mathf.Abs( aStarNodeA.GridPos.x - aStarNodeB.GridPos.x );
+			var distY = Mathf.Abs( aStarNodeA.GridPos.y - aStarNodeB.GridPos.y );
 			int bigger;
 			int smaller;
 
@@ -248,7 +167,7 @@ namespace SCPCB.Remaster.Utility.PathFinding {
 		private Vector3Int gridSize;
 		private Vector3    position;
 
-		private Node[,,] grid;
+		private AStarNode[,,] grid;
 
 		#region Unity Events
 		private void Awake() {
@@ -292,7 +211,7 @@ namespace SCPCB.Remaster.Utility.PathFinding {
 						Gizmos.color = grid[x, y, z].IsGround ? Color.yellow : Color.white;
 						Gizmos.color = grid[x, y, z].IsWalkable ? Gizmos.color : Color.red;
 
-						Gizmos.DrawCube( grid[x, y, z].worldPosition, new Vector3( nodeSize, nodeSize, nodeSize ) * 0.25f );
+						Gizmos.DrawCube( grid[x, y, z].WorldPosition, new Vector3( nodeSize, nodeSize, nodeSize ) * 0.25f );
 					}
 				}
 			}
@@ -300,7 +219,7 @@ namespace SCPCB.Remaster.Utility.PathFinding {
 		#endregion
 
 		// ReSharper disable once MemberCanBePrivate.Global
-		public Node GetNodeFromWorld( Vector3 worldPos ) {
+		public AStarNode GetNodeFromWorld( Vector3 worldPos ) {
 			// Makes an obsolete position a relative one. Which makes it good to use anywhere.
 			worldPos -= position;
 
@@ -328,10 +247,11 @@ namespace SCPCB.Remaster.Utility.PathFinding {
 		/// <param name="start">The starting world position to calculate from.</param>
 		/// <param name="end">The end world position.</param>
 		/// <param name="token">The token to cancel the job.</param>
+		/// <param name="canFly">If the object can go into the air or not.</param>
 		/// <returns>An array of nodes to follow.</returns>
-		public Task<Node[]> FindPathAsync( Vector3 start, Vector3 end, CancellationToken token ) => Task.Run( () => {
+		public Task<AStarNode[]> FindPathAsync( Vector3 start, Vector3 end, CancellationToken token, bool canFly = false ) => Task.Run( () => {
 			try {
-				return FindPath( start, end );
+				return FindPath( start, end, canFly );
 			} catch ( Exception e ) {
 				Debug.LogException( e );
 				throw;
@@ -347,10 +267,11 @@ namespace SCPCB.Remaster.Utility.PathFinding {
 		/// <seealso cref="FindPathAsync"/>
 		/// <param name="start">The starting world position.</param>
 		/// <param name="end">The target world position.</param>
+		/// <param name="canFly">If the object can go into the air or not.</param>
 		/// <returns>An array of nodes of the path.</returns>
 		/// <exception cref="Exception">You should never see this. If you do, something went horrible wrong.</exception>
 		[SuppressMessage( "ReSharper", "MemberCanBePrivate.Global" )]
-		public Node[] FindPath( Vector3 start, Vector3 end ) {
+		public AStarNode[] FindPath( Vector3 start, Vector3 end, bool canFly = false ) {
 			if ( !IsGridReady ) {
 				return null;
 			}
@@ -370,11 +291,11 @@ namespace SCPCB.Remaster.Utility.PathFinding {
 				// This method basically created a LinkedList, but in one direction. Using C#'s built in LinkedList means that we can `AddFirst` the parents.
 				// Which means that we are reversing the list while also adding it to another. Then we use Linq to return an array.
 				if ( currentNode == targetNode ) {
-					var list = new LinkedList<Node>();
+					var list = new LinkedList<AStarNode>();
 					var node = currentNode;
 
 					do {
-						list.AddFirst( node.node );
+						list.AddFirst( node.aStarNode );
 
 						node = node.parent;
 					} while ( node != null );
@@ -383,7 +304,7 @@ namespace SCPCB.Remaster.Utility.PathFinding {
 				}
 
 				foreach ( var neighborNode in GetNeighborNodes( currentNode ) ) {
-					if ( !neighborNode.IsWalkable || closedSet.Contains( neighborNode ) ) {
+					if ( !neighborNode.IsGround && !canFly || !neighborNode.IsWalkable || closedSet.Contains( neighborNode ) ) {
 						continue;
 					}
 
@@ -408,14 +329,14 @@ namespace SCPCB.Remaster.Utility.PathFinding {
 
 		private IEnumerator CreateGrid( int sizeX, int sizeY, int sizeZ ) {
 			const float WAIT_FRAMERATE = 1f / 24f;
-			var         bottomLeft    = transform.position - gridWorldSize / 2f;
-			var         boxCheck      = new Vector3( nodeSize, nodeSize, nodeSize ) / 2f;
+			var         bottomLeft     = transform.position - gridWorldSize / 2f;
+			var         boxCheck       = new Vector3( nodeSize, nodeSize, nodeSize ) / 2f;
 
 			yield return new WaitForEndOfFrame();
 
 			// Since the path finding is done via A*, the best way to calculate the path is to make a grid.
 			// There is probably a better way to do this but for now the grid will have to do.
-			grid = new Node[sizeX, sizeY, sizeZ];
+			grid = new AStarNode[sizeX, sizeY, sizeZ];
 
 			// This is the part that is of course going to take the longest. Should probably put it on a different task.
 			for ( var x = 0; x < sizeX; ++x ) {
@@ -432,7 +353,7 @@ namespace SCPCB.Remaster.Utility.PathFinding {
 
 						// Locking the grid to make sure only this method is updating it.
 						lock ( grid ) {
-							grid[x, y, z] = new Node(
+							grid[x, y, z] = new AStarNode(
 								worldPoint, // Where it exists within Unity.
 								gridPos, // Where it logically exists on the grid.
 								walkable, // If it is walkable or not.
@@ -457,34 +378,34 @@ namespace SCPCB.Remaster.Utility.PathFinding {
 		/// <summary>
 		/// Grabs the nodes that surround the node passed to it.
 		/// </summary>
-		/// <param name="node">The node to look around.</param>
+		/// <param name="aStarNode">The node to look around.</param>
 		/// <remarks>
 		/// The <see cref="IEnumerable{T}"/> max size is 26. The reason it is 26 is because (3^3)-1.
-		/// 3^3 in case we want A* to go 3D, and we subtract 1 because it will contain <paramref name="node"/>.
-		/// Since <paramref name="node"/> is already known, it can be excluded from the set.
+		/// 3^3 in case we want A* to go 3D, and we subtract 1 because it will contain <paramref name="aStarNode"/>.
+		/// Since <paramref name="aStarNode"/> is already known, it can be excluded from the set.
 		/// </remarks>
-		/// <returns>An <see cref="IEnumerable{T}"/> of <see cref="Node"/>s that surround <paramref name="node"/>.</returns>
-		private IEnumerable<NodePath> GetNeighborNodes( Node node ) {
+		/// <returns>An <see cref="IEnumerable{T}"/> of <see cref="AStarNode"/>s that surround <paramref name="aStarNode"/>.</returns>
+		private IEnumerable<NodePath> GetNeighborNodes( AStarNode aStarNode ) {
 			for ( var x = -1; x <= 1; ++x ) {
-				var gridX = node.gridPos.x + x;
+				var gridX = aStarNode.GridPos.x + x;
 
 				if ( gridX < 0 || gridX >= gridSize.x ) {
 					continue;
 				}
 
 				for ( var y = -1; y <= 1; ++y ) {
-					var gridY = node.gridPos.y + y;
+					var gridY = aStarNode.GridPos.y + y;
 
 					if ( gridY < 0 || gridY >= gridSize.y ) {
 						continue;
 					}
 
-					if ( node.IsGround && y < 0 ) {
+					if ( aStarNode.IsGround && y < 0 ) {
 						continue;
 					}
 
 					for ( var z = -1; z <= 1; ++z ) {
-						var gridZ = node.gridPos.z + z;
+						var gridZ = aStarNode.GridPos.z + z;
 
 						if ( gridZ < 0 || gridZ >= gridSize.z ) {
 							continue;
