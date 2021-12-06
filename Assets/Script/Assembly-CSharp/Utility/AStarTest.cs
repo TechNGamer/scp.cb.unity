@@ -2,6 +2,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 using UnityEngine;
+using SCPCB.Remaster.Utility.PathFinding;
 
 namespace SCPCB.Remaster.Utility {
 	public class AStarTest : MonoBehaviour {

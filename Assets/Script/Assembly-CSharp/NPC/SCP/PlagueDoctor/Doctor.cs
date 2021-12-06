@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using SCPCB.Remaster.Player;
-using SCPCB.Remaster.Utility;
+using SCPCB.Remaster.Utility.PathFinding;
 using UnityEngine;
 
 namespace SCPCB.Remaster.NPC.SCP.PlagueDoctor {

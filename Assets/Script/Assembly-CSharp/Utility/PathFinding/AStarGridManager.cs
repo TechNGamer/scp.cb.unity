@@ -9,7 +9,7 @@ using SCPCB.Remaster.Data;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-namespace SCPCB.Remaster.Utility {
+namespace SCPCB.Remaster.Utility.PathFinding {
 	/// <summary>
 	/// This class helps compute a path using A*, and must be part of a game object.
 	/// </summary>
