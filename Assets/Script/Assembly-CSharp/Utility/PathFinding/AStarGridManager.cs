@@ -353,7 +353,7 @@ namespace SCPCB.Remaster.Utility.PathFinding {
 						var worldPoint = bottomLeft + new Vector3(
 							x * nodeSize + NodeDiameter, // Each location has to be offset the actual size
 							y * nodeSize + NodeDiameter, // of the node, plus the node's diameter to get it
-							z * nodeSize + NodeDiameter // in the center of where it needs to be.
+							z * nodeSize + NodeDiameter  // in the center of where it needs to be.
 						);
 						var walkable = !Physics.CheckBox( worldPoint, boxCheck, Quaternion.identity, blockMask );
 						var isGround = Physics.CheckBox( worldPoint, boxCheck, Quaternion.identity, groundMask );
@@ -363,9 +363,9 @@ namespace SCPCB.Remaster.Utility.PathFinding {
 						lock ( grid ) {
 							grid[x, y, z] = new AStarNode(
 								worldPoint, // Where it exists within Unity.
-								gridPos, // Where it logically exists on the grid.
-								walkable, // If it is walkable or not.
-								isGround // If the mesh is part of the ground.
+								gridPos,    // Where it logically exists on the grid.
+								walkable,   // If it is walkable or not.
+								isGround    // If the mesh is part of the ground.
 							);
 						}
 
