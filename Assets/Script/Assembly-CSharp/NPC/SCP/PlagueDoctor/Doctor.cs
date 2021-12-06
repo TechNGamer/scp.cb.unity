@@ -23,6 +23,10 @@ namespace SCPCB.Remaster.NPC.SCP.PlagueDoctor {
 		}
 
 		private void Update() {
+			if ( !gridManager.IsGridReady ) {
+				return;
+			}
+			
 			if ( playerOldPos == null || playerOldPos != player.transform.position ) {
 				if ( walkingPath != null ) {
 					StopCoroutine( walkingPath );
