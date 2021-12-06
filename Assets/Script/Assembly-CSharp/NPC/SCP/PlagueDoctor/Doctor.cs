@@ -38,21 +38,21 @@ namespace SCPCB.Remaster.NPC.SCP.PlagueDoctor {
 
 				for ( var i = 0; i < path.Length - 1; ) {
 					if ( i == 0 ) {
-						Debug.DrawLine( transform.position, path[i].worldPosition, Color.red, float.MaxValue );
+						Debug.DrawLine( transform.position, path[i].WorldPosition, Color.red, float.MaxValue );
 					}
 
-					Debug.DrawLine( path[i].worldPosition, path[++i].worldPosition, Color.red, float.MaxValue );
+					Debug.DrawLine( path[i].WorldPosition, path[++i].WorldPosition, Color.red, float.MaxValue );
 				}
 
 				playerOldPos = player.transform.position;
 			}
 		}
 
-		private IEnumerator FollowPath( IEnumerable<AStarGridManager.Node> path ) {
+		private IEnumerator FollowPath( IEnumerable<AStarNode> path ) {
 			var myTransform = transform;
 			
 			foreach ( var node in path ) {
-				var heading = node.worldPosition - transform.position;
+				var heading = node.WorldPosition - transform.position;
 
 				while ( heading.magnitude > 0.5f ) {
 					var distance  = heading.magnitude;
@@ -66,7 +66,7 @@ namespace SCPCB.Remaster.NPC.SCP.PlagueDoctor {
 
 					yield return new WaitForEndOfFrame();
 
-					heading = node.worldPosition - position;
+					heading = node.WorldPosition - position;
 				}
 			}
 		}
