@@ -139,6 +139,9 @@ namespace SCPCB.Remaster.Utility.PathFinding {
 		// ReSharper disable once MemberCanBePrivate.Global
 		public float NodeDiameter => nodeSize / 2f;
 
+		/// <summary>
+		/// If the grid is ready for calls or not.
+		/// </summary>
 		public bool IsGridReady { get; private set; }
 
 		[SerializeField]
@@ -218,6 +221,11 @@ namespace SCPCB.Remaster.Utility.PathFinding {
 		}
 		#endregion
 
+		/// <summary>
+		/// This method uses the world position to calculate where on the grid it is.
+		/// </summary>
+		/// <param name="worldPos">The world position of the object.</param>
+		/// <returns>The <see cref="AStarNode"/> that represents that portion of the world.</returns>
 		// ReSharper disable once MemberCanBePrivate.Global
 		public AStarNode GetNodeFromWorld( Vector3 worldPos ) {
 			// Makes an obsolete position a relative one. Which makes it good to use anywhere.
