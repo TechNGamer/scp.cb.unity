@@ -185,58 +185,103 @@ namespace SCPCB.Remaster.Utility.PathFinding {
 		private LayerMask groundMask;
 
 		[SerializeField]
-		[FormerlySerializedAs( "gridSize" )]
 		[Tooltip( "The size of the grid to make." )]
-		private Vector3 gridWorldSize;
+		private Vector3 numOfRooms;
 
-		private Vector3Int gridSize;
+		[SerializeField]
+		[Tooltip( "The size of each room." )]
+		private Vector3 roomSize;
+
+		private Vector2Int gridSize;
 		private Vector3    position;
 
-		private AStarNode[,,] grid;
+		private AStarRoom[,] grid;
 
 		#region Unity Events
 		private void Awake() {
-			var gridSizeX = Mathf.RoundToInt( gridWorldSize.x / nodeSize );
-			var gridSizeY = Mathf.RoundToInt( gridWorldSize.y / nodeSize );
-			var gridSizeZ = Mathf.RoundToInt( gridWorldSize.z / nodeSize );
+			// var gridSizeX = Mathf.RoundToInt( numOfRooms.x / roomSize.x );
+			// var gridSizeY = Mathf.RoundToInt( numOfRooms.z / roomSize.z );
+			var gridSizeX = ( int )numOfRooms.x;
+			var gridSizeY = ( int )numOfRooms.z;
 
-			gridSize = new Vector3Int( gridSizeX, gridSizeY, gridSizeZ );
+			gridSize = new Vector2Int( gridSizeX, gridSizeY );
 
 			// Since the grid should never move from where it is placed, we can do this and now that worldPos is accessible on any thread.
 			position = transform.position;
 
-			StartCoroutine( CreateGrid( gridSizeX, gridSizeY, gridSizeZ ) );
+			StartCoroutine( CreateGrid( gridSizeX, gridSizeY ) );
 		}
 
 		private void Reset() => Awake();
 
 		[SuppressMessage( "ReSharper", "LocalVariableHidesMember" )]
 		private void OnDrawGizmosSelected() {
-			if ( gridWorldSize == Vector3.zero ) {
+			if ( numOfRooms == Vector3.zero ) {
 				return;
 			}
 
 			var position = transform.position;
 
-			Gizmos.DrawWireCube( position, gridWorldSize );
+			Gizmos.DrawWireCube( position, numOfRooms );
 
-			// Bottom Left
-			Gizmos.color = Color.black;
-
-			var bottomLeft = position - gridWorldSize / 2f;
-			Gizmos.DrawWireSphere( bottomLeft, 1f );
-
-			if ( grid == null || !showGrid ) {
-				return;
+			if ( grid == null || !IsGridReady || grid.Length == 0 ) {
+				ShowDynamicRoomGrid();
+			} else {
+				ShowGrid();
 			}
 
-			for ( var x = 0; x < grid.GetLength( 0 ); ++x ) {
-				for ( var y = 0; y < grid.GetLength( 1 ); ++y ) {
-					for ( var z = 0; z < gridSize.z; ++z ) {
-						Gizmos.color = grid[x, y, z].IsGround ? Color.yellow : Color.white;
-						Gizmos.color = grid[x, y, z].IsWalkable ? Gizmos.color : Color.red;
+			void ShowGrid() {
+				if ( !IsGridReady ) {
+					return;
+				}
 
-						Gizmos.DrawCube( grid[x, y, z].WorldPosition, new Vector3( nodeSize, nodeSize, nodeSize ) * 0.25f );
+				for ( var x = 0; x < gridSize.x; ++x ) {
+					for ( var y = 0; y < gridSize.y; ++y ) {
+						var room = grid[x, y];
+
+						Gizmos.color = new Color(
+							x / ( float )( gridSize.x ),
+							0f,
+							y / ( float )( gridSize.y )
+						);
+
+						Gizmos.DrawWireCube( room.WorldPosition, roomSize );
+
+						if ( !showGrid ) {
+							continue;
+						}
+
+						try {
+							room.DrawGrid();
+						} catch {
+							// We don't care.
+						}
+					}
+				}
+			}
+
+			// Generates fake rooms to show where it might be located at.
+			void ShowDynamicRoomGrid() {
+				var gridSizeX = numOfRooms.x;
+				var gridSizeZ = numOfRooms.z;
+
+				for ( var x = 0; x < gridSizeX; ++x ) {
+					for ( var y = 0; y < gridSizeZ; ++y ) {
+						var worldPos = new Vector3(
+							x * roomSize.x + roomSize.x / 2f,
+							roomSize.y / 2f,
+							y * roomSize.z + roomSize.z / 2f
+						);
+						var localBottomLeft = worldPos - roomSize / 2f;
+
+						Gizmos.color = new Color(
+							x / gridSizeX,
+							0f,
+							y / gridSizeZ
+						);
+
+						Gizmos.DrawWireCube( worldPos, roomSize );
+						Gizmos.DrawWireSphere( localBottomLeft, 0.5f );
 					}
 				}
 			}
@@ -249,21 +294,20 @@ namespace SCPCB.Remaster.Utility.PathFinding {
 		/// <param name="worldPos">The world position of the object.</param>
 		/// <returns>The <see cref="AStarNode"/> that represents that portion of the world.</returns>
 		// ReSharper disable once MemberCanBePrivate.Global
-		public AStarNode GetNodeFromWorld( Vector3 worldPos ) {
+		private AStarRoom GetRoomFromWorld( Vector3 worldPos ) {
 			// Makes an obsolete position a relative one. Which makes it good to use anywhere.
 			worldPos -= position;
 
 			/* Getting the logical position of it's location on the grid.
 			 * It does this by adding the world position to half of the grid world size.
 			 * It then divides that by the grid world size to get where it is between 0 and 1. */
-			var perX = ( worldPos.x + gridWorldSize.x / 2 ) / gridWorldSize.x;
-			var perY = ( worldPos.y + gridWorldSize.y / 2 ) / gridWorldSize.y;
-			var perZ = ( worldPos.z + gridWorldSize.z / 2 ) / gridWorldSize.z;
+			var perX = ( worldPos.x + numOfRooms.x / 2 ) / numOfRooms.x;
+			var perY = ( worldPos.y + numOfRooms.y / 2 ) / numOfRooms.y;
 
 			/* Instead of clamping the value, I think it would be better to alert that the value is out of bounds.
 			 * Since I plan on allowing mods, it only makes sense to allow the mod developers into knowing why their
 			 * code is failing or what they are doing wrong. */
-			if ( IsOutsideBounds( perX ) || IsOutsideBounds( perY ) || IsOutsideBounds( perZ ) ) {
+			if ( IsOutsideBounds( perX ) || IsOutsideBounds( perY ) ) {
 				throw new PointOutOfAreaException( worldPos );
 			}
 
@@ -272,10 +316,9 @@ namespace SCPCB.Remaster.Utility.PathFinding {
 			 * it, so it can get the general location. */
 			var x = Mathf.RoundToInt( perX * ( gridSize.x - 1 ) );
 			var y = Mathf.RoundToInt( perY * ( gridSize.y - 1 ) );
-			var z = Mathf.RoundToInt( perZ * ( gridSize.z - 1 ) );
 
 			// Returns that node at that position.
-			return grid[x, y, z];
+			return grid[x, y];
 
 			static bool IsOutsideBounds( float v ) => v < 0f || v > 1f;
 		}
@@ -315,99 +358,91 @@ namespace SCPCB.Remaster.Utility.PathFinding {
 				return null;
 			}
 
-			var startNode  = new NodePath( GetNodeFromWorld( start ) );
-			var targetNode = new NodePath( GetNodeFromWorld( end ) );
-			var openSet    = new Heap<NodePath>( grid.Length );
-			var closedSet  = new HashSet<NodePath>();
-
-			openSet.Add( startNode );
-
-			while ( openSet.Count > 0 ) {
-				var currentNode = openSet.RemoveFirst();
-				closedSet.Add( currentNode );
-
-				// This is the first time where a LinkedList actually comes in handy.
-				// This method basically created a LinkedList, but in one direction. Using C#'s built in LinkedList means that we can `AddFirst` the parents.
-				// Which means that we are reversing the list while also adding it to another. Then we use Linq to return an array.
-				if ( currentNode == targetNode ) {
-					var list = new LinkedList<AStarNode>();
-					var node = currentNode;
-
-					do {
-						list.AddFirst( node.aStarNode );
-
-						node = node.parent;
-					} while ( node != null );
-
-					return list.ToArray();
-				}
-
-				foreach ( var neighborNode in GetNeighborNodes( currentNode ) ) {
-					if ( !neighborNode.IsGround && !canFly || !neighborNode.IsWalkable || closedSet.Contains( neighborNode ) ) {
-						continue;
-					}
-
-					var newMoveCost = currentNode.gCost + GetDistance( currentNode, neighborNode );
-
-					if ( newMoveCost > neighborNode.gCost && openSet.Contains( neighborNode ) ) {
-						continue;
-					}
-
-					neighborNode.gCost  = newMoveCost;
-					neighborNode.hCost  = GetDistance( neighborNode, targetNode );
-					neighborNode.parent = currentNode;
-
-					if ( !openSet.Contains( neighborNode ) ) {
-						openSet.Add( neighborNode );
-					}
-				}
-			}
+			// var startNode  = new NodePath( GetNodeFromWorld( start ) );
+			// var targetNode = new NodePath( GetNodeFromWorld( end ) );
+			// var openSet    = new Heap<NodePath>( grid.Length );
+			// var closedSet  = new HashSet<NodePath>();
+			//
+			// openSet.Add( startNode );
+			//
+			// while ( openSet.Count > 0 ) {
+			// 	var currentNode = openSet.RemoveFirst();
+			// 	closedSet.Add( currentNode );
+			//
+			// 	// This is the first time where a LinkedList actually comes in handy.
+			// 	// This method basically created a LinkedList, but in one direction. Using C#'s built in LinkedList means that we can `AddFirst` the parents.
+			// 	// Which means that we are reversing the list while also adding it to another. Then we use Linq to return an array.
+			// 	if ( currentNode == targetNode ) {
+			// 		var list = new LinkedList<AStarNode>();
+			// 		var node = currentNode;
+			//
+			// 		do {
+			// 			list.AddFirst( node.aStarNode );
+			//
+			// 			node = node.parent;
+			// 		} while ( node != null );
+			//
+			// 		return list.ToArray();
+			// 	}
+			//
+			// 	foreach ( var neighborNode in GetNeighborNodes( currentNode ) ) {
+			// 		if ( !neighborNode.IsGround && !canFly || !neighborNode.IsWalkable || closedSet.Contains( neighborNode ) ) {
+			// 			continue;
+			// 		}
+			//
+			// 		var newMoveCost = currentNode.gCost + GetDistance( currentNode, neighborNode );
+			//
+			// 		if ( newMoveCost > neighborNode.gCost && openSet.Contains( neighborNode ) ) {
+			// 			continue;
+			// 		}
+			//
+			// 		neighborNode.gCost  = newMoveCost;
+			// 		neighborNode.hCost  = GetDistance( neighborNode, targetNode );
+			// 		neighborNode.parent = currentNode;
+			//
+			// 		if ( !openSet.Contains( neighborNode ) ) {
+			// 			openSet.Add( neighborNode );
+			// 		}
+			// 	}
+			// }
 
 			return null;
 		}
 
-		private IEnumerator CreateGrid( int sizeX, int sizeY, int sizeZ ) {
+		private IEnumerator CreateGrid( int sizeX, int sizeY ) {
 			const float WAIT_FRAMERATE = 1f / 24f;
-			var         bottomLeft     = transform.position - gridWorldSize / 2f;
-			var         boxCheck       = new Vector3( nodeSize, nodeSize, nodeSize ) / 2f;
+			var         bottomLeft     = transform.position - numOfRooms / 2f;
 
 			yield return new WaitForEndOfFrame();
 
 			// Since the path finding is done via A*, the best way to calculate the path is to make a grid.
 			// There is probably a better way to do this but for now the grid will have to do.
-			grid = new AStarNode[sizeX, sizeY, sizeZ];
+			grid = new AStarRoom[sizeX, sizeY];
 
 			// This is the part that is of course going to take the longest. Should probably put it on a different task.
 			for ( var x = 0; x < sizeX; ++x ) {
-				for ( var y = 0; y < sizeY; ++y ) {
-					for ( var z = 0; z < sizeZ; ++z ) {
-						var worldPoint = bottomLeft + new Vector3(
-							x * nodeSize + NodeDiameter, // Each location has to be offset the actual size
-							y * nodeSize + NodeDiameter, // of the node, plus the node's diameter to get it
-							z * nodeSize + NodeDiameter  // in the center of where it needs to be.
-						);
-						var walkable = !Physics.CheckBox( worldPoint, boxCheck, Quaternion.identity, blockMask );
-						var isGround = Physics.CheckBox( worldPoint, boxCheck, Quaternion.identity, groundMask );
-						var gridPos  = new Vector3Int( x, y, z );
+				for ( var z = 0; z < sizeY; ++z ) {
+					/* We times each X-Z iteration by the room size in that direction and add half the room size to center it.
+					 * The Y position is half the height since it starts at the bottom left, which is half the size down.
+					 */
+					var worldPos = bottomLeft + new Vector3(
+						x * roomSize.x + roomSize.x / 2f,
+						roomSize.y / 2f,
+						z * roomSize.z + roomSize.z / 2f
+					);
+					var room = new AStarRoom( roomSize, worldPos, groundMask, blockMask, x, z, nodeSize );
 
-						// Locking the grid to make sure only this method is updating it.
-						lock ( grid ) {
-							grid[x, y, z] = new AStarNode(
-								worldPoint, // Where it exists within Unity.
-								gridPos,    // Where it logically exists on the grid.
-								walkable,   // If it is walkable or not.
-								isGround    // If the mesh is part of the ground.
-							);
-						}
+					grid[x, z] = room;
 
-						if ( Time.realtimeSinceStartup / Time.frameCount <= WAIT_FRAMERATE ) {
-							continue;
-						}
+					room.CreateGrid();
 
-						Debug.Log( "Waiting until 24 FPS" );
-
-						yield return new WaitForSecondsRealtime( WAIT_FRAMERATE );
+					if ( Time.realtimeSinceStartup / Time.frameCount <= WAIT_FRAMERATE ) {
+						continue;
 					}
+
+					Debug.Log( "Waiting until 24 FPS" );
+
+					yield return new WaitForSecondsRealtime( WAIT_FRAMERATE );
 				}
 			}
 
@@ -417,48 +452,35 @@ namespace SCPCB.Remaster.Utility.PathFinding {
 		/// <summary>
 		/// Grabs the nodes that surround the node passed to it.
 		/// </summary>
-		/// <param name="aStarNode">The node to look around.</param>
+		/// <param name="room">The node to look around.</param>
 		/// <remarks>
 		/// The <see cref="IEnumerable{T}"/> max size is 26. The reason it is 26 is because (3^3)-1.
-		/// 3^3 in case we want A* to go 3D, and we subtract 1 because it will contain <paramref name="aStarNode"/>.
-		/// Since <paramref name="aStarNode"/> is already known, it can be excluded from the set.
+		/// 3^3 in case we want A* to go 3D, and we subtract 1 because it will contain <paramref name="room"/>.
+		/// Since <paramref name="room"/> is already known, it can be excluded from the set.
 		/// </remarks>
-		/// <returns>An <see cref="IEnumerable{T}"/> of <see cref="AStarNode"/>s that surround <paramref name="aStarNode"/>.</returns>
-		private IEnumerable<NodePath> GetNeighborNodes( AStarNode aStarNode ) {
+		/// <returns>An <see cref="IEnumerable{T}"/> of <see cref="AStarRoom"/>s that surround <paramref name="room"/>.</returns>
+		private IEnumerable<AStarRoomPath> GetNeighborNodes( AStarRoom room ) {
 			for ( var x = -1; x <= 1; ++x ) {
-				var gridX = aStarNode.GridPos.x + x;
+				var gridX = room.GridPosition.x + x;
 
 				if ( gridX < 0 || gridX >= gridSize.x ) {
 					continue;
 				}
 
 				for ( var y = -1; y <= 1; ++y ) {
-					var gridY = aStarNode.GridPos.y + y;
+					var gridY = room.GridPosition.y + y;
 
 					if ( gridY < 0 || gridY >= gridSize.y ) {
 						continue;
 					}
 
-					if ( aStarNode.IsGround && y < 0 ) {
+					if ( x == 0 && y == 0 ) {
 						continue;
 					}
 
-					for ( var z = -1; z <= 1; ++z ) {
-						var gridZ = aStarNode.GridPos.z + z;
+					var gNode = grid[gridX, gridY];
 
-						if ( gridZ < 0 || gridZ >= gridSize.z ) {
-							continue;
-						}
-
-						if ( x == 0 && y == 0 && z == 0 ) {
-							continue;
-						}
-
-						var gNode = grid[gridX, gridY, gridZ];
-
-						// This should help keep execution flowing.
-						yield return new NodePath( gNode );
-					}
+					yield return new AStarRoomPath( grid[x, y] );
 				}
 			}
 		}
