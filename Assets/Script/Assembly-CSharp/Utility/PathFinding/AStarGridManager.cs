@@ -234,9 +234,16 @@ namespace SCPCB.Remaster.Utility.PathFinding {
 			/* Getting the logical position of it's location on the grid.
 			 * It does this by adding the world position to half of the grid world size.
 			 * It then divides that by the grid world size to get where it is between 0 and 1. */
-			var perX = Mathf.Clamp01( ( worldPos.x + gridWorldSize.x / 2 ) / gridWorldSize.x );
-			var perY = Mathf.Clamp01( ( worldPos.y + gridWorldSize.y / 2 ) / gridWorldSize.y );
-			var perZ = Mathf.Clamp01( ( worldPos.z + gridWorldSize.z / 2 ) / gridWorldSize.z );
+			var perX = ( worldPos.x + gridWorldSize.x / 2 ) / gridWorldSize.x;
+			var perY = ( worldPos.y + gridWorldSize.y / 2 ) / gridWorldSize.y;
+			var perZ = ( worldPos.z + gridWorldSize.z / 2 ) / gridWorldSize.z;
+
+			/* Instead of clamping the value, I think it would be better to alert that the value is out of bounds.
+			 * Since I plan on allowing mods, it only makes sense to allow the mod developers into knowing why their
+			 * code is failing or what they are doing wrong. */
+			if ( IsOutsideBounds( perX ) || IsOutsideBounds( perY ) || IsOutsideBounds( perZ ) ) {
+				throw new PointOutOfAreaException( worldPos );
+			}
 
 			/* Get's the XY coords by multiplying the grid size by the percentage, then subtracting 1.
 			 * The reason for not using GridWorldSize for this is that it needs to know how big the grid
@@ -247,6 +254,8 @@ namespace SCPCB.Remaster.Utility.PathFinding {
 
 			// Returns that node at that position.
 			return grid[x, y, z];
+
+			static bool IsOutsideBounds( float v ) => v < 0f || v > 1f;
 		}
 
 		/// <summary>
