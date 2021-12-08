@@ -2,12 +2,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using SCPCB.Remaster.Data;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace SCPCB.Remaster.Utility.PathFinding {
 	/// <summary>
@@ -104,6 +102,30 @@ namespace SCPCB.Remaster.Utility.PathFinding {
 				};
 
 			public override string ToString() => WorldPosition.ToString();
+		}
+
+		private class AStarRoomPath : IEquatable<AStarRoomPath>, Heap<AStarRoomPath>.IHeapItem<AStarRoomPath> {
+			public int FCost => GCost + HCost;
+
+			public int GCost { get; set; }
+
+			public int HCost { get; set; }
+
+			public AStarRoom Room { get; }
+
+			public AStarRoomPath( AStarRoom room ) {
+				Room = room;
+			}
+
+			public bool Equals( AStarRoomPath other ) => Equals( ( object )other );
+
+			public int CompareTo( AStarRoomPath other ) {
+				var compareNum = FCost.CompareTo( other.FCost );
+
+				return compareNum == 0 ? HCost.CompareTo( other.HCost ) : -compareNum;
+			}
+
+			public int HeapIndex { get; set; }
 		}
 		#endregion
 
