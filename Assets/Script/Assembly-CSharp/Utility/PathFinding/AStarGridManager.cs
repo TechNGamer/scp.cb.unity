@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using SCPCB.Remaster.Data;
@@ -113,6 +114,8 @@ namespace SCPCB.Remaster.Utility.PathFinding {
 
 			public AStarRoom Room { get; }
 
+			public AStarRoomPath Parent { get; set; }
+
 			public AStarRoomPath( AStarRoom room ) {
 				Room = room;
 			}
@@ -199,8 +202,6 @@ namespace SCPCB.Remaster.Utility.PathFinding {
 
 		#region Unity Events
 		private void Awake() {
-			// var gridSizeX = Mathf.RoundToInt( numOfRooms.x / roomSize.x );
-			// var gridSizeY = Mathf.RoundToInt( numOfRooms.z / roomSize.z );
 			var gridSizeX = ( int )numOfRooms.x;
 			var gridSizeY = ( int )numOfRooms.z;
 
@@ -295,32 +296,17 @@ namespace SCPCB.Remaster.Utility.PathFinding {
 		/// <returns>The <see cref="AStarNode"/> that represents that portion of the world.</returns>
 		// ReSharper disable once MemberCanBePrivate.Global
 		private AStarRoom GetRoomFromWorld( Vector3 worldPos ) {
-			// Makes an obsolete position a relative one. Which makes it good to use anywhere.
+			// Gets the relative location to the grid manager.
 			worldPos -= position;
 
-			/* Getting the logical position of it's location on the grid.
-			 * It does this by adding the world position to half of the grid world size.
-			 * It then divides that by the grid world size to get where it is between 0 and 1. */
-			var perX = ( worldPos.x + numOfRooms.x / 2 ) / numOfRooms.x;
-			var perY = ( worldPos.y + numOfRooms.y / 2 ) / numOfRooms.y;
+			var xRoom = ( int )( worldPos.x / roomSize.x );
+			var zRoom = ( int )( worldPos.z / roomSize.z );
 
-			/* Instead of clamping the value, I think it would be better to alert that the value is out of bounds.
-			 * Since I plan on allowing mods, it only makes sense to allow the mod developers into knowing why their
-			 * code is failing or what they are doing wrong. */
-			if ( IsOutsideBounds( perX ) || IsOutsideBounds( perY ) ) {
+			if ( xRoom > roomSize.x || xRoom < 0 || zRoom > roomSize.z || zRoom < 0 ) {
 				throw new PointOutOfAreaException( worldPos );
 			}
 
-			/* Get's the XY coords by multiplying the grid size by the percentage, then subtracting 1.
-			 * The reason for not using GridWorldSize for this is that it needs to know how big the grid
-			 * it, so it can get the general location. */
-			var x = Mathf.RoundToInt( perX * ( gridSize.x - 1 ) );
-			var y = Mathf.RoundToInt( perY * ( gridSize.y - 1 ) );
-
-			// Returns that node at that position.
-			return grid[x, y];
-
-			static bool IsOutsideBounds( float v ) => v < 0f || v > 1f;
+			return grid[xRoom, zRoom];
 		}
 
 		/// <summary>
@@ -331,7 +317,7 @@ namespace SCPCB.Remaster.Utility.PathFinding {
 		/// <param name="token">The token to cancel the job.</param>
 		/// <param name="canFly">If the object can go into the air or not.</param>
 		/// <returns>An array of nodes to follow.</returns>
-		public Task<AStarNode[]> FindPathAsync( Vector3 start, Vector3 end, CancellationToken token, bool canFly = false ) => Task.Run( () => {
+		public Task<AStarRoom[]> FindPathAsync( Vector3 start, Vector3 end, CancellationToken token, bool canFly = false ) => Task.Run( () => {
 			try {
 				return FindPath( start, end, canFly );
 			} catch ( Exception e ) {
@@ -353,38 +339,36 @@ namespace SCPCB.Remaster.Utility.PathFinding {
 		/// <returns>An array of nodes of the path.</returns>
 		/// <exception cref="Exception">You should never see this. If you do, something went horrible wrong.</exception>
 		[SuppressMessage( "ReSharper", "MemberCanBePrivate.Global" )]
-		public AStarNode[] FindPath( Vector3 start, Vector3 end, bool canFly = false ) {
+		public AStarRoom[] FindPath( Vector3 start, Vector3 end, bool canFly = false ) {
 			if ( !IsGridReady ) {
 				return null;
 			}
 
-			// var startNode  = new NodePath( GetNodeFromWorld( start ) );
-			// var targetNode = new NodePath( GetNodeFromWorld( end ) );
-			// var openSet    = new Heap<NodePath>( grid.Length );
-			// var closedSet  = new HashSet<NodePath>();
-			//
-			// openSet.Add( startNode );
-			//
-			// while ( openSet.Count > 0 ) {
-			// 	var currentNode = openSet.RemoveFirst();
-			// 	closedSet.Add( currentNode );
-			//
-			// 	// This is the first time where a LinkedList actually comes in handy.
-			// 	// This method basically created a LinkedList, but in one direction. Using C#'s built in LinkedList means that we can `AddFirst` the parents.
-			// 	// Which means that we are reversing the list while also adding it to another. Then we use Linq to return an array.
-			// 	if ( currentNode == targetNode ) {
-			// 		var list = new LinkedList<AStarNode>();
-			// 		var node = currentNode;
-			//
-			// 		do {
-			// 			list.AddFirst( node.aStarNode );
-			//
-			// 			node = node.parent;
-			// 		} while ( node != null );
-			//
-			// 		return list.ToArray();
-			// 	}
-			//
+			var startRoom  = new AStarRoomPath( GetRoomFromWorld( start ) );
+			var targetRoom = new AStarRoomPath( GetRoomFromWorld( end ) );
+			var openSet    = new Heap<AStarRoomPath>( grid.Length );
+			var closedSet  = new HashSet<AStarRoomPath>();
+
+			openSet.Add( startRoom );
+
+			while ( openSet.Count > 0 ) {
+				var currentRoom = openSet.RemoveFirst();
+
+				closedSet.Add( currentRoom );
+
+				// This is the first time where a LinkedList actually comes in handy.
+				// This method basically created a LinkedList, but in one direction. Using C#'s built in LinkedList means that we can `AddFirst` the parents.
+				// Which means that we are reversing the list while also adding it to another. Then we use Linq to return an array.
+				if ( currentRoom == targetRoom ) {
+					return CreateRoomList( currentRoom );
+				}
+
+				foreach ( var roomPath in GetNeighborNodes( currentRoom ) ) {
+					
+				}
+			}
+
+			
 			// 	foreach ( var neighborNode in GetNeighborNodes( currentNode ) ) {
 			// 		if ( !neighborNode.IsGround && !canFly || !neighborNode.IsWalkable || closedSet.Contains( neighborNode ) ) {
 			// 			continue;
@@ -407,6 +391,18 @@ namespace SCPCB.Remaster.Utility.PathFinding {
 			// }
 
 			return null;
+
+			static AStarRoom[] CreateRoomList( AStarRoomPath point ) {
+				var list = new LinkedList<AStarRoom>();
+
+				do {
+					list.AddFirst( point.Room );
+
+					point = point.Parent;
+				} while ( point != null );
+
+				return list.ToArray();
+			}
 		}
 
 		private IEnumerator CreateGrid( int sizeX, int sizeY ) {
@@ -452,23 +448,23 @@ namespace SCPCB.Remaster.Utility.PathFinding {
 		/// <summary>
 		/// Grabs the nodes that surround the node passed to it.
 		/// </summary>
-		/// <param name="room">The node to look around.</param>
+		/// <param name="point">The node to look around.</param>
 		/// <remarks>
 		/// The <see cref="IEnumerable{T}"/> max size is 26. The reason it is 26 is because (3^3)-1.
-		/// 3^3 in case we want A* to go 3D, and we subtract 1 because it will contain <paramref name="room"/>.
-		/// Since <paramref name="room"/> is already known, it can be excluded from the set.
+		/// 3^3 in case we want A* to go 3D, and we subtract 1 because it will contain <paramref name="point"/>.
+		/// Since <paramref name="point"/> is already known, it can be excluded from the set.
 		/// </remarks>
-		/// <returns>An <see cref="IEnumerable{T}"/> of <see cref="AStarRoom"/>s that surround <paramref name="room"/>.</returns>
-		private IEnumerable<AStarRoomPath> GetNeighborNodes( AStarRoom room ) {
+		/// <returns>An <see cref="IEnumerable{T}"/> of <see cref="AStarRoom"/>s that surround <paramref name="point"/>.</returns>
+		private IEnumerable<AStarRoomPath> GetNeighborNodes( AStarRoomPath point ) {
 			for ( var x = -1; x <= 1; ++x ) {
-				var gridX = room.GridPosition.x + x;
+				var gridX = point.Room.GridPosition.x + x;
 
 				if ( gridX < 0 || gridX >= gridSize.x ) {
 					continue;
 				}
 
 				for ( var y = -1; y <= 1; ++y ) {
-					var gridY = room.GridPosition.y + y;
+					var gridY = point.Room.GridPosition.y + y;
 
 					if ( gridY < 0 || gridY >= gridSize.y ) {
 						continue;
@@ -480,7 +476,7 @@ namespace SCPCB.Remaster.Utility.PathFinding {
 
 					var gNode = grid[gridX, gridY];
 
-					yield return new AStarRoomPath( grid[x, y] );
+					yield return new AStarRoomPath( gNode );
 				}
 			}
 		}

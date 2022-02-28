@@ -1,10 +1,10 @@
 ﻿using UnityEngine;
 
 namespace SCPCB.Remaster.Utility.PathFinding {
-	internal class AStarRoom {
-		internal Vector3 WorldPosition { get; }
+	public class AStarRoom {
+		public Vector3 WorldPosition { get; }
 
-		internal Vector2Int GridPosition { get; }
+		public Vector2Int GridPosition { get; }
 
 		private float NodeDiameter {
 			get {

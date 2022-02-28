@@ -3721,7 +3721,7 @@ GameObject:
   - component: {fileID: 179604334}
   m_Layer: 0
   m_Name: Closet.2
-  m_TagString: Untagged
+  m_TagString: Room
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3799,6 +3799,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2639844407970777852}
     m_Modifications:
+    - target: {fileID: -5702057933385053949, guid: 5724f702cf34cda4e9fce1744f411aeb, type: 3}
+      propertyPath: MaxDistance
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 3554926527114789469, guid: 5724f702cf34cda4e9fce1744f411aeb, type: 3}
       propertyPath: m_Name
       value: Door.1

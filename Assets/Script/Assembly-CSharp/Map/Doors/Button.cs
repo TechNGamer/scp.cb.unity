@@ -35,7 +35,7 @@ namespace SCPCB.Remaster.Door {
 		}
 
 		public virtual void Interact() {
-			if ( !Interactable ) {
+			if ( !Interactable || buttonPressed == null ) {
 				source.clip = audioManager["Interact"]["ButtonFailed"].Clip;
 			} else {
 				buttonPressed?.Invoke();

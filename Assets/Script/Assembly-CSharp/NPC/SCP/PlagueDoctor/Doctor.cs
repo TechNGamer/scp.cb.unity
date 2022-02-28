@@ -23,29 +23,29 @@ namespace SCPCB.Remaster.NPC.SCP.PlagueDoctor {
 		}
 
 		private void Update() {
-			if ( !gridManager.IsGridReady ) {
-				return;
-			}
-			
-			if ( playerOldPos == null || playerOldPos != player.transform.position ) {
-				if ( walkingPath != null ) {
-					StopCoroutine( walkingPath );
-				}
-
-				var path = gridManager.FindPath( transform.position, player.transform.position );
-
-				walkingPath = StartCoroutine( FollowPath( path ) );
-
-				for ( var i = 0; i < path.Length - 1; ) {
-					if ( i == 0 ) {
-						Debug.DrawLine( transform.position, path[i].WorldPosition, Color.red, float.MaxValue );
-					}
-
-					Debug.DrawLine( path[i].WorldPosition, path[++i].WorldPosition, Color.red, float.MaxValue );
-				}
-
-				playerOldPos = player.transform.position;
-			}
+			// if ( !gridManager.IsGridReady ) {
+			// 	return;
+			// }
+			//
+			// if ( playerOldPos == null || playerOldPos != player.transform.position ) {
+			// 	if ( walkingPath != null ) {
+			// 		StopCoroutine( walkingPath );
+			// 	}
+			//
+			// 	var path = gridManager.FindPath( transform.position, player.transform.position );
+			//
+			// 	walkingPath = StartCoroutine( FollowPath( path ) );
+			//
+			// 	for ( var i = 0; i < path.Length - 1; ) {
+			// 		if ( i == 0 ) {
+			// 			Debug.DrawLine( transform.position, path[i].WorldPosition, Color.red, float.MaxValue );
+			// 		}
+			//
+			// 		Debug.DrawLine( path[i].WorldPosition, path[++i].WorldPosition, Color.red, float.MaxValue );
+			// 	}
+			//
+			// 	playerOldPos = player.transform.position;
+			// }
 		}
 
 		private IEnumerator FollowPath( IEnumerable<AStarNode> path ) {
